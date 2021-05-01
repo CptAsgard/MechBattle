@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ai: {fileID: 3563438109148196184}
   turretTransform: {fileID: 3563438108850267960}
-  rotationSpeed: 1
+  rotationSpeed: 1.5
 --- !u!114 &3563438109148196184
 MonoBehaviour:
   m_ObjectHideFlags: 0
