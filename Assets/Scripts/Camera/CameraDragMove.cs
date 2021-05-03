@@ -8,7 +8,8 @@ public class CameraDragMove : MonoBehaviour
     private Vector3 worldStartPosition;
     private Vector3 cameraStartPosition;
     private Camera panCam;
-    private bool isdragging = false;
+    private bool isDragging = false;
+    private Vector3 cameraPreviousPosition;
 
     private void Start()
     {
@@ -28,9 +29,9 @@ public class CameraDragMove : MonoBehaviour
         if (Input.GetMouseButtonDown(2))
         {
             Ray ray = panCam.ScreenPointToRay(screenPosition);
-            isdragging = Physics.Raycast(ray, out hit, panCam.farClipPlane, groundLayerMask);
+            isDragging = Physics.Raycast(ray, out hit, panCam.farClipPlane, groundLayerMask);
 
-            if (!isdragging)
+            if (!isDragging)
             {
                 return;
             }
@@ -40,7 +41,7 @@ public class CameraDragMove : MonoBehaviour
             return;
         }
 
-        if (!isdragging)
+        if (!isDragging)
         {
             return;
         }
@@ -65,12 +66,22 @@ public class CameraDragMove : MonoBehaviour
 
             Vector3 worldDelta = worldStartPosition - ray.GetPoint(hit.distance);
             panCam.transform.position += worldDelta;
+
+            if (Physics.Raycast(panCam.transform.position, -Vector3.up, out RaycastHit downHit, panCam.farClipPlane, groundLayerMask))
+            {
+                panCam.transform.position = downHit.point + Vector3.up * 13f;
+                cameraPreviousPosition = panCam.transform.position;
+            }
+            else
+            {
+                panCam.transform.position = cameraPreviousPosition;
+            }
         }
         else
         {
             // reset and cleanup data from drag
             worldStartPosition = Vector3.zero;
-            isdragging = false;
+            isDragging = false;
 
             if (resetPositionOnEndDrag)
             {

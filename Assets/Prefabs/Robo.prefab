@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 3563438109148196184}
   turretTransform: {fileID: 3563438108850267960}
   rotationSpeed: 1.5
+  angleLimit: 85
 --- !u!114 &3563438109148196184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
-  constrainInsideGraph: 1
+  constrainInsideGraph: 0
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0

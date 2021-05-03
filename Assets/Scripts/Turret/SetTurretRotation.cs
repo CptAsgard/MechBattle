@@ -1,4 +1,3 @@
-using Pathfinding;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -10,7 +9,7 @@ public class SetTurretRotation : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 1f;
     [SerializeField]
-    private float angleLimit = 45f;
+    private float angleLimit = 45f; // should never be 90d or turret will invert/snap at limits
 
     private Vector3 target = Vector3.forward + Vector3.right;
 
@@ -25,7 +24,7 @@ public class SetTurretRotation : MonoBehaviour
         lookDir.y = turretTransform.forward.y; // height
 
         Quaternion newRotation = Quaternion.LookRotation(lookDir, Vector3.up);
-        turretTransform.rotation = newRotation;
+        turretTransform.rotation = newRotation; // assigning is expensive, we need localEulerAngles a different way
 
         Quaternion clampedRotation = Quaternion.Euler(new Vector3(turretTransform.localEulerAngles.x, ClampAngle(turretTransform.localEulerAngles.y, -angleLimit, angleLimit), turretTransform.localEulerAngles.z) + transform.eulerAngles);
         turretTransform.rotation = clampedRotation;
