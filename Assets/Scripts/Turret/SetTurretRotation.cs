@@ -1,9 +1,12 @@
+using Pathfinding;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 public class SetTurretRotation : MonoBehaviour
 {
+    [SerializeField]
+    private AIPath ai = null;
     [SerializeField]
     private Transform turretTransform = null;
     [SerializeField]
@@ -20,16 +23,36 @@ public class SetTurretRotation : MonoBehaviour
 
     private void Update()
     {
+        UpdateTurretDirection();
+        Debug.DrawRay(transform.position, target, Color.red);
+
+        if (!ai.reachedEndOfPath && ai.hasPath)
+        {
+            return;
+        }
+
+        UpdateLegsDirection();
+    }
+
+    private void UpdateTurretDirection()
+    {
         Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, target, rotationSpeed * Time.deltaTime, 0f);
-        lookDir.y = turretTransform.forward.y; // height
+        lookDir.y = 0; // height
 
         Quaternion newRotation = Quaternion.LookRotation(lookDir, Vector3.up);
         turretTransform.rotation = newRotation; // assigning is expensive, we need localEulerAngles a different way
 
         Quaternion clampedRotation = Quaternion.Euler(new Vector3(turretTransform.localEulerAngles.x, ClampAngle(turretTransform.localEulerAngles.y, -angleLimit, angleLimit), turretTransform.localEulerAngles.z) + transform.eulerAngles);
         turretTransform.rotation = clampedRotation;
+    }
 
-        Debug.DrawRay(transform.position, target, Color.red);
+    private void UpdateLegsDirection()
+    {
+        Vector3 feetDir = Vector3.RotateTowards(transform.forward, target, rotationSpeed / 2 * Time.deltaTime, 0f);
+        feetDir.y = 0;
+
+        Quaternion feetRotation = Quaternion.LookRotation(feetDir, Vector3.up);
+        transform.rotation = feetRotation;
     }
 
     private static float ClampAngle(float angle, float min, float max)
