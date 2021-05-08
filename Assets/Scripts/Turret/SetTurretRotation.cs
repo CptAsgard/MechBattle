@@ -24,7 +24,6 @@ public class SetTurretRotation : MonoBehaviour
     private void Update()
     {
         UpdateTurretDirection();
-        Debug.DrawRay(transform.position, target, Color.red);
 
         if (!ai.reachedEndOfPath && ai.hasPath)
         {

@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5c1794c5de3990d4099d0a820b449cf0
+  - enabled: 1
+    path: Assets/Scenes/RoomMenu.unity
+    guid: b4a362358540808448e758292843abbe
+  - enabled: 1
     path: Assets/Scenes/SnowArena.unity
     guid: e7bbd05e9067e334fb4f5b5e9f7c1ab8
   m_configObjects: {}

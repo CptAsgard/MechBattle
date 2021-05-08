@@ -7,36 +7,24 @@ public class CameraDragMove : MonoBehaviour
 
     private Vector3 worldStartPosition;
     private Vector3 cameraStartPosition;
-    private Camera panCam;
     private bool isDragging = false;
     private Vector3 cameraPreviousPosition;
 
-    private void Start()
-    {
-        panCam = GetComponent<Camera>();
-    }
-
     private void Update()
     {
-        if (!panCam)
-        {
-            Debug.LogError("No camera attached", gameObject);
-            return;
-        }
-
         RaycastHit hit;
         Vector3 screenPosition = Input.mousePosition;
         if (Input.GetMouseButtonDown(2))
         {
-            Ray ray = panCam.ScreenPointToRay(screenPosition);
-            isDragging = Physics.Raycast(ray, out hit, panCam.farClipPlane, groundLayerMask);
+            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            isDragging = Physics.Raycast(ray, out hit, Camera.main.farClipPlane, groundLayerMask);
 
             if (!isDragging)
             {
                 return;
             }
 
-            cameraStartPosition = panCam.transform.position;
+            cameraStartPosition = Camera.main.transform.position;
             worldStartPosition = ray.GetPoint(hit.distance);
             return;
         }
@@ -48,33 +36,33 @@ public class CameraDragMove : MonoBehaviour
 
         if (Input.GetMouseButton(2))
         {
-            Ray ray = panCam.ScreenPointToRay(screenPosition);
+            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
-            if (!Physics.Raycast(ray, out hit, panCam.farClipPlane, groundLayerMask))
+            if (!Physics.Raycast(ray, out hit, Camera.main.farClipPlane, groundLayerMask))
             {
                 //current raycast not hitting anything then don't move camera
-                bool offscreen = screenPosition.x < 0 || screenPosition.y < 0 || screenPosition.x > panCam.pixelWidth || screenPosition.y > panCam.pixelHeight;
+                bool offscreen = screenPosition.x < 0 || screenPosition.y < 0 || screenPosition.x > Camera.main.pixelWidth || screenPosition.y > Camera.main.pixelHeight;
 
                 if (!offscreen)
                 {
                     //but if not hitting anything and mouse is onscreen, then assume player dragged to the void and reset camera position
-                    panCam.transform.position = cameraStartPosition;
+                    Camera.main.transform.position = cameraStartPosition;
                 }
 
                 return;
             }
 
             Vector3 worldDelta = worldStartPosition - ray.GetPoint(hit.distance);
-            panCam.transform.position += worldDelta;
+            Camera.main.transform.position += worldDelta;
 
-            if (Physics.Raycast(panCam.transform.position, -Vector3.up, out RaycastHit downHit, panCam.farClipPlane, groundLayerMask))
+            if (Physics.Raycast(Camera.main.transform.position, -Vector3.up, out RaycastHit downHit, Camera.main.farClipPlane, groundLayerMask))
             {
-                panCam.transform.position = downHit.point + Vector3.up * 13f;
-                cameraPreviousPosition = panCam.transform.position;
+                Camera.main.transform.position = downHit.point + Vector3.up * 13f;
+                cameraPreviousPosition = Camera.main.transform.position;
             }
             else
             {
-                panCam.transform.position = cameraPreviousPosition;
+                Camera.main.transform.position = cameraPreviousPosition;
             }
         }
         else
@@ -85,7 +73,7 @@ public class CameraDragMove : MonoBehaviour
 
             if (resetPositionOnEndDrag)
             {
-                panCam.transform.position = cameraStartPosition;
+                Camera.main.transform.position = cameraStartPosition;
             }
         }
     }

@@ -9,6 +9,7 @@ public class Selector : MonoBehaviour
 
     private void Update()
     {
+        if (!Camera.main) return;
         if (!Input.GetMouseButtonDown(0)) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))

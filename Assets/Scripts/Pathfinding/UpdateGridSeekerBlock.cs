@@ -1,12 +1,13 @@
+using Mirror;
 using Pathfinding;
 using UnityEngine;
 
 public class UpdateGridSeekerBlock : MonoBehaviour
 {
+    public int seekerTag = 0;
+
     [SerializeField]
     private Vector3 seekerSize = Vector3.zero;
-    [SerializeField]
-    private int seekerTag = 0;
     [SerializeField]
     private float updateRate = 0.2f;
 
@@ -16,6 +17,7 @@ public class UpdateGridSeekerBlock : MonoBehaviour
     private void Start()
     {
         timer = updateRate;
+        GetComponentInParent<Seeker>().traversableTags = Mathf.RoundToInt(Mathf.Pow(2, seekerTag)) + 1;
     }
 
     void Update()

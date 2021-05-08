@@ -1,6 +1,7 @@
-using UnityEngine;
+using Mirror;
 
-public class Selectable : MonoBehaviour
+public class Selectable : NetworkBehaviour
 {
-
+    [SyncVar]
+    public int owner;
 }
