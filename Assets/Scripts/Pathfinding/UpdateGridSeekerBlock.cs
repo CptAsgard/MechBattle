@@ -1,4 +1,3 @@
-using Mirror;
 using Pathfinding;
 using UnityEngine;
 
