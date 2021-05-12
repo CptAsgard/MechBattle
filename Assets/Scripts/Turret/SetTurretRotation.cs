@@ -16,6 +16,8 @@ public class SetTurretRotation : MonoBehaviour
 
     private Vector3 target = Vector3.forward + Vector3.right;
 
+    public Vector3 Orientation => transform.forward;
+
     public void SetOrientation(Vector3 to)
     {
         target = to;
@@ -36,12 +38,11 @@ public class SetTurretRotation : MonoBehaviour
     private void UpdateTurretDirection()
     {
         Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, target, rotationSpeed * Time.deltaTime, 0f);
-        lookDir.y = 0; // height
 
-        Quaternion newRotation = Quaternion.LookRotation(lookDir, Vector3.up);
-        turretTransform.rotation = newRotation; // assigning is expensive, we need localEulerAngles a different way
+        turretTransform.rotation = Quaternion.LookRotation(lookDir); // assigning is expensive, we need localEulerAngles a different way
 
         Quaternion clampedRotation = Quaternion.Euler(new Vector3(turretTransform.localEulerAngles.x, ClampAngle(turretTransform.localEulerAngles.y, -angleLimit, angleLimit), turretTransform.localEulerAngles.z) + transform.eulerAngles);
+
         turretTransform.rotation = clampedRotation;
     }
 

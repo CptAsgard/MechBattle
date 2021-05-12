@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260a478428affce4db67ff1199c39e7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 938e66ab159b7384bb9a0ed36a75ebb5, type: 3}
   m_Name: ProjectileWeaponData
   m_EditorClassIdentifier: 
-  weaponType: 0
-  firingSpeed: 1
-  range: 250
-  damage: 10
-  splash: 5
-  projectileSpeed: 125
-  maxAngleForwardDeviation: 0
-  pointsCost: 2
+  pointsCost: 0
+  maxAngleDeviation: 1.5
+  reloadDelay: 1
+  muzzleVelocity: 410
+  projectileMass: 11
+  projectileRadius: 0.0125
+  projectileDragCoefficient: 0.4
+  projectileLiftCoefficient: 0.3

@@ -7,15 +7,10 @@ public enum WeaponType
     Beam
 }
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "MechBattle/WeaponData", order = 1)]
-public class WeaponData : ScriptableObject
+public abstract class WeaponData : ScriptableObject
 {
-    public WeaponType weaponType;
-    public float firingSpeed;
-    public float range;
-    public float damage;
-    public float splash;
-    public float projectileSpeed;
-    public float maxAngleForwardDeviation;
+    public abstract WeaponType weaponType { get; }
     public int pointsCost;
+    public float maxAngleDeviation;
+    public float reloadDelay;
 }

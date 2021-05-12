@@ -87,7 +87,7 @@ namespace Pixelplacement
                 }
             }
 
-            //if the range has changed, update:
+            //if the maxRange has changed, update:
             if (startPercentage != _previousStart || endPercentage != _previousEnd)
             {
                 UpdateLineRenderer ();

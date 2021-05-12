@@ -346,7 +346,7 @@ namespace Pixelplacement
         }
 
         /// <summary>
-        /// Changes the range of a light.
+        /// Changes the maxRange of a light.
         /// </summary>
         public static TweenSystem.TweenBase LightRange(Light target, float endValue, float duration, float delay, AnimationCurve easeCurve = null, LoopType loop = LoopType.None, Action startCallback = null, Action completeCallback = null, bool obeyTimescale = true)
         {
@@ -356,7 +356,7 @@ namespace Pixelplacement
         }
 
         /// <summary>
-        /// Changes the range of a light.
+        /// Changes the maxRange of a light.
         /// </summary>
         public static TweenSystem.TweenBase LightRange(Light target, float startValue, float endValue, float duration, float delay, AnimationCurve easeCurve = null, LoopType loop = LoopType.None, Action startCallback = null, Action completeCallback = null, bool obeyTimescale = true)
         {
