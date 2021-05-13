@@ -14,6 +14,11 @@ public class ProjectileWeapon : Weapon
 
     private void Update()
     {
+        if (target.Current == null)
+        {
+            return;
+        }
+
         Aim();
     }
 
