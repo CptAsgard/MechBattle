@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private EnvironmentConstants environment;
+    [SerializeField]
+    private TrailRenderer trail;
 
     private Vector3 currentPosition;
     private Vector3 currentVelocity;
@@ -11,6 +13,7 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         StepBullet();
+        trail.enabled = true;
     }
 
     public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData)

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environment: {fileID: 11400000, guid: 2864e3335808a1144876b085155156df, type: 2}
+  trail: {fileID: 1698163017707534965}
 --- !u!96 &1698163017707534965
 TrailRenderer:
   serializedVersion: 2
@@ -53,7 +54,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7510768159891794021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

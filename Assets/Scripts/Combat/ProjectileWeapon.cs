@@ -32,51 +32,39 @@ public class ProjectileWeapon : Weapon
 
     private void Aim()
     {
-        float? highAngle, lowAngle = 0f;
-        CalculateAngleToHitTarget(out highAngle, out lowAngle);
+        CalculateAngleToHitTarget(out var highAngle, out var lowAngle);
 
-        if (lowAngle != null || highAngle != null)
+        if (lowAngle == null && highAngle == null)
         {
-            float angle = (float) (lowAngle ?? highAngle);
-
-            Origin.LookAt(target.Current);
-            Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
+            return;
         }
+
+        float angle = (float) (lowAngle ?? highAngle);
+
+        Origin.LookAt(target.Current);
+        Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
     }
 
-    void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
+    private void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
     {
-        //Initial speed
-        float v = weaponData.muzzleVelocity;
+        float velocity = weaponData.muzzleVelocity;
+        Vector3 targetVector = target.Current.position - Origin.position;
+        float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
+        float gravity = -Physics.gravity.y;
 
-        Vector3 targetVec = target.Current.position - Origin.position;
+        float velocitySqr = velocity * velocity;
 
-        //Vertical distance
-        float y = targetVec.y;
-
-        //Reset y so we can get the horizontal distance x
-        targetVec.y = 0f;
-
-        //Horizontal distance
-        float x = targetVec.magnitude;
-
-        //Gravity
-        float g = -Physics.gravity.y;
-
-        //Calculate the angles
-        float vSqr = v * v;
-
-        float underTheRoot = (vSqr * vSqr) - g * (g * x * x + 2 * y * vSqr);
+        float underRoot = velocitySqr * velocitySqr - gravity * (gravity * x * x + 2 * targetVector.y * velocitySqr);
 
         //Check if we are within range
-        if (underTheRoot >= 0f)
+        if (underRoot >= 0f)
         {
-            float rightSide = Mathf.Sqrt(underTheRoot);
+            float rightSide = Mathf.Sqrt(underRoot);
 
-            float top1 = vSqr + rightSide;
-            float top2 = vSqr - rightSide;
+            float top1 = velocitySqr + rightSide;
+            float top2 = velocitySqr - rightSide;
 
-            float bottom = g * x;
+            float bottom = gravity * x;
 
             theta1 = Mathf.Atan2(top1, bottom) * Mathf.Rad2Deg;
             theta2 = Mathf.Atan2(top2, bottom) * Mathf.Rad2Deg;

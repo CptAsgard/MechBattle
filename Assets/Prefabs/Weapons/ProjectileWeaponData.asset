@@ -16,7 +16,3 @@ MonoBehaviour:
   maxAngleDeviation: 1.5
   reloadDelay: 1
   muzzleVelocity: 410
-  projectileMass: 11
-  projectileRadius: 0.0125
-  projectileDragCoefficient: 0.4
-  projectileLiftCoefficient: 0.3

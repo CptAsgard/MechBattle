@@ -34,7 +34,7 @@ public class TurretWeaponsController : MonoBehaviour
                 continue;
             }
 
-            if (true/*Mathf.Abs(Vector3.Angle(turretRotation.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation*/)
+            if (Mathf.Abs(Vector3.Angle(turretRotation.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
             {
                 weapon.Fire();
             }
