@@ -8,13 +8,24 @@ public class TurretWeaponsController : MonoBehaviour
     private List<Weapon> weaponsPriority;
     [SerializeField]
     private SetTurretRotation turretRotation;
+    [SerializeField]
+    private CombatTarget target;
+    
+    private void Start()
+    {
+        target = FindObjectOfType<CombatTarget>();
+    }
 
     private void Update()
     {
-        if (weaponsPriority.Any(weapon => weapon.Armed))
+        if (target.Current == null)
         {
-            turretRotation.SetOrientation(GetPriorityDirection());
+            return;
         }
+
+        turretRotation.SetOrientation(weaponsPriority.Any(weapon => weapon.Armed)
+            ? GetPriorityDirection()
+            : weaponsPriority.First().AimDirection);
 
         FireWeapons();
     }

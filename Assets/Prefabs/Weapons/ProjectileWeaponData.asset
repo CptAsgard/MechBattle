@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsCost: 0
   maxAngleDeviation: 1.5
-  reloadDelay: 1
+  reloadDelay: 5
   muzzleVelocity: 410

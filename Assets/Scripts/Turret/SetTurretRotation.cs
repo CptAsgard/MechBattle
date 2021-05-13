@@ -12,7 +12,9 @@ public class SetTurretRotation : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 1f;
     [SerializeField]
-    private float angleLimit = 45f; // should never be 90d or turret will invert/snap at limits
+    private float horizontalAngleLimit = 45f; // should never be 90d or turret will invert/snap at limits
+    [SerializeField]
+    private float verticalAngleLimit = 10f;
 
     private Vector3 target = Vector3.forward + Vector3.right;
 
@@ -41,7 +43,12 @@ public class SetTurretRotation : MonoBehaviour
 
         turretTransform.rotation = Quaternion.LookRotation(lookDir); // assigning is expensive, we need localEulerAngles a different way
 
-        Quaternion clampedRotation = Quaternion.Euler(new Vector3(turretTransform.localEulerAngles.x, ClampAngle(turretTransform.localEulerAngles.y, -angleLimit, angleLimit), turretTransform.localEulerAngles.z) + transform.eulerAngles);
+        Quaternion clampedRotation = Quaternion.Euler(
+            new Vector3(
+                ClampAngle(turretTransform.localEulerAngles.x, -verticalAngleLimit, verticalAngleLimit), 
+                ClampAngle(turretTransform.localEulerAngles.y, -horizontalAngleLimit, horizontalAngleLimit), 
+                turretTransform.localEulerAngles.z) 
+            + transform.eulerAngles);
 
         turretTransform.rotation = clampedRotation;
     }

@@ -62,11 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7540edcccd18c749a3eded07b8bb957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   origin: {fileID: 0}
-  aimDirection: {x: 0, y: 0, z: 0}
+  AimDirection: {x: 0, y: 0, z: 0}
   weaponData: {fileID: 11400000, guid: 0e23b78976ba52148b3c6b4f8e5e67c3, type: 2}
+  fireController: {fileID: -1575424751296791178}
   projectile: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
     type: 3}
 --- !u!114 &-1575424751296791178
