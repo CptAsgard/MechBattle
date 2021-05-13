@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
     private Transform origin;
     public Transform Origin => origin;
 
-    public Vector3 AimDirection => origin.forward;
+    public Vector3 AimDirection;
 
     public abstract WeaponData WeaponData { get; }
     public abstract bool Armed { get; }

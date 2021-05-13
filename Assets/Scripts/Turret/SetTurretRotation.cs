@@ -16,7 +16,7 @@ public class SetTurretRotation : MonoBehaviour
 
     private Vector3 target = Vector3.forward + Vector3.right;
 
-    public Vector3 Orientation => transform.forward;
+    public Vector3 Orientation => turretTransform.forward;
 
     public void SetOrientation(Vector3 to)
     {

@@ -41,8 +41,8 @@ public class ProjectileWeapon : Weapon
 
         float angle = (float) (lowAngle ?? highAngle);
 
-        Origin.LookAt(target.Current);
-        Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
+        Vector3 forward = Quaternion.LookRotation((target.Current.position - Origin.position).normalized) * Vector3.forward;
+        AimDirection = forward;
     }
 
     private void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
