@@ -10,26 +10,7 @@ public class TurretWeaponsController : MonoBehaviour
     private SetTurretRotation turretRotation;
 
     public bool Armed => weaponsPriority.Any(weapon => weapon.Armed);
-
-    //[SerializeField]
-    //private CombatTarget target;
-
-    //private void Start()
-    //{
-    //    target = FindObjectOfType<CombatTarget>();
-    //}
-
-    //public void Tick()
-    //{
-    //    if (target.Current == null || weaponsPriority.All(weapon => !weapon.Armed) || weaponsPriority.All(weapon => !weapon.Armed))
-    //    {
-    //        return;
-    //    }
-
-    //    turretRotation.LookAt(GetPriorityDirection());
-    //    FireWeapons();
-    //}
-
+    
     public Vector3 GetPriorityDirection()
     {
         return weaponsPriority.First(weapon => weapon.Armed).AimDirection;
@@ -45,6 +26,7 @@ public class TurretWeaponsController : MonoBehaviour
                 continue;
             }
 
+            // TODO : Sketch to rely on actual angle in world to determine whether turret has moved in that direction, precision could be off
             if (Mathf.Abs(Vector3.Angle(turretRotation.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
             {
                 weapon.Fire();

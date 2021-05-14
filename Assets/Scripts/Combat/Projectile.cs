@@ -3,8 +3,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private EnvironmentConstants environment;
-    [SerializeField]
     private TrailRenderer trail;
 
     private Vector3 currentPosition;
