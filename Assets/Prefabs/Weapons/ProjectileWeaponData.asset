@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ProjectileWeaponData
   m_EditorClassIdentifier: 
   pointsCost: 0
-  maxAngleDeviation: 0
+  maxAngleDeviation: 0.5
   reloadDelay: 5
   muzzleVelocity: 10

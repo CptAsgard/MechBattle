@@ -87,7 +87,7 @@ public class MoveToPoint : NetworkBehaviour
             return;
         }
 
-        SetTurretRotation turret = target.GetComponentInChildren<SetTurretRotation>();
-        turret.LookAt(point);
+        TargetingController turret = target.GetComponentInChildren<TargetingController>();
+        turret.SetDirection(dirVector);
     }
 }

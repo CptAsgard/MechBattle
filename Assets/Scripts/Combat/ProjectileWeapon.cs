@@ -41,15 +41,16 @@ public class ProjectileWeapon : Weapon
     {
         if (Target.Current == null)
         {
-            WithinRange = false;
+            InRange = false;
             return;
         }
 
         CalculateAngleToHitTarget(out var highAngle, out var lowAngle);
-        WithinRange = lowAngle != null || highAngle != null;
+        InRange = lowAngle != null || highAngle != null;
 
         if (lowAngle == null && highAngle == null)
         {
+            AimDirection = (Target.Current.position - Origin.position).normalized;
             return;
         }
 

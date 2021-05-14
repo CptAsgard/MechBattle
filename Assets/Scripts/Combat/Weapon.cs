@@ -11,7 +11,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract WeaponData WeaponData { get; }
     public abstract bool Armed { get; }
 
-    public bool WithinRange { get; protected set; }
+    public bool InRange { get; protected set; }
     protected CombatTarget Target { get; private set; }
 
     private void Start()

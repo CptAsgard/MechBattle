@@ -8,24 +8,27 @@ public class TurretWeaponsController : MonoBehaviour
     private List<Weapon> weaponsPriority;
     [SerializeField]
     private SetTurretRotation turretRotation;
-    [SerializeField]
-    private CombatTarget target;
-    
-    private void Start()
-    {
-        target = FindObjectOfType<CombatTarget>();
-    }
 
-    private void Update()
-    {
-        if (target.Current == null || weaponsPriority.All(weapon => !weapon.WithinRange) || weaponsPriority.All(weapon => !weapon.Armed))
-        {
-            return;
-        }
+    public bool Armed => weaponsPriority.Any(weapon => weapon.Armed);
 
-        turretRotation.LookAt(GetPriorityDirection());
-        FireWeapons();
-    }
+    //[SerializeField]
+    //private CombatTarget target;
+
+    //private void Start()
+    //{
+    //    target = FindObjectOfType<CombatTarget>();
+    //}
+
+    //public void Tick()
+    //{
+    //    if (target.Current == null || weaponsPriority.All(weapon => !weapon.Armed) || weaponsPriority.All(weapon => !weapon.Armed))
+    //    {
+    //        return;
+    //    }
+
+    //    turretRotation.LookAt(GetPriorityDirection());
+    //    FireWeapons();
+    //}
 
     public Vector3 GetPriorityDirection()
     {
@@ -33,11 +36,11 @@ public class TurretWeaponsController : MonoBehaviour
     }
 
     // TODO : this is going to be a command probably
-    private void FireWeapons()
+    public void FireWeapons()
     {
         foreach (Weapon weapon in weaponsPriority)
         {
-            if (!weapon.Armed)
+            if (!weapon.Armed || !weapon.InRange)
             {
                 continue;
             }
