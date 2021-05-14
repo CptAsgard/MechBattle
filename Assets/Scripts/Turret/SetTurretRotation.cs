@@ -16,13 +16,13 @@ public class SetTurretRotation : MonoBehaviour
     [SerializeField]
     private float verticalAngleLimit = 10f;
 
-    private Vector3 target = Vector3.forward + Vector3.right;
+    private Vector3 forward = Vector3.forward + Vector3.right;
 
     public Vector3 Orientation => turretTransform.forward;
 
-    public void SetOrientation(Vector3 to)
+    public void LookAt(Vector3 to)
     {
-        target = to;
+        forward = to;
     }
 
     private void Update()
@@ -39,7 +39,7 @@ public class SetTurretRotation : MonoBehaviour
 
     private void UpdateTurretDirection()
     {
-        Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, target, rotationSpeed * Time.deltaTime, 0f);
+        Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, forward, rotationSpeed * Time.deltaTime, 0f);
 
         turretTransform.rotation = Quaternion.LookRotation(lookDir); // assigning is expensive, we need localEulerAngles a different way
 
@@ -55,7 +55,7 @@ public class SetTurretRotation : MonoBehaviour
 
     private void UpdateLegsDirection()
     {
-        Vector3 feetDir = Vector3.RotateTowards(transform.forward, target, rotationSpeed / 2 * Time.deltaTime, 0f);
+        Vector3 feetDir = Vector3.RotateTowards(transform.forward, forward, rotationSpeed / 2 * Time.deltaTime, 0f);
         feetDir.y = 0;
 
         Quaternion feetRotation = Quaternion.LookRotation(feetDir, Vector3.up);

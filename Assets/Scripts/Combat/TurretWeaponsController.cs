@@ -18,15 +18,12 @@ public class TurretWeaponsController : MonoBehaviour
 
     private void Update()
     {
-        if (target.Current == null)
+        if (target.Current == null || weaponsPriority.All(weapon => !weapon.WithinRange) || weaponsPriority.All(weapon => !weapon.Armed))
         {
             return;
         }
 
-        turretRotation.SetOrientation(weaponsPriority.Any(weapon => weapon.Armed)
-            ? GetPriorityDirection()
-            : weaponsPriority.First().AimDirection);
-
+        turretRotation.LookAt(GetPriorityDirection());
         FireWeapons();
     }
 

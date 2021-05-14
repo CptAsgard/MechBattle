@@ -11,11 +11,12 @@ public abstract class Weapon : MonoBehaviour
     public abstract WeaponData WeaponData { get; }
     public abstract bool Armed { get; }
 
-    protected CombatTarget target { get; private set; }
+    public bool WithinRange { get; protected set; }
+    protected CombatTarget Target { get; private set; }
 
     private void Start()
     {
-        target = FindObjectOfType<CombatTarget>();
+        Target = FindObjectOfType<CombatTarget>();
     }
 
     public virtual void Fire()
