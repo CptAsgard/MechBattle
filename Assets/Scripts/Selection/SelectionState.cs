@@ -1,4 +1,4 @@
 public class SelectionState
 {
-    public Selectable selected;
+    public MechData selected;
 }

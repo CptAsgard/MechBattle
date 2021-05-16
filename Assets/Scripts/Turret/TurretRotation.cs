@@ -3,7 +3,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-public class SetTurretRotation : MonoBehaviour
+public class TurretRotation : MonoBehaviour
 {
     [SerializeField]
     private AIPath ai = null;
@@ -29,7 +29,7 @@ public class SetTurretRotation : MonoBehaviour
     {
         UpdateTurretDirection();
 
-        if (!ai.reachedEndOfPath && ai.hasPath)
+        if (ai.hasPath && !ai.reachedEndOfPath)
         {
             return;
         }
@@ -45,9 +45,9 @@ public class SetTurretRotation : MonoBehaviour
 
         Quaternion clampedRotation = Quaternion.Euler(
             new Vector3(
-                ClampAngle(turretTransform.localEulerAngles.x, -verticalAngleLimit, verticalAngleLimit), 
-                ClampAngle(turretTransform.localEulerAngles.y, -horizontalAngleLimit, horizontalAngleLimit), 
-                turretTransform.localEulerAngles.z) 
+                ClampAngle(turretTransform.localEulerAngles.x, -verticalAngleLimit, verticalAngleLimit),
+                ClampAngle(turretTransform.localEulerAngles.y, -horizontalAngleLimit, horizontalAngleLimit),
+                turretTransform.localEulerAngles.z)
             + transform.eulerAngles);
 
         turretTransform.rotation = clampedRotation;

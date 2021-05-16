@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TurretWeaponsController : MonoBehaviour
+public class WeaponsController : MonoBehaviour
 {
     [SerializeField]
     private List<Weapon> weaponsPriority;
     [SerializeField]
-    private SetTurretRotation turretRotation;
+    private TurretRotation turretRotation;
 
     public bool Armed => weaponsPriority.Any(weapon => weapon.Armed);
     

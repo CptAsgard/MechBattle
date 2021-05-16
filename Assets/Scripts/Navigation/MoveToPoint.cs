@@ -28,6 +28,11 @@ public class MoveToPoint : NetworkBehaviour
                 return;
             }
 
+            if (downHit.transform.CompareTag("Player"))
+            {
+                return;
+            }
+
             WalkTowards(selector.selectionState.selected.gameObject, downHit.point);
         }
 
@@ -47,8 +52,8 @@ public class MoveToPoint : NetworkBehaviour
     [Command]
     private void WalkTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {
-        Selectable selectable = target.GetComponent<Selectable>();
-        if (sender == null || selectable.owner != player.identity)
+        MechData mechData = target.GetComponent<MechData>();
+        if (sender == null || mechData.owner != player.identity)
         {
             return;
         }
@@ -74,8 +79,8 @@ public class MoveToPoint : NetworkBehaviour
     [Command]
     private void LookTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {        
-        Selectable selectable = target.GetComponent<Selectable>();
-        if (sender == null || selectable.owner != player.identity)
+        MechData mechData = target.GetComponent<MechData>();
+        if (sender == null || mechData.owner != player.identity)
         {
             return;
         }

@@ -16,7 +16,7 @@ public class ProjectileWeapon : Weapon
 
     private void Update()
     {
-        if (Target.Current == null)
+        if (MechData.target == null)
         {
             return;
         }
@@ -39,7 +39,7 @@ public class ProjectileWeapon : Weapon
 
     private void Aim()
     {
-        if (Target.Current == null)
+        if (MechData.target == null)
         {
             InRange = false;
             return;
@@ -50,13 +50,13 @@ public class ProjectileWeapon : Weapon
 
         if (lowAngle == null && highAngle == null)
         {
-            AimDirection = (Target.Current.position - Origin.position).normalized;
+            AimDirection = (MechData.target.position - Origin.position).normalized;
             return;
         }
 
         float angle = (float) (lowAngle ?? highAngle);
 
-        Origin.LookAt(Target.Current);
+        Origin.LookAt(MechData.target);
         Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
         AimDirection = Origin.forward;
     }
@@ -64,7 +64,7 @@ public class ProjectileWeapon : Weapon
     void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
     {
         float velocity = weaponData.muzzleVelocity;
-        Vector3 targetVector = Target.Current.position - Origin.position;
+        Vector3 targetVector = MechData.target.position - Origin.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
 

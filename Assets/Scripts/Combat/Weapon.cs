@@ -12,11 +12,11 @@ public abstract class Weapon : MonoBehaviour
     public abstract bool Armed { get; }
 
     public bool InRange { get; protected set; }
-    protected CombatTarget Target { get; private set; }
+    protected MechData MechData { get; private set; }
 
     private void Start()
     {
-        Target = FindObjectOfType<CombatTarget>();
+        MechData = GetComponentInParent<MechData>();
     }
 
     public virtual void Fire()

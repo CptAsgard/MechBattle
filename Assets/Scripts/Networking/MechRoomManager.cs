@@ -17,7 +17,9 @@ public class MechRoomManager : NetworkRoomManager
         {
             GameObject mech = Instantiate(mechPrefab, spawn.spawnPoints[i - 1].position, spawn.spawnPoints[i - 1].rotation);
             mech.GetComponentInChildren<UpdateGridSeekerBlock>().seekerTag = spawn.spawnPoints.Count * index + i;
-            mech.GetComponent<Selectable>().owner = index;
+            MechData mechData = mech.GetComponent<MechData>();
+            mechData.owner = index;
+            mechData.team = index;
 
             NetworkServer.Spawn(mech);
         }

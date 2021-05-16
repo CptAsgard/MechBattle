@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8086518042328657325}
   m_Layer: 9
   m_Name: ShootyEnd
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4195100158606469795}
   m_Layer: 9
   m_Name: ShootyEnd
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1891762823}
   m_Layer: 9
   m_Name: Weapons
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 7557471309751165434}
   m_Layer: 9
   m_Name: ShootyEnd
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3563438108850267960}
   m_Layer: 9
   m_Name: TurretModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   - {fileID: 5976101462369990963}
   - {fileID: 4584893096913787416}
   - {fileID: -8686500384392713775}
+  - {fileID: 2138734003613044796}
   authorityOnly: []
 --- !u!114 &3563438109148196188
 MonoBehaviour:
@@ -327,6 +328,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   owner: 0
+  team: 0
+  target: {fileID: 0}
 --- !u!114 &1464163905055579710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +493,7 @@ MonoBehaviour:
   rotator: {fileID: 5976101462369990963}
   weapons: {fileID: -8686500384392713775}
   pathfinder: {fileID: 2894551261037655868}
+  data: {fileID: 3563438109148196188}
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +508,7 @@ GameObject:
   - component: {fileID: 3563438109742177716}
   m_Layer: 9
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +604,7 @@ GameObject:
   - component: {fileID: 3563438109810394631}
   m_Layer: 9
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +701,7 @@ GameObject:
   - component: {fileID: 3563438109963878162}
   m_Layer: 0
   m_Name: LegModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,7 +798,7 @@ GameObject:
   - component: {fileID: 3563438110496315497}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -889,7 +893,7 @@ GameObject:
   - component: {fileID: 3563438110557640331}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -984,7 +988,7 @@ GameObject:
   - component: {fileID: 3563438110952281030}
   m_Layer: 9
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1077,7 +1081,7 @@ GameObject:
   - component: {fileID: 7944366690533867562}
   m_Layer: 9
   m_Name: ShootyEnd (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1182,6 +1186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ProjectileWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4223662892337230679, guid: 10879ea4486b0c740b24e8bed63acc24,
         type: 3}
