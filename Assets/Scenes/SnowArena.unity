@@ -707,7 +707,7 @@ PrefabInstance:
     - target: {fileID: 335323573937799667, guid: a29f185c6834bd54795a87a7bc4bc5bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.878982
+      value: -14.9
       objectReference: {fileID: 0}
     - target: {fileID: 335323573937799667, guid: a29f185c6834bd54795a87a7bc4bc5bb,
         type: 3}
@@ -717,7 +717,7 @@ PrefabInstance:
     - target: {fileID: 335323573937799667, guid: a29f185c6834bd54795a87a7bc4bc5bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 105.2
+      value: -8.43
       objectReference: {fileID: 0}
     - target: {fileID: 335323573937799667, guid: a29f185c6834bd54795a87a7bc4bc5bb,
         type: 3}
@@ -893,7 +893,6 @@ GameObject:
   - component: {fileID: 1039240824}
   - component: {fileID: 1039240823}
   - component: {fileID: 1039240822}
-  - component: {fileID: 1039240825}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -968,20 +967,6 @@ Transform:
   m_Father: {fileID: 538497785}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1039240825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039240821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac64c55a57a26349ba31c4a5f2d3d00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: b5f8cbe27e4b68f438f4076c12b69e40,
-    type: 3}
 --- !u!1001 &1390408234
 PrefabInstance:
   m_ObjectHideFlags: 0

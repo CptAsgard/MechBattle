@@ -9,8 +9,13 @@ public class MechMoveActions : NetworkBehaviour
     private InputActionReference mousePosition;
     [SerializeField]
     private MechSelectActions mechSelectActions;
-    [SerializeField]
+
     private Player player;
+
+    private void Start()
+    {
+        player = isServer ? GetComponentInParent<Player>() : NetworkClient.localPlayer.GetComponent<Player>();
+    }
 
     public void Move(InputAction.CallbackContext callbackContext)
     {

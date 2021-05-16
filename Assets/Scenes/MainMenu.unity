@@ -301,22 +301,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2081870935185298451, guid: 50163423a94987e48baecc4a386d4fb5,
-        type: 3}
-      propertyPath: networkAddress
-      value: 84.104.129.30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081870935185298451, guid: 50163423a94987e48baecc4a386d4fb5,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081870935185298451, guid: 50163423a94987e48baecc4a386d4fb5,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19,
-        type: 3}
     - target: {fileID: 7146083071264858460, guid: 50163423a94987e48baecc4a386d4fb5,
         type: 3}
       propertyPath: m_Name

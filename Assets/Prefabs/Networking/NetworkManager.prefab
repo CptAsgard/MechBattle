@@ -66,6 +66,7 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 3874495760368242340, guid: 0a3278dac7967b04b9582928a98695ed, type: 3}
+  - {fileID: 6781474868229854122, guid: d9043cf957809674a988a28fdc265e2a, type: 3}
   - {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19, type: 3}
   showRoomGUI: 1
   minPlayers: 1
@@ -77,8 +78,6 @@ MonoBehaviour:
   roomSlots: []
   clientIndex: 0
   mechPrefab: {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19,
-    type: 3}
-  mechClientPrefab: {fileID: 2661368205589728002, guid: 22aa0c4fdd271a047899230fd0af3939,
     type: 3}
 --- !u!114 &609192954014754095
 MonoBehaviour:
