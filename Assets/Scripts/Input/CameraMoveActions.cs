@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraDragMove : MonoBehaviour
+public class CameraMoveActions : MonoBehaviour
 {
     [SerializeField]
     private InputActionReference mousePosition;
@@ -15,20 +15,26 @@ public class CameraDragMove : MonoBehaviour
     private bool isDragging = false;
     private Vector3 cameraPreviousPosition;
 
-    public void Update()
+    private void Start()
+    {
+        UpdateCameraHeight();
+    }
+
+    private void Update()
     {
         if (!isDragging)
         {
             return;
-        }            
-        
+        }
+
         Vector3 screenPosition = mousePosition.action.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Camera.main.farClipPlane, groundLayerMask))
         {
             //current raycast not hitting anything then don't move camera
-            bool offscreen = screenPosition.x < 0 || screenPosition.y < 0 || screenPosition.x > Camera.main.pixelWidth || screenPosition.y > Camera.main.pixelHeight;
+            bool offscreen = screenPosition.x < 0 || screenPosition.y < 0 ||
+                screenPosition.x > Camera.main.pixelWidth || screenPosition.y > Camera.main.pixelHeight;
 
             if (!offscreen)
             {
@@ -42,15 +48,7 @@ public class CameraDragMove : MonoBehaviour
         Vector3 worldDelta = worldStartPosition - ray.GetPoint(hit.distance);
         Camera.main.transform.position += worldDelta;
 
-        if (Physics.Raycast(Camera.main.transform.position, -Vector3.up, out RaycastHit downHit, Camera.main.farClipPlane, groundLayerMask))
-        {
-            Camera.main.transform.position = downHit.point + Vector3.up * 13f;
-            cameraPreviousPosition = Camera.main.transform.position;
-        }
-        else
-        {
-            Camera.main.transform.position = cameraPreviousPosition;
-        }
+        UpdateCameraHeight();
     }
 
     public void OnDragAction(InputAction.CallbackContext callbackContext)
@@ -81,6 +79,19 @@ public class CameraDragMove : MonoBehaviour
             {
                 Camera.main.transform.position = cameraStartPosition;
             }
+        }
+    }
+
+    private void UpdateCameraHeight()
+    {
+        if (Physics.Raycast(Camera.main.transform.position, -Vector3.up, out RaycastHit downHit, Camera.main.farClipPlane, groundLayerMask))
+        {
+            Camera.main.transform.position = downHit.point + Vector3.up * 13f;
+            cameraPreviousPosition = Camera.main.transform.position;
+        }
+        else
+        {
+            Camera.main.transform.position = cameraPreviousPosition;
         }
     }
 }

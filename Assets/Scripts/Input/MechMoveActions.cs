@@ -1,29 +1,32 @@
 using Mirror;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class MoveToPoint : NetworkBehaviour
+public class MechMoveActions : NetworkBehaviour
 {
     [SerializeField]
-    private Selector selector;
+    private InputActionReference mousePosition;
+    [SerializeField]
+    private MechSelectActions mechSelectActions;
     [SerializeField]
     private Player player;
 
-    private void Update()
+    public void Move(InputAction.CallbackContext callbackContext)
     {
         if (!hasAuthority)
         {
             return;
         }
 
-        if (selector.selectionState.selected == null || selector.selectionState.selected.owner != player.identity)
+        if (mechSelectActions.selectionState.selected == null || mechSelectActions.selectionState.selected.owner != player.identity)
         {
             return;
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (callbackContext.started)
         {
-            if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit downHit, 100))
+            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>()), out RaycastHit downHit, 100))
             {
                 return;
             }
@@ -33,20 +36,18 @@ public class MoveToPoint : NetworkBehaviour
                 return;
             }
 
-            WalkTowards(selector.selectionState.selected.gameObject, downHit.point);
+            WalkTowards(mechSelectActions.selectionState.selected.gameObject, downHit.point);
         }
 
-        if (!Input.GetMouseButtonUp(1))
+        if (callbackContext.canceled)
         {
-            return;
-        }
+            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>()), out RaycastHit upHit, 100))
+            {
+                return;
+            }
 
-        if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit upHit, 100))
-        {
-            return;
+            LookTowards(mechSelectActions.selectionState.selected.gameObject, upHit.point);
         }
-
-        LookTowards(selector.selectionState.selected.gameObject, upHit.point);
     }
 
     [Command]
