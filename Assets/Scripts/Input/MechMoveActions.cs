@@ -24,7 +24,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        if (mechSelectActions.selectionState.selected == null || mechSelectActions.selectionState.selected.owner != player.identity)
+        if (mechSelectActions.SelectionState.selected == null || mechSelectActions.SelectionState.selected.Owner != player.identity)
         {
             return;
         }
@@ -41,7 +41,7 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            WalkTowards(mechSelectActions.selectionState.selected.gameObject, downHit.point);
+            WalkTowards(mechSelectActions.SelectionState.selected.gameObject, downHit.point);
         }
 
         if (callbackContext.canceled)
@@ -51,15 +51,15 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            LookTowards(mechSelectActions.selectionState.selected.gameObject, upHit.point);
+            LookTowards(mechSelectActions.SelectionState.selected.gameObject, upHit.point);
         }
     }
 
     [Command]
     private void WalkTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {
-        MechData mechData = target.GetComponent<MechData>();
-        if (sender == null || mechData.owner != player.identity)
+        MechState mechState = target.GetComponent<MechState>();
+        if (sender == null || mechState.Owner != player.identity)
         {
             return;
         }
@@ -85,14 +85,15 @@ public class MechMoveActions : NetworkBehaviour
     [Command]
     private void LookTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {        
-        MechData mechData = target.GetComponent<MechData>();
-        if (sender == null || mechData.owner != player.identity)
+        MechState mechState = target.GetComponent<MechState>();
+        if (sender == null || mechState.Owner != player.identity)
         {
             return;
         }
 
         AIPath ai = target.GetComponentInChildren<AIPath>();
-        Vector3 dirVector = point - ai.destination;
+        
+        Vector3 dirVector = point - (ai.hasPath ? ai.destination : target.transform.position);
         if (dirVector.sqrMagnitude < 1f)
         {
             return;

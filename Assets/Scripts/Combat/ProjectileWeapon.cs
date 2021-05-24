@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class ProjectileWeapon : Weapon
@@ -5,18 +6,24 @@ public class ProjectileWeapon : Weapon
     [SerializeField]
     private ProjectileWeaponData weaponData;
     [SerializeField]
+    private ProjectileWeaponView weaponView;
+    [SerializeField]
     private WeaponFireController fireController;
     [SerializeField]
     private GameObject projectile;
-    [SerializeField]
-    private LineRenderer lineRenderer;
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => fireController.ReadyToFire;
 
     private void Update()
     {
-        if (MechData.target == null)
+        if (!isServer)
+        {
+            enabled = false;
+            return; 
+        }
+
+        if (!Owner)
         {
             return;
         }
@@ -24,6 +31,7 @@ public class ProjectileWeapon : Weapon
         Aim();
     }
 
+    [Server]
     public override void Fire()
     {
         if (!Armed)
@@ -31,15 +39,25 @@ public class ProjectileWeapon : Weapon
             return;
         }
 
-        GameObject pr = Instantiate(projectile);
-        pr.GetComponent<Projectile>().Initialize(Origin.position, Origin.forward, weaponData);
-
         fireController.ResetCooldown();
+
+        Vector3 position = Origin.position;
+        Vector3 forward = Origin.forward;
+
+        SpawnBullet(position, forward);
+        weaponView.RpcFire(position, forward);
+    }
+    
+    [Server]
+    private void SpawnBullet(Vector3 position, Vector3 forward)
+    {
+        GameObject pr = Instantiate(projectile);
+        pr.GetComponent<Projectile>().Initialize(position, forward, weaponData);
     }
 
     private void Aim()
     {
-        if (MechData.target == null)
+        if (Owner.Target == null)
         {
             InRange = false;
             return;
@@ -50,21 +68,21 @@ public class ProjectileWeapon : Weapon
 
         if (lowAngle == null && highAngle == null)
         {
-            AimDirection = (MechData.target.position - Origin.position).normalized;
+            AimDirection = (Owner.Target.position - Origin.position).normalized;
             return;
         }
 
         float angle = (float) (lowAngle ?? highAngle);
 
-        Origin.LookAt(MechData.target);
+        Origin.LookAt(Owner.Target);
         Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
         AimDirection = Origin.forward;
     }
-
-    void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
+    
+    private void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
     {
         float velocity = weaponData.muzzleVelocity;
-        Vector3 targetVector = MechData.target.position - Origin.position;
+        Vector3 targetVector = Owner.Target.position - Origin.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
 

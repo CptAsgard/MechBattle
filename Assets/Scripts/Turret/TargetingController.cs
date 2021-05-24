@@ -4,20 +4,20 @@ using UnityEngine;
 public class TargetingController : MonoBehaviour
 {
     [SerializeField]
-    private TurretRotation rotator;
+    private TurretRotationController rotator;
     [SerializeField]
     private WeaponsController weapons;
     [SerializeField]
     private AIPath pathfinder;
     [SerializeField]
-    private MechData data;
+    private MechState mechState;
 
     private Vector3 lookDirection;
 
     public void SetDirection(Vector3 direction)
     {
         lookDirection = direction;
-        if (data.target == null || !weapons.Armed)
+        if (mechState.Target == null || !weapons.Armed)
         {
             rotator.LookAt(lookDirection);
         }
@@ -25,12 +25,11 @@ public class TargetingController : MonoBehaviour
 
     private void Update()
     {
-        if (data.target != null && weapons.Armed)
+        if (mechState.Target != null && weapons.Armed)
         {
             rotator.LookAt(weapons.GetPriorityDirection());
-            weapons.FireWeapons(); // TODO : yeah no, not the firing controller
         }
-        else if (data.target == null && pathfinder.reachedEndOfPath)
+        else if (mechState.Target == null && pathfinder.reachedEndOfPath)
         {
             rotator.LookAt(lookDirection);
         }

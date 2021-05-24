@@ -3,7 +3,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-public class TurretRotation : MonoBehaviour
+public class TurretRotationController : MonoBehaviour
 {
     [SerializeField]
     private AIPath ai = null;

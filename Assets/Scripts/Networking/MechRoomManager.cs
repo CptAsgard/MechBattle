@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class MechRoomManager : NetworkRoomManager
     [Header("Mech")]
     [SerializeField]
     private GameObject mechPrefab;
+    [SerializeField]
+    private GameObject projectileWeaponPrefab;
 
     private int index = 0;
 
@@ -16,15 +19,18 @@ public class MechRoomManager : NetworkRoomManager
         for (int i = 1; i <= spawn.spawnPoints.Count; i++)
         {
             GameObject mech = Instantiate(mechPrefab, spawn.spawnPoints[i - 1].position, spawn.spawnPoints[i - 1].rotation);
-            mech.GetComponentInChildren<UpdateGridSeekerBlock>().seekerTag = spawn.spawnPoints.Count * index + i;
-            MechData mechData = mech.GetComponent<MechData>();
-            mechData.owner = index;
-            mechData.team = index;
+
+            GameObject weapon = Instantiate(projectileWeaponPrefab);
 
             NetworkServer.Spawn(mech);
+            NetworkServer.Spawn(weapon);
+            
+            mech.GetComponent<UpdateGridSeekerBlock>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
+            mech.GetComponent<MechState>().Initialize(index + 1); // NOTE : default placed mechs will be enemies
+            mech.GetComponent<WeaponsController>().Add(weapon.GetComponent<Weapon>());
         }
 
-        gamePlayer.GetComponent<Player>().identity = index;
+        gamePlayer.GetComponent<Player>().identity = index + 1;
         index++;
 
         return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);

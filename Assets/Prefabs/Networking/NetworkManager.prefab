@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7146083071264858460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.7274294, y: 8.293734, z: -22.896154}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 3874495760368242340, guid: 0a3278dac7967b04b9582928a98695ed, type: 3}
   - {fileID: 6781474868229854122, guid: d9043cf957809674a988a28fdc265e2a, type: 3}
   - {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19, type: 3}
+  - {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24, type: 3}
   showRoomGUI: 1
   minPlayers: 1
   roomPlayerPrefab: {fileID: 3706078414028804418, guid: 5ee7f3c0e60e0ed4f853d1a46e56c66a,
@@ -78,6 +79,8 @@ MonoBehaviour:
   roomSlots: []
   clientIndex: 0
   mechPrefab: {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19,
+    type: 3}
+  projectileWeaponPrefab: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
     type: 3}
 --- !u!114 &609192954014754095
 MonoBehaviour:

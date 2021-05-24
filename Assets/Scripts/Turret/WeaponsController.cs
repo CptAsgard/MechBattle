@@ -1,25 +1,69 @@
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 
-public class WeaponsController : MonoBehaviour
+public class WeaponsController : NetworkBehaviour
 {
     [SerializeField]
-    private List<Weapon> weaponsPriority;
+    private Transform slotParent;
     [SerializeField]
-    private TurretRotation turretRotation;
+    private TurretRotationController turretController;
+    [SerializeField]
+    private MechState mechState;
 
-    public bool Armed => weaponsPriority.Any(weapon => weapon.Armed);
-    
-    public Vector3 GetPriorityDirection()
+    private List<Weapon> weapons = new List<Weapon>();
+
+    public bool Armed => weapons.Any(weapon => weapon.Armed);
+
+    private void FixedUpdate()
     {
-        return weaponsPriority.First(weapon => weapon.Armed).AimDirection;
+        Fire();
     }
 
-    // TODO : this is going to be a command probably
-    public void FireWeapons()
+    public void Add(Weapon weapon)
     {
-        foreach (Weapon weapon in weaponsPriority)
+        int slotIndex = -1;
+        for (int i = 0; i < slotParent.childCount; i++)
+        {
+            if (slotParent.GetChild(i).childCount != 0)
+            {
+                continue;
+            }
+
+            slotIndex = i;
+            break;
+        }
+
+        if (slotIndex == -1)
+        {
+            Debug.LogError($"ERROR: Tried to add weapon {weapon.name} to mech {name} but there is no free slot!", gameObject);
+            return;
+        }
+
+        weapon.transform.parent = slotParent.GetChild(slotIndex);
+        weapon.Initialize(slotIndex, mechState);
+        weapons.Add(weapon);
+    }
+
+    public Transform GetSlot(int index)
+    {
+        return slotParent.GetChild(index);
+    }
+
+    public Vector3 GetPriorityDirection()
+    {
+        return weapons.First(weapon => weapon.Armed).AimDirection;
+    }
+
+    public void Aim(Transform target)
+    {
+        mechState.Target = target;
+    }
+
+    public void Fire()
+    {
+        foreach (Weapon weapon in weapons)
         {
             if (!weapon.Armed || !weapon.InRange)
             {
@@ -27,7 +71,7 @@ public class WeaponsController : MonoBehaviour
             }
 
             // TODO : Sketch to rely on actual angle in world to determine whether turret has moved in that direction, precision could be off
-            if (Mathf.Abs(Vector3.Angle(turretRotation.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
+            if (Mathf.Abs(Vector3.Angle(turretController.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
             {
                 weapon.Fire();
             }

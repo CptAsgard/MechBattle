@@ -5,25 +5,25 @@ public class WeaponFireController : MonoBehaviour
     [SerializeField]
     private Weapon weapon;
 
-    public float Cooldown { get; private set; }
+    public bool ReadyToFire => timer <= 0f;
 
-    public bool ReadyToFire => Cooldown <= 0f;
+    private float timer;
 
     private void Start()
     {
-        Cooldown = 0f;
+        timer = 0f;
     }
 
     private void Update()
     {
-        if (Cooldown > 0f)
+        if (timer > 0f)
         {
-            Cooldown -= Time.deltaTime;
+            timer -= Time.deltaTime;
         }
     }
 
     public void ResetCooldown()
     {
-        Cooldown = weapon.WeaponData.reloadDelay;
+        timer = weapon.WeaponData.reloadDelay;
     }
 }

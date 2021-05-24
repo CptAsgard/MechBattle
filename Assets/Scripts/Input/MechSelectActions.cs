@@ -1,26 +1,25 @@
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MechSelectActions : MonoBehaviour
+public class MechSelectActions : NetworkBehaviour
 {
     [SerializeField]
     private InputActionReference mousePosition;
     [SerializeField]
     private LayerMask selectorMask;
 
-    public SelectionState selectionState = new SelectionState();
+    public SelectionState SelectionState = new SelectionState();
 
     public void Select(InputAction.CallbackContext callbackContext)
     {
+        if (!callbackContext.started)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
-        if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
-        {
-            selectionState.selected = hit.collider.GetComponentInParent<MechData>();
-        }
-        else
-        {
-            selectionState.selected = null;
-        }
+        SelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
     }
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)
@@ -28,14 +27,19 @@ public class MechSelectActions : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {
-            MechData selectedData = selectionState.selected.GetComponent<MechData>();
-            int selectedTeam = selectedData.team;
-            int targetTeam = hit.collider.GetComponentInParent<MechData>().team;
+            int selectedTeam = SelectionState.selected.Owner; // TODO check if owners on same team
+            int targetTeam = hit.collider.GetComponentInParent<MechState>().Owner;
 
             if (selectedTeam != targetTeam)
             {
-                selectedData.target = hit.collider.transform.parent;
+                SetTarget(SelectionState.selected.gameObject, hit.collider.transform.root.gameObject);
             }
         }
+    }
+
+    [Command]
+    private void SetTarget(GameObject from, GameObject target, NetworkConnectionToClient sender = null)
+    {
+        from.GetComponentInParent<WeaponsController>().Aim(target.transform);
     }
 }
