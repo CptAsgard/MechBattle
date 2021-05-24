@@ -63,26 +63,28 @@ public class ProjectileWeapon : Weapon
             return;
         }
 
-        CalculateAngleToHitTarget(out var highAngle, out var lowAngle);
+        Vector3 targetPositionWorld = Owner.Target.GetComponent<ComponentsTarget>().GetWorldPosition(Components.Torso);
+
+        CalculateAngleToHitTarget(targetPositionWorld, out var highAngle, out var lowAngle);
         InRange = lowAngle != null || highAngle != null;
 
         if (lowAngle == null && highAngle == null)
         {
-            AimDirection = (Owner.Target.position - Origin.position).normalized;
+            AimDirection = (targetPositionWorld - Origin.position).normalized;
             return;
         }
 
         float angle = (float) (lowAngle ?? highAngle);
 
-        Origin.LookAt(Owner.Target);
+        Origin.LookAt(targetPositionWorld);
         Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
         AimDirection = Origin.forward;
     }
     
-    private void CalculateAngleToHitTarget(out float? theta1, out float? theta2)
+    private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
     {
         float velocity = weaponData.muzzleVelocity;
-        Vector3 targetVector = Owner.Target.position - Origin.position;
+        Vector3 targetVector = target - Origin.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
 

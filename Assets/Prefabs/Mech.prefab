@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 5976101462369990963}
   - component: {fileID: -8686500384392713775}
   - component: {fileID: 2138734003613044796}
+  - component: {fileID: 4531279283716984758}
   m_Layer: 9
   m_Name: Mech
   m_TagString: Player
@@ -492,6 +493,24 @@ MonoBehaviour:
   weapons: {fileID: -8686500384392713775}
   pathfinder: {fileID: 2894551261037655868}
   mechState: {fileID: 162267820753287055}
+--- !u!114 &4531279283716984758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563438109148196198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aed4196bc3be3e4784d6b8d7648ed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torsoBounds: {fileID: 3563438109963878162}
+  headBounds: {fileID: 3563438109810394631}
+  leftArmBounds: {fileID: 3563438110952281030}
+  rightArmBounds: {fileID: 3563438109742177716}
+  leftLegBounds: {fileID: 3563438110496315497}
+  rightLegBounds: {fileID: 3563438110557640331}
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +524,7 @@ GameObject:
   - component: {fileID: 3563438109742177719}
   - component: {fileID: 3563438109742177716}
   m_Layer: 9
-  m_Name: Cube (1)
+  m_Name: RightArm
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,7 +620,7 @@ GameObject:
   - component: {fileID: 3563438109810394630}
   - component: {fileID: 3563438109810394631}
   m_Layer: 9
-  m_Name: Cube (2)
+  m_Name: Head
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,7 +717,7 @@ GameObject:
   - component: {fileID: 3563438109963878165}
   - component: {fileID: 3563438109963878162}
   m_Layer: 0
-  m_Name: LegModel
+  m_Name: Torso
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,7 +814,7 @@ GameObject:
   - component: {fileID: 3563438110496315496}
   - component: {fileID: 3563438110496315497}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: LeftLeg
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -890,7 +909,7 @@ GameObject:
   - component: {fileID: 3563438110557640330}
   - component: {fileID: 3563438110557640331}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RightLeg
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,7 +1004,7 @@ GameObject:
   - component: {fileID: 3563438110952280633}
   - component: {fileID: 3563438110952281030}
   m_Layer: 9
-  m_Name: Cube
+  m_Name: LeftArm
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

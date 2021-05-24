@@ -1,6 +1,7 @@
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Networking.Types;
 
 public class MechSelectActions : NetworkBehaviour
 {
@@ -40,6 +41,6 @@ public class MechSelectActions : NetworkBehaviour
     [Command]
     private void SetTarget(GameObject from, GameObject target, NetworkConnectionToClient sender = null)
     {
-        from.GetComponentInParent<WeaponsController>().Aim(target.transform);
+        from.GetComponentInParent<WeaponsController>().Aim(target.GetComponent<NetworkIdentity>());
     }
 }

@@ -56,7 +56,7 @@ public class WeaponsController : NetworkBehaviour
         return weapons.First(weapon => weapon.Armed).AimDirection;
     }
 
-    public void Aim(Transform target)
+    public void Aim(NetworkIdentity target)
     {
         mechState.Target = target;
     }
