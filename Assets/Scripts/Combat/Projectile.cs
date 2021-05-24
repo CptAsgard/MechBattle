@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     {
         currentPosition = initialPosition;
         currentVelocity = direction * weaponData.muzzleVelocity;
+        trail.AddPosition(currentPosition);
     }
 
     private void StepBullet()
