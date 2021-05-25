@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55cb325d5d2e58446907a0e595f1263e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  environment: {fileID: 11400000, guid: 2864e3335808a1144876b085155156df, type: 2}
   trail: {fileID: 1698163017707534965}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3584
 --- !u!96 &1698163017707534965
 TrailRenderer:
   serializedVersion: 2

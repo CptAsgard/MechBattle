@@ -63,7 +63,7 @@ public class ProjectileWeapon : Weapon
             return;
         }
 
-        Vector3 targetPositionWorld = Owner.Target.GetComponent<ComponentsTarget>().GetWorldPosition(Components.Torso);
+        Vector3 targetPositionWorld = Owner.Target.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
         CalculateAngleToHitTarget(targetPositionWorld, out var highAngle, out var lowAngle);
         InRange = lowAngle != null || highAngle != null;

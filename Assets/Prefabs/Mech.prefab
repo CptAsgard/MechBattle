@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: -8686500384392713775}
   - component: {fileID: 2138734003613044796}
   - component: {fileID: 4531279283716984758}
+  - component: {fileID: 2585438111749325341}
   m_Layer: 9
   m_Name: Mech
   m_TagString: Player
@@ -505,12 +506,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aed4196bc3be3e4784d6b8d7648ed50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  mechStatsScriptableObject: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2,
+    type: 2}
   torsoBounds: {fileID: 3563438109963878162}
   headBounds: {fileID: 3563438109810394631}
   leftArmBounds: {fileID: 3563438110952281030}
   rightArmBounds: {fileID: 3563438109742177716}
   leftLegBounds: {fileID: 3563438110496315497}
   rightLegBounds: {fileID: 3563438110557640331}
+--- !u!114 &2585438111749325341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563438109148196198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f540d130466d146bd485170ca8dba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentRepository: {fileID: 4531279283716984758}
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +734,7 @@ GameObject:
   - component: {fileID: 3563438109963878164}
   - component: {fileID: 3563438109963878165}
   - component: {fileID: 3563438109963878162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torso
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -813,7 +831,7 @@ GameObject:
   - component: {fileID: 3563438110496315499}
   - component: {fileID: 3563438110496315496}
   - component: {fileID: 3563438110496315497}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftLeg
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -908,7 +926,7 @@ GameObject:
   - component: {fileID: 3563438110557640333}
   - component: {fileID: 3563438110557640330}
   - component: {fileID: 3563438110557640331}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightLeg
   m_TagString: Player
   m_Icon: {fileID: 0}

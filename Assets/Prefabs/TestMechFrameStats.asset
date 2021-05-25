@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938e66ab159b7384bb9a0ed36a75ebb5, type: 3}
-  m_Name: CannonData
+  m_Script: {fileID: 11500000, guid: 91ab3fdedb6061343a5c8a973925ca57, type: 3}
+  m_Name: TestMechFrameStats
   m_EditorClassIdentifier: 
-  pointsCost: 0
-  maxAngleDeviation: 0.5
-  reloadDelay: 1
-  muzzleVelocity: 5
+  TorsoHealth: 150
+  HeadHealth: 25
+  LeftArmHealth: 75
+  RightArmHealth: 75
+  LeftLegHealth: 75
+  RightLegHealth: 75

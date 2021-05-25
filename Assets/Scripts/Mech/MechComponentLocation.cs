@@ -1,4 +1,4 @@
-public enum Components
+public enum MechComponentLocation : byte
 {
     Torso,
     Head,
