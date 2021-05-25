@@ -1,7 +1,9 @@
-using UnityEngine;
-
-[CreateAssetMenu("DamageForceScriptableObject", "ScriptableObject/DamageForceScriptableObject", 1)]
-public class DamageForceScriptableObject : ScriptableObject, IDamageForce
+public class DamageForce : IDamageForce
 {
-    public float Damage { get; set;  }
+    public float Damage { get; private set; }
+
+    public DamageForce(float damage)
+    {
+        Damage = damage;
+    }
 }
