@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2879935305621288551}
   - component: {fileID: 6347188670377770972}
-  - component: {fileID: -5045683014470845635}
   - component: {fileID: 2234860837166077214}
   - component: {fileID: 4946275486694099662}
   - component: {fileID: 4651439412345411882}
@@ -53,20 +52,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &-5045683014470845635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6781474868229854122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25fd0c51bbe07c140bc30978b91e9182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!114 &2234860837166077214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4cbabaa1c765d4fac798ef6ef8e4d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   mousePosition: {fileID: 2607035550237485003, guid: b5f8cbe27e4b68f438f4076c12b69e40,
     type: 3}
   selectorMask:

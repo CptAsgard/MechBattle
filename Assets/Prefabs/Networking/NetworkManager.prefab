@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2081870935185298451}
   - component: {fileID: 609192954014754095}
   - component: {fileID: 738793919683500967}
+  - component: {fileID: 1226381652}
+  - component: {fileID: 1226381653}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -82,6 +84,7 @@ MonoBehaviour:
     type: 3}
   projectileWeaponPrefab: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
     type: 3}
+  mechRepository: {fileID: 1226381653}
 --- !u!114 &609192954014754095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,3 +122,29 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
+--- !u!114 &1226381652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146083071264858460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c3983e0e54d4847bdbc81f456b6087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rebuildInterval: 1
+  mechRepository: {fileID: 1226381653}
+--- !u!114 &1226381653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146083071264858460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a800e19ba152e545a46fa5b64e7adbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

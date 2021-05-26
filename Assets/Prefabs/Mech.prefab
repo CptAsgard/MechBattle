@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 2138734003613044796}
   - component: {fileID: 4531279283716984758}
   - component: {fileID: 2585438111749325341}
+  - component: {fileID: 1949132100923613145}
   m_Layer: 9
   m_Name: Mech
   m_TagString: Player
@@ -532,6 +533,18 @@ MonoBehaviour:
   componentRepository: {fileID: 4531279283716984758}
   mechState: {fileID: 162267820753287055}
   aiPath: {fileID: 2894551261037655868}
+--- !u!114 &1949132100923613145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563438109148196198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311d8fb38da23d44c8d906c4ddd0cda7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0
