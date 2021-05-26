@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MechStatsScriptableObject", menuName = "ScriptableObjects/MechStatsScriptableObject", order = 1)]
-public class MechStatsScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "MechDataScriptableObject", menuName = "ScriptableObjects/MechDataScriptableObject", order = 1)]
+public class MechDataScriptableObject : ScriptableObject
 {
     public float TorsoHealth;
     public float HeadHealth;

@@ -3,12 +3,12 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 
-public class WeaponsController : NetworkBehaviour
+public class MechWeaponsController : NetworkBehaviour
 {
     [SerializeField]
     private Transform slotParent;
     [SerializeField]
-    private TurretRotationController turretController;
+    private MechTurretAngleController mechTurretController;
     [SerializeField]
     private MechState mechState;
 
@@ -71,7 +71,7 @@ public class WeaponsController : NetworkBehaviour
             }
 
             // TODO : Sketch to rely on actual angle in world to determine whether turret has moved in that direction, precision could be off
-            if (Mathf.Abs(Vector3.Angle(turretController.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
+            if (Mathf.Abs(Vector3.Angle(mechTurretController.Orientation, weapon.AimDirection)) <= weapon.WeaponData.maxAngleDeviation)
             {
                 weapon.Fire();
             }

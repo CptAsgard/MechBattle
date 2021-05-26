@@ -5,7 +5,7 @@ public class MechComponentRepository : NetworkBehaviour
 {
     [Header("Stats")]
     [SerializeField]
-    private MechStatsScriptableObject mechStatsScriptableObject;
+    private MechDataScriptableObject mechDataScriptableObject;
 
     [Header("Bounds")]
     [SerializeField]
@@ -36,12 +36,12 @@ public class MechComponentRepository : NetworkBehaviour
 
     private void Awake()
     {
-        torsoComponent = new MechComponent(MechComponentLocation.Torso, mechStatsScriptableObject.TorsoHealth);
-        headComponent = new MechComponent(MechComponentLocation.Head, mechStatsScriptableObject.HeadHealth);
-        leftArmComponent = new MechComponent(MechComponentLocation.LeftArm, mechStatsScriptableObject.LeftArmHealth);
-        rightArmComponent = new MechComponent(MechComponentLocation.RightArm, mechStatsScriptableObject.RightArmHealth);
-        leftLegComponent = new MechComponent(MechComponentLocation.LeftLeg, mechStatsScriptableObject.LeftLegHealth);
-        rightLegComponent = new MechComponent(MechComponentLocation.RightLeg, mechStatsScriptableObject.RightLegHealth);
+        torsoComponent = new MechComponent(MechComponentLocation.Torso, mechDataScriptableObject.TorsoHealth);
+        headComponent = new MechComponent(MechComponentLocation.Head, mechDataScriptableObject.HeadHealth);
+        leftArmComponent = new MechComponent(MechComponentLocation.LeftArm, mechDataScriptableObject.LeftArmHealth);
+        rightArmComponent = new MechComponent(MechComponentLocation.RightArm, mechDataScriptableObject.RightArmHealth);
+        leftLegComponent = new MechComponent(MechComponentLocation.LeftLeg, mechDataScriptableObject.LeftLegHealth);
+        rightLegComponent = new MechComponent(MechComponentLocation.RightLeg, mechDataScriptableObject.RightLegHealth);
     }
 
     public MechComponent GetComponent(MechComponentLocation target)

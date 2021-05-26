@@ -1,4 +1,4 @@
-public class SelectionState
+public class MechSelectionState
 {
     public MechState selected;
 }

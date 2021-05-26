@@ -20,7 +20,7 @@ public abstract class Weapon : NetworkBehaviour
         Slot = slot;
         Owner = owner;
 
-        Origin = owner.GetComponent<WeaponsController>().GetSlot(slot);
+        Origin = owner.GetComponent<MechWeaponsController>().GetSlot(slot);
     }
 
     public virtual void Fire()

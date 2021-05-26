@@ -1,7 +1,7 @@
 using Pathfinding;
 using UnityEngine;
 
-public class UpdateGridSeekerBlock : MonoBehaviour
+public class AIPathBlocker : MonoBehaviour
 {
     public int seekerTag = 0;
 

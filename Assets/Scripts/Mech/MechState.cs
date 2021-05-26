@@ -8,7 +8,7 @@ public class MechState : NetworkBehaviour
     [field: SyncVar]
     public NetworkIdentity Target { get; set; }
     [SyncVar]
-    public PowerState PowerState;
+    public MechPowerState PowerState;
 
     public void Initialize(int owner)
     {

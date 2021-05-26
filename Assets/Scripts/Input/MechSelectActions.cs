@@ -10,7 +10,7 @@ public class MechSelectActions : NetworkBehaviour
     [SerializeField]
     private LayerMask selectorMask;
 
-    public SelectionState SelectionState = new SelectionState();
+    public MechSelectionState MechSelectionState = new MechSelectionState();
 
     public void Select(InputAction.CallbackContext callbackContext)
     {
@@ -20,7 +20,7 @@ public class MechSelectActions : NetworkBehaviour
         }
 
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
-        SelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
+        MechSelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
     }
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)
@@ -28,12 +28,12 @@ public class MechSelectActions : NetworkBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {
-            int selectedTeam = SelectionState.selected.Owner; // TODO check if owners on same team
+            int selectedTeam = MechSelectionState.selected.Owner; // TODO check if owners on same team
             int targetTeam = hit.collider.GetComponentInParent<MechState>().Owner;
 
             if (selectedTeam != targetTeam)
             {
-                SetTarget(SelectionState.selected.gameObject, hit.collider.transform.root.gameObject);
+                SetTarget(MechSelectionState.selected.gameObject, hit.collider.transform.root.gameObject);
             }
         }
     }
@@ -41,6 +41,6 @@ public class MechSelectActions : NetworkBehaviour
     [Command]
     private void SetTarget(GameObject from, GameObject target, NetworkConnectionToClient sender = null)
     {
-        from.GetComponentInParent<WeaponsController>().Aim(target.GetComponent<NetworkIdentity>());
+        from.GetComponentInParent<MechWeaponsController>().Aim(target.GetComponent<NetworkIdentity>());
     }
 }

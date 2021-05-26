@@ -25,9 +25,9 @@ public class MechRoomManager : NetworkRoomManager
             NetworkServer.Spawn(mech);
             NetworkServer.Spawn(weapon);
             
-            mech.GetComponent<UpdateGridSeekerBlock>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
+            mech.GetComponent<AIPathBlocker>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
             mech.GetComponent<MechState>().Initialize(index + 1); // NOTE : default placed mechs will be enemies
-            mech.GetComponent<WeaponsController>().Add(weapon.GetComponent<Weapon>());
+            mech.GetComponent<MechWeaponsController>().Add(weapon.GetComponent<Weapon>());
         }
 
         gamePlayer.GetComponent<Player>().identity = index + 1;

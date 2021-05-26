@@ -24,7 +24,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        if (mechSelectActions.SelectionState.selected == null || mechSelectActions.SelectionState.selected.Owner != player.identity)
+        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.Owner != player.identity)
         {
             return;
         }
@@ -41,7 +41,7 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            WalkTowards(mechSelectActions.SelectionState.selected.gameObject, downHit.point);
+            WalkTowards(mechSelectActions.MechSelectionState.selected.gameObject, downHit.point);
         }
 
         if (callbackContext.canceled)
@@ -51,7 +51,7 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            LookTowards(mechSelectActions.SelectionState.selected.gameObject, upHit.point);
+            LookTowards(mechSelectActions.MechSelectionState.selected.gameObject, upHit.point);
         }
     }
 
@@ -99,7 +99,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        TargetingController turret = target.GetComponentInChildren<TargetingController>();
+        MechTargetingController turret = target.GetComponentInChildren<MechTargetingController>();
         turret.SetDirection(dirVector);
     }
 }

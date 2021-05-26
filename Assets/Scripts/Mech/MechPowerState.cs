@@ -1,4 +1,4 @@
-public enum PowerState
+public enum MechPowerState
 {
     PowerOff,
     PowerOn,
