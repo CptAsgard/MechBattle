@@ -33,9 +33,10 @@ public class MechSelectActions : NetworkBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {
             int selectedTeam = MechSelectionState.selected.Owner; // TODO check if owners on same team
-            int targetTeam = hit.collider.GetComponentInParent<MechState>().Owner;
+            MechState targetState = hit.collider.GetComponentInParent<MechState>();
+            int targetTeam = targetState.Owner;
 
-            if (selectedTeam != targetTeam)
+            if (targetState.PowerState != MechPowerState.Destroyed && selectedTeam != targetTeam)
             {
                 SetTarget(MechSelectionState.selected.gameObject, hit.collider.transform.root.gameObject);
             }

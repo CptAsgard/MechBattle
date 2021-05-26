@@ -52,7 +52,13 @@ public class ProjectileWeapon : Weapon
     private void SpawnBullet(Vector3 position, Vector3 forward)
     {
         GameObject pr = Instantiate(projectile);
-        pr.GetComponent<Projectile>().Initialize(position, forward, weaponData);
+        pr.GetComponent<Projectile>().Initialize(position, forward, weaponData, OnProjectileHit);
+    }
+
+    [Server]
+    private static void OnProjectileHit(IDamageable damageable)
+    {
+        damageable?.TakeDamage(MechComponentLocation.Torso, new DamageForce(20));
     }
 
     private void Aim()

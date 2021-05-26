@@ -15,4 +15,4 @@ MonoBehaviour:
   pointsCost: 0
   maxAngleDeviation: 0.5
   reloadDelay: 1
-  muzzleVelocity: 5
+  muzzleVelocity: 410

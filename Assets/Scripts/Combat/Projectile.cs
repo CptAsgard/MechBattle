@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -9,13 +10,13 @@ public class Projectile : MonoBehaviour
 
     private Vector3 currentPosition;
     private Vector3 currentVelocity;
-
+    private Action<IDamageable> onHitAction;
     private float timer;
 
     private void FixedUpdate()
     {
         StepBullet();
-        trail.enabled = true;
+        trail.emitting = true;
 
         timer += Time.fixedDeltaTime;
         if (timer >= 10f)
@@ -24,24 +25,26 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData)
+    public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData, Action<IDamageable> callback = null)
     {
         currentPosition = initialPosition;
         currentVelocity = direction * weaponData.muzzleVelocity;
         trail.AddPosition(currentPosition);
+        onHitAction = callback;
     }
 
     private void StepBullet()
     {
         ProjectileIntegrationMethods.HeunsNoExternalForces(Time.fixedDeltaTime, currentPosition, currentVelocity, out Vector3 newPosition, out Vector3 newVelocity);
 
-        // TODO : server
         if (Physics.Linecast(currentPosition, newPosition, out RaycastHit hitInfo, layerMask))
         {
+            newPosition = hitInfo.point;
+
             IDamageable damageable = hitInfo.transform.GetComponentInParent<IDamageable>();
-            damageable?.TakeDamage(MechComponentLocation.Torso, new DamageForce(20));
+            onHitAction?.Invoke(damageable);
             Destroy(gameObject);
-            return;
+            enabled = false;
         }
 
         currentPosition = newPosition;
@@ -49,5 +52,11 @@ public class Projectile : MonoBehaviour
 
         transform.position = currentPosition;
         transform.forward = currentVelocity.normalized;
+    }
+
+    private void OnDestroy()
+    {
+        trail.transform.parent = null;
+        trail.autodestruct = true;
     }
 }
