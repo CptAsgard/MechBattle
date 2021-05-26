@@ -10,9 +10,11 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
     [SerializeField]
     private AIPath aiPath;
 
-    public void TakeDamage(MechComponentLocation location, IDamageForce force)
+    public void TakeDamage(Vector3 point, IDamageForce force)
     {
-        Debug.Log($"{name} damaged. Health " +
+        MechComponentLocation location = componentRepository.GetNearestComponent(point);
+
+        Debug.Log($"{name} component {location} damaged. Health " +
             $"(old): {componentRepository.GetComponent(location).Health} (new): {componentRepository.GetComponent(location).Health - force.Damage}");
 
         componentRepository.GetComponent(location).Health -= force.Damage;

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -10,7 +9,7 @@ public class Projectile : MonoBehaviour
 
     private Vector3 currentPosition;
     private Vector3 currentVelocity;
-    private Action<IDamageable> onHitAction;
+    private System.Action<IDamageable, Vector3> onHitAction;
     private float timer;
 
     private void FixedUpdate()
@@ -25,12 +24,13 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData, Action<IDamageable> callback = null)
+    public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData, System.Action<IDamageable, Vector3> callback = null)
     {
         currentPosition = initialPosition;
         currentVelocity = direction * weaponData.muzzleVelocity;
-        trail.AddPosition(currentPosition);
         onHitAction = callback;
+        
+        trail.AddPosition(currentPosition);
     }
 
     private void StepBullet()
@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
             newPosition = hitInfo.point;
 
             IDamageable damageable = hitInfo.transform.GetComponentInParent<IDamageable>();
-            onHitAction?.Invoke(damageable);
+            onHitAction?.Invoke(damageable, newPosition);
             Destroy(gameObject);
         }
 

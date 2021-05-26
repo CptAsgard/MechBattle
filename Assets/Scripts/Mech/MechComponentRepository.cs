@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 
@@ -34,6 +35,8 @@ public class MechComponentRepository : NetworkBehaviour
     [SyncVar]
     private MechComponent rightLegComponent;
 
+    private Array enumValues;
+
     private void Awake()
     {
         torsoComponent = new MechComponent(MechComponentLocation.Torso, mechDataScriptableObject.TorsoHealth);
@@ -42,6 +45,8 @@ public class MechComponentRepository : NetworkBehaviour
         rightArmComponent = new MechComponent(MechComponentLocation.RightArm, mechDataScriptableObject.RightArmHealth);
         leftLegComponent = new MechComponent(MechComponentLocation.LeftLeg, mechDataScriptableObject.LeftLegHealth);
         rightLegComponent = new MechComponent(MechComponentLocation.RightLeg, mechDataScriptableObject.RightLegHealth);
+
+        enumValues = Enum.GetValues(typeof(MechComponentLocation));
     }
 
     public MechComponent GetComponent(MechComponentLocation target)
@@ -58,22 +63,44 @@ public class MechComponentRepository : NetworkBehaviour
         };
     }
 
-    public Vector3 GetWorldPosition(MechComponentLocation target)
+    public Bounds GetBounds(MechComponentLocation target)
     {
         return target switch
         {
-            MechComponentLocation.Torso => RandomPointInBounds(torsoBounds.bounds),
-            MechComponentLocation.Head => RandomPointInBounds(headBounds.bounds),
-            MechComponentLocation.LeftArm => RandomPointInBounds(leftArmBounds.bounds),
-            MechComponentLocation.RightArm => RandomPointInBounds(rightArmBounds.bounds),
-            MechComponentLocation.LeftLeg => RandomPointInBounds(leftLegBounds.bounds),
-            MechComponentLocation.RightLeg => RandomPointInBounds(rightLegBounds.bounds),
+            MechComponentLocation.Torso => torsoBounds.bounds,
+            MechComponentLocation.Head => headBounds.bounds,
+            MechComponentLocation.LeftArm => leftArmBounds.bounds,
+            MechComponentLocation.RightArm => rightArmBounds.bounds,
+            MechComponentLocation.LeftLeg => leftLegBounds.bounds,
+            MechComponentLocation.RightLeg => rightLegBounds.bounds,
             _ => throw new System.ArgumentOutOfRangeException(nameof(target), target, null)
         };
     }
 
-    private static Vector3 RandomPointInBounds(Bounds bounds)
+    public Vector3 GetWorldPosition(MechComponentLocation target)
     {
-        return bounds.center;
+        return GetBounds(target).center;
+    }
+
+    public MechComponentLocation GetNearestComponent(Vector3 position)
+    {
+        float nearestDistance = float.MaxValue;
+        MechComponentLocation nearestLocation = MechComponentLocation.Torso;
+        foreach (MechComponentLocation location in enumValues)
+        {
+            float distance = DistanceToPoint(GetBounds(location), position);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestLocation = location;
+            }
+        }
+        return nearestLocation;
+    }
+
+    private static float DistanceToPoint(Bounds bounds, Vector3 position)
+    {
+        Vector3 posA = bounds.ClosestPoint(position);
+        return (position - posA).sqrMagnitude;
     }
 }

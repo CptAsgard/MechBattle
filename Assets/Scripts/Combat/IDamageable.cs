@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IDamageForce
 {
     float Damage { get; }
@@ -5,5 +7,5 @@ public interface IDamageForce
 
 public interface IDamageable
 {
-    void TakeDamage(MechComponentLocation location, IDamageForce force);
+    void TakeDamage(Vector3 point, IDamageForce force);
 }
