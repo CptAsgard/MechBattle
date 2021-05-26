@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 
 public class MechDamageHandler : MonoBehaviour, IDamageable
@@ -6,6 +7,8 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
     private MechComponentRepository componentRepository;
     [SerializeField]
     private MechState mechState;
+    [SerializeField]
+    private AIPath aiPath;
 
     public void TakeDamage(MechComponentLocation location, IDamageForce force)
     {
@@ -22,6 +25,13 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
         if (componentRepository.GetComponent(MechComponentLocation.Torso).Health <= 0)
         {
             mechState.PowerState = MechPowerState.Destroyed;
+            aiPath.isStopped = true;
+            aiPath.canMove = false;
+
+            GetComponent<MechTurretAngleController>().enabled = false;
+            GetComponent<MechWeaponsController>().enabled = false;
+            GetComponent<MechTargetingController>().enabled = false;
+
             Debug.Log("MECH DESTROYED!", gameObject);
         }
     }

@@ -1,7 +1,6 @@
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Networking.Types;
 
 public class MechSelectActions : NetworkBehaviour
 {
@@ -25,6 +24,11 @@ public class MechSelectActions : NetworkBehaviour
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)
     {
+        if (!MechSelectionState.selected || MechSelectionState.selected.PowerState == MechPowerState.Destroyed)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {

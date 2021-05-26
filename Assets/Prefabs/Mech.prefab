@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  PowerState: 0
+  PowerState: 1
 --- !u!114 &5976101462369990963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentRepository: {fileID: 4531279283716984758}
   mechState: {fileID: 162267820753287055}
+  aiPath: {fileID: 2894551261037655868}
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0

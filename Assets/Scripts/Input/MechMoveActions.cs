@@ -8,7 +8,7 @@ public class MechMoveActions : NetworkBehaviour
     [SerializeField]
     private InputActionReference mousePosition;
     [SerializeField]
-    private MechSelectActions mechSelectActions;
+    private MechSelectActions mechSelectActions; // TODO : this is not great
 
     private Player player;
 
@@ -24,7 +24,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.Owner != player.identity)
+        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.PowerState != MechPowerState.PowerOn || mechSelectActions.MechSelectionState.selected.Owner != player.identity)
         {
             return;
         }
@@ -59,7 +59,7 @@ public class MechMoveActions : NetworkBehaviour
     private void WalkTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {
         MechState mechState = target.GetComponent<MechState>();
-        if (sender == null || mechState.Owner != player.identity)
+        if (sender == null || mechState.Owner != player.identity || mechState.PowerState != MechPowerState.PowerOn)
         {
             return;
         }
@@ -84,15 +84,15 @@ public class MechMoveActions : NetworkBehaviour
 
     [Command]
     private void LookTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
-    {        
+    {
         MechState mechState = target.GetComponent<MechState>();
-        if (sender == null || mechState.Owner != player.identity)
+        if (sender == null || mechState.Owner != player.identity || mechState.PowerState != MechPowerState.PowerOn)
         {
             return;
         }
 
         AIPath ai = target.GetComponentInChildren<AIPath>();
-        
+
         Vector3 dirVector = point - (ai.hasPath ? ai.destination : target.transform.position);
         if (dirVector.sqrMagnitude < 1f)
         {
