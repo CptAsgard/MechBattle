@@ -56,9 +56,9 @@ public class ProjectileWeapon : Weapon
     }
 
     [Server]
-    private static void OnProjectileHit(IDamageable damageable, Vector3 hitPosition)
+    private void OnProjectileHit(IDamageable damageable, Vector3 hitPosition)
     {
-        damageable?.TakeDamage(hitPosition, new DamageForce(20));
+        damageable?.TakeDamage(hitPosition, new DamageForce(weaponData.damageOnHit));
     }
 
     private void Aim()

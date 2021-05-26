@@ -5,4 +5,5 @@ public class ProjectileWeaponData : WeaponData
 {
     public override WeaponType weaponType => WeaponType.Projectile;
     public float muzzleVelocity;
+    public float damageOnHit;
 }

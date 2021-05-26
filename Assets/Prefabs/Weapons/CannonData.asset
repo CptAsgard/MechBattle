@@ -16,3 +16,4 @@ MonoBehaviour:
   maxAngleDeviation: 0.5
   reloadDelay: 1
   muzzleVelocity: 410
+  damageOnHit: 10
