@@ -18,6 +18,16 @@ public class MechWeaponsController : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (mechState.Target == null)
+        {
+            return;
+        }
+
+        if (mechState.Target.GetComponent<MechState>().PowerState == MechPowerState.Destroyed)
+        {
+            mechState.Target = null;
+        }
+
         Fire();
     }
 
