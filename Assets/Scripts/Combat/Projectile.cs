@@ -44,7 +44,6 @@ public class Projectile : MonoBehaviour
             IDamageable damageable = hitInfo.transform.GetComponentInParent<IDamageable>();
             onHitAction?.Invoke(damageable);
             Destroy(gameObject);
-            enabled = false;
         }
 
         currentPosition = newPosition;
