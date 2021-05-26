@@ -35,6 +35,7 @@ public class Projectile : MonoBehaviour
     {
         ProjectileIntegrationMethods.HeunsNoExternalForces(Time.fixedDeltaTime, currentPosition, currentVelocity, out Vector3 newPosition, out Vector3 newVelocity);
 
+        // TODO : server
         if (Physics.Linecast(currentPosition, newPosition, out RaycastHit hitInfo, layerMask))
         {
             IDamageable damageable = hitInfo.transform.GetComponentInParent<IDamageable>();

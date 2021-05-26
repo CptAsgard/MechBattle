@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentRepository: {fileID: 4531279283716984758}
+  mechState: {fileID: 162267820753287055}
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0
