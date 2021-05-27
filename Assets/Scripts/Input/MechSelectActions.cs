@@ -32,9 +32,9 @@ public class MechSelectActions : NetworkBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {
-            int selectedTeam = MechSelectionState.selected.Owner; // TODO check if owners on same team
+            int selectedTeam = MechSelectionState.selected.PlayerIndex; // TODO check if owners on same team
             MechState targetState = hit.collider.GetComponentInParent<MechState>();
-            int targetTeam = targetState.Owner;
+            int targetTeam = targetState.PlayerIndex;
 
             if (targetState.PowerState != MechPowerState.Destroyed && selectedTeam != targetTeam)
             {

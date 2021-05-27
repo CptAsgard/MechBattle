@@ -24,7 +24,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.PowerState != MechPowerState.PowerOn || mechSelectActions.MechSelectionState.selected.Owner != player.identity)
+        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.PowerState != MechPowerState.PowerOn || mechSelectActions.MechSelectionState.selected.PlayerIndex != player.identity)
         {
             return;
         }
@@ -59,7 +59,7 @@ public class MechMoveActions : NetworkBehaviour
     private void WalkTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {
         MechState mechState = target.GetComponent<MechState>();
-        if (sender == null || mechState.Owner != player.identity || mechState.PowerState != MechPowerState.PowerOn)
+        if (sender == null || mechState.PlayerIndex != player.identity || mechState.PowerState != MechPowerState.PowerOn)
         {
             return;
         }
@@ -86,7 +86,7 @@ public class MechMoveActions : NetworkBehaviour
     private void LookTowards(GameObject target, Vector3 point, NetworkConnectionToClient sender = null)
     {
         MechState mechState = target.GetComponent<MechState>();
-        if (sender == null || mechState.Owner != player.identity || mechState.PowerState != MechPowerState.PowerOn)
+        if (sender == null || mechState.PlayerIndex != player.identity || mechState.PowerState != MechPowerState.PowerOn)
         {
             return;
         }

@@ -12,6 +12,8 @@ public class MechWeaponsController : NetworkBehaviour
     [SerializeField]
     private MechState mechState;
 
+    public IEnumerable<Weapon> Weapons => weapons;
+
     private List<Weapon> weapons = new List<Weapon>();
 
     public bool Armed => weapons.Any(weapon => weapon.Armed);
@@ -23,7 +25,8 @@ public class MechWeaponsController : NetworkBehaviour
             return;
         }
 
-        if (mechState.Target.GetComponent<MechState>().PowerState == MechPowerState.Destroyed)
+        if (!mechState.Target.observers.ContainsValue(mechState.Owner) ||
+            mechState.Target.GetComponent<MechState>().PowerState == MechPowerState.Destroyed)
         {
             mechState.Target = null;
         }

@@ -26,7 +26,7 @@ public class MechRoomManager : NetworkRoomManager
             NetworkServer.Spawn(weapon);
 
             MechState newMechState = mech.GetComponent<MechState>();
-            newMechState.Initialize(index + 1); // NOTE : we start at 1, uninitialized mechs start at 0 and are considered enemies
+            newMechState.Initialize(conn, index + 1); // NOTE : we start at 1, uninitialized mechs start at 0 and are considered enemies
             mechRepository.Add(newMechState);
 
             mech.GetComponent<AIPathBlocker>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable

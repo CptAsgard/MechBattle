@@ -46,6 +46,7 @@ public class ProjectileWeapon : Weapon
 
         SpawnBullet(position, forward);
         weaponView.RpcFire(position, forward);
+        Debug.Log("Called RpcFire");
     }
     
     [Server]

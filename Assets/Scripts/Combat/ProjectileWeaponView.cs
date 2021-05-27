@@ -13,5 +13,6 @@ public class ProjectileWeaponView : NetworkBehaviour
     {
         GameObject pr = Instantiate(bulletPrefab);
         pr.GetComponent<Projectile>().Initialize(position, forward, (ProjectileWeaponData) weapon.WeaponData);
+        Debug.Log("RpcFire");
     }
 }

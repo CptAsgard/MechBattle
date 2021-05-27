@@ -1,17 +1,19 @@
 using Mirror;
-using UnityEngine;
 
 public class MechState : NetworkBehaviour
 {
-    [field: SyncVar]
-    public int Owner { get; private set; }
-    [field: SyncVar]
-    public NetworkIdentity Target { get; set; }
+    public NetworkConnection Owner { get; private set; }
+
+    [SyncVar]
+    public int PlayerIndex;
+    [SyncVar]
+    public NetworkIdentity Target;
     [SyncVar]
     public MechPowerState PowerState;
 
-    public void Initialize(int owner)
+    public void Initialize(NetworkConnection owner, int index)
     {
         Owner = owner;
+        PlayerIndex = index;
     }
 }

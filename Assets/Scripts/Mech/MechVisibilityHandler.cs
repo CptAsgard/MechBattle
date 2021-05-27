@@ -1,3 +1,5 @@
+using System.Linq;
+using Mirror;
 using UnityEngine;
 
 public class MechVisibilityHandler : MonoBehaviour
@@ -6,11 +8,17 @@ public class MechVisibilityHandler : MonoBehaviour
     private Transform sensorsTransform;
     [SerializeField]
     private LayerMask blockingMask;
+    [SerializeField]
+    private MechWeaponsController weaponsController;
 
-    public bool CanSee(Vector3 point)
+    public bool CanSee(NetworkIdentity identity)
     {
-        Vector3 center = point + Vector3.up;
+        if (weaponsController.Weapons.Any(weapon => weapon.netIdentity == identity))
+        {
+            return true;
+        }
 
+        Vector3 center = identity.transform.position + Vector3.up;
         return Test(sensorsTransform.position, center + Vector3.left) ||
                 Test(sensorsTransform.position, center + Vector3.right) ||
                 Test(sensorsTransform.position, center + Vector3.up) ||
