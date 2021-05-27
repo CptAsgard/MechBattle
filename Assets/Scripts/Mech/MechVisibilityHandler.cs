@@ -2,8 +2,23 @@ using UnityEngine;
 
 public class MechVisibilityHandler : MonoBehaviour
 {
+    [SerializeField]
+    private Transform sensorsTransform;
+    [SerializeField]
+    private LayerMask blockingMask;
+
     public bool CanSee(Vector3 point)
     {
-        return Vector3.Distance(point, transform.position) < 10f;
+        Vector3 center = point + Vector3.up;
+
+        return Test(sensorsTransform.position, center + Vector3.left) ||
+                Test(sensorsTransform.position, center + Vector3.right) ||
+                Test(sensorsTransform.position, center + Vector3.up) ||
+                Test(sensorsTransform.position, center + Vector3.down);
+    }
+
+    private bool Test(Vector3 a, Vector3 b)
+    {
+        return !Physics.Linecast(a, b, blockingMask);
     }
 }

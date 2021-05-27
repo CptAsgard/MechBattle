@@ -13,30 +13,33 @@ public class LineOfSightInterestManagement : InterestManagement
 
     public override bool OnCheckObserver(NetworkIdentity identity, NetworkConnection newObserver)
     {
-        if (identity.connectionToClient == newObserver)
+        if (identity.connectionToClient == newObserver || newObserver.clientOwnedObjects.Contains(identity))
         {
             return true;
         }
-
+        
         Player nonRoomPlayer = newObserver.identity.GetComponent<Player>();
         if (nonRoomPlayer == null)
         {
             return false;
         }
+        int nonRoomPlayerId = nonRoomPlayer.identity;
 
-        int ownerID = newObserver.identity.GetComponent<Player>().identity;
-        var mechs = mechRepository.GetMechsByOwner(ownerID);
-
+        var mechs = mechRepository.GetMechsByOwner(nonRoomPlayerId);
         return mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity.transform.position));
     }
 
     public override void OnRebuildObservers(NetworkIdentity identity, HashSet<NetworkConnection> newObservers, bool initialize)
     {
-        Vector3 position = identity.transform.position;
-
         foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
         {
-            if (conn != null && conn.isAuthenticated && conn.identity != null)
+            if (identity.connectionToClient == conn || conn.clientOwnedObjects.Contains(identity))
+            {
+                newObservers.Add(conn);
+                continue;
+            }
+
+            if (conn.isAuthenticated && conn.identity != null)
             {
                 Player nonRoomPlayer = conn.identity.GetComponent<Player>();
                 if (nonRoomPlayer == null)
@@ -44,10 +47,10 @@ public class LineOfSightInterestManagement : InterestManagement
                     continue;
                 }
 
-                int ownerID = conn.identity.GetComponent<Player>().identity;
-                var mechs = mechRepository.GetMechsByOwner(ownerID);
+                int ownerId = nonRoomPlayer.identity;
+                var mechs = mechRepository.GetMechsByOwner(ownerId);
 
-                if (mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(position)))
+                if (mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity.transform.position)))
                 {
                     newObservers.Add(conn);
                 }
@@ -58,7 +61,10 @@ public class LineOfSightInterestManagement : InterestManagement
     void Update()
     {
         // only on server
-        if (!NetworkServer.active) return;
+        if (!NetworkServer.active)
+        {
+            return;
+        }
 
         // rebuild all spawned NetworkIdentity's observers every interval
         if (NetworkTime.time >= lastRebuildTime + rebuildInterval)
