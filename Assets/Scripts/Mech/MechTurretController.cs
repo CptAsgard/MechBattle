@@ -1,10 +1,10 @@
 using Pathfinding;
 using UnityEngine;
 
-public class MechTargetingController : MonoBehaviour
+public class MechTurretController : MonoBehaviour
 {
     [SerializeField]
-    private MechTurretAngleController rotator;
+    private MechTurretView turretView;
     [SerializeField]
     private MechWeaponsController mechWeapons;
     [SerializeField]
@@ -19,7 +19,7 @@ public class MechTargetingController : MonoBehaviour
         lookDirection = direction;
         if (mechState.Target == null || !mechWeapons.Armed)
         {
-            rotator.LookAt(lookDirection);
+            turretView.LookAt(lookDirection);
         }
     }
 
@@ -27,11 +27,11 @@ public class MechTargetingController : MonoBehaviour
     {
         if (mechState.Target != null && mechWeapons.Armed)
         {
-            rotator.LookAt(mechWeapons.GetPriorityDirection());
+            turretView.LookAt(mechWeapons.GetPriorityDirection());
         }
         else if (mechState.Target == null && pathfinder.reachedEndOfPath)
         {
-            rotator.LookAt(lookDirection);
+            turretView.LookAt(lookDirection);
         }
     }
 }

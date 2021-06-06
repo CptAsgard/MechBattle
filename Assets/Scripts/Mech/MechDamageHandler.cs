@@ -30,9 +30,9 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
             aiPath.isStopped = true;
             aiPath.canMove = false;
 
-            GetComponent<MechTurretAngleController>().enabled = false;
+            GetComponent<MechTurretView>().enabled = false;
             GetComponent<MechWeaponsController>().enabled = false;
-            GetComponent<MechTargetingController>().enabled = false;
+            GetComponent<MechTurretController>().enabled = false;
 
             Debug.Log("MECH DESTROYED!", gameObject);
         }

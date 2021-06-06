@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938e66ab159b7384bb9a0ed36a75ebb5, type: 3}
-  m_Name: CannonData
+  m_Script: {fileID: 11500000, guid: 4856b4a856017654f9063cc47bd5c0a0, type: 3}
+  m_Name: MissileLauncherData
   m_EditorClassIdentifier: 
   pointsCost: 0
-  maxAngleDeviation: 0.5
-  reloadDelay: 5
-  muzzleVelocity: 410
-  damageOnHit: 10
+  maxAngleDeviation: 0
+  reloadDelay: 0

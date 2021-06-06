@@ -99,7 +99,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        MechTargetingController turret = target.GetComponentInChildren<MechTargetingController>();
+        MechTurretController turret = target.GetComponentInChildren<MechTurretController>();
         turret.SetDirection(dirVector);
     }
 }

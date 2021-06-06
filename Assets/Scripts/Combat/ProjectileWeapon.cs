@@ -11,16 +11,21 @@ public class ProjectileWeapon : Weapon
     private WeaponFireController fireController;
     [SerializeField]
     private GameObject projectile;
+    [SerializeField]
+    private Transform origin;
+
+    private bool inRange;
 
     public override WeaponData WeaponData => weaponData;
-    public override bool Armed => fireController.ReadyToFire;
+    public override bool Armed => fireController.ReadyToFire && inRange;
+    public override bool ShouldAim => true;
 
     private void Update()
     {
         if (!isServer)
         {
             enabled = false;
-            return; 
+            return;
         }
 
         if (!Owner)
@@ -41,14 +46,13 @@ public class ProjectileWeapon : Weapon
 
         fireController.ResetCooldown();
 
-        Vector3 position = Origin.position;
-        Vector3 forward = Origin.forward;
+        Vector3 position = origin.position;
+        Vector3 forward = origin.forward;
 
         SpawnBullet(position, forward);
         weaponView.RpcFire(position, forward);
-        Debug.Log("Called RpcFire");
     }
-    
+
     [Server]
     private void SpawnBullet(Vector3 position, Vector3 forward)
     {
@@ -66,32 +70,30 @@ public class ProjectileWeapon : Weapon
     {
         if (Owner.Target == null)
         {
-            InRange = false;
+            inRange = false;
             return;
         }
 
         Vector3 targetPositionWorld = Owner.Target.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
         CalculateAngleToHitTarget(targetPositionWorld, out var highAngle, out var lowAngle);
-        InRange = lowAngle != null || highAngle != null;
+        inRange = lowAngle != null || highAngle != null;
 
-        if (lowAngle == null && highAngle == null)
+        if (!inRange)
         {
-            AimDirection = (targetPositionWorld - Origin.position).normalized;
             return;
         }
 
         float angle = (float) (lowAngle ?? highAngle);
-
-        Origin.LookAt(targetPositionWorld);
-        Origin.localEulerAngles = new Vector3(360f - angle, Origin.localEulerAngles.y, Origin.localEulerAngles.z);
-        AimDirection = Origin.forward;
+        origin.LookAt(targetPositionWorld);
+        origin.localEulerAngles = new Vector3(360f - angle, origin.localEulerAngles.y, origin.localEulerAngles.z);
+        AimDirection = origin.forward;
     }
-    
+
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
     {
         float velocity = weaponData.muzzleVelocity;
-        Vector3 targetVector = target - Origin.position;
+        Vector3 targetVector = target - origin.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
 
