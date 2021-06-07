@@ -94,7 +94,7 @@ public class MechMoveActions : NetworkBehaviour
         AIPath ai = target.GetComponentInChildren<AIPath>();
 
         Vector3 dirVector = point - (ai.hasPath ? ai.destination : target.transform.position);
-        if (dirVector.sqrMagnitude < 1f)
+        if (dirVector.sqrMagnitude < 1f) // TODO : double check function, maybe not hardcode
         {
             return;
         }
