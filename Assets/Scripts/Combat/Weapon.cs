@@ -12,7 +12,7 @@ public abstract class Weapon : NetworkBehaviour
     public abstract bool Armed { get; }
     public abstract bool ShouldAim { get; }
 
-    public void Initialize(MechState owner)
+    public virtual void Initialize(MechState owner)
     {
         Owner = owner;
         transform.parent = owner.GetComponent<MechWeaponsController>().WeaponsParent;

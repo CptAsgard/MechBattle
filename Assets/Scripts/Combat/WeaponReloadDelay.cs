@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponFireController : MonoBehaviour
+public class WeaponReloadDelay : MonoBehaviour
 {
     [SerializeField]
     private Weapon weapon;

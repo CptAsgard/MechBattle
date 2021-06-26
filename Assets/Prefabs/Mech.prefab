@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 2585438111749325341}
   - component: {fileID: 1949132100923613145}
   - component: {fileID: 1117604622}
+  - component: {fileID: -5377476768442471665}
   m_Layer: 9
   m_Name: Mech
   m_TagString: Player
@@ -330,7 +331,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   PlayerIndex: 0
-  Target: {fileID: 0}
   PowerState: 1
 --- !u!114 &2138734003613044796
 MonoBehaviour:
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretView: {fileID: 5976101462369990963}
   mechWeapons: {fileID: -8686500384392713775}
-  mechState: {fileID: 162267820753287055}
+  targetRepository: {fileID: -5377476768442471665}
   pathfinder: {fileID: 2894551261037655868}
 --- !u!114 &5976101462369990963
 MonoBehaviour:
@@ -449,6 +449,18 @@ MonoBehaviour:
   ai: {fileID: 2894551261037655868}
   turretView: {fileID: 5976101462369990963}
   tempLegsRotationSpeed: 1
+--- !u!114 &-5377476768442471665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563438109148196198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fb5d2e8481611418bff7dc5ea336a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3563438109742177714
 GameObject:
   m_ObjectHideFlags: 0

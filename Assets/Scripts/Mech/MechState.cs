@@ -7,8 +7,6 @@ public class MechState : NetworkBehaviour
     [SyncVar]
     public int PlayerIndex;
     [SyncVar]
-    public NetworkIdentity Target;
-    [SyncVar]
     public MechPowerState PowerState;
 
     public void Initialize(NetworkConnection owner, int index)

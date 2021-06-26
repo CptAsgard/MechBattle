@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269405566}
   m_Layer: 0
-  m_Name: Origin
+  m_Name: MuzzleEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,8 +138,6 @@ GameObject:
   - component: {fileID: 4512524148914312566}
   - component: {fileID: 5323250688621236474}
   - component: {fileID: -8271884349800700090}
-  - component: {fileID: -8651628942034655269}
-  - component: {fileID: -2428605683512775417}
   m_Layer: 9
   m_Name: Cannon
   m_TagString: Untagged
@@ -197,10 +195,10 @@ MonoBehaviour:
   AimDirection: {x: 0, y: 0, z: 0}
   weaponData: {fileID: 11400000, guid: 0e23b78976ba52148b3c6b4f8e5e67c3, type: 2}
   weaponView: {fileID: 5323250688621236474}
-  fireController: {fileID: -8271884349800700090}
+  reloadDelay: {fileID: -8271884349800700090}
   projectile: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
     type: 3}
-  origin: {fileID: 269405566}
+  muzzleEnd: {fileID: 269405566}
 --- !u!114 &5323250688621236474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,28 +229,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 4512524148914312566}
---- !u!114 &-8651628942034655269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223662892337230678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61646e5e9d996b4b86c449ba46639f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repository: {fileID: -2428605683512775417}
---- !u!114 &-2428605683512775417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223662892337230678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fb5d2e8481611418bff7dc5ea336a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

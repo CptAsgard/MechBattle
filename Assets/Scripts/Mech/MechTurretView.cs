@@ -29,15 +29,30 @@ public class MechTurretView : MonoBehaviour
 
     private void UpdateTurretDirection()
     {
-        Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, lookAt, tempRotationSpeed * Time.fixedDeltaTime, 0f);
-        turretTransform.rotation = Quaternion.LookRotation(lookDir); // assigning is expensive, we need localEulerAngles a different way
-        Quaternion clampedRotation = Quaternion.Euler(
-            new Vector3(
-                ClampAngle(turretTransform.localEulerAngles.x, -verticalAngleLimit, verticalAngleLimit),
-                ClampAngle(turretTransform.localEulerAngles.y, -horizontalAngleLimit, horizontalAngleLimit),
-                turretTransform.localEulerAngles.z)
-            + transform.eulerAngles);
-        turretTransform.rotation = clampedRotation;
+        if (turretTransform.forward == lookAt)
+        {
+            return;
+        }
+
+        if (Vector3.Dot(turretTransform.forward, lookAt) < 0.9999f)
+        {
+            Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, lookAt, tempRotationSpeed * Time.fixedDeltaTime, 0f);
+
+            turretTransform.rotation = Quaternion.LookRotation(lookDir);
+
+            Quaternion clampedRotation = Quaternion.Euler(
+                new Vector3(
+                    ClampAngle(turretTransform.localEulerAngles.x, -verticalAngleLimit, verticalAngleLimit),
+                    ClampAngle(turretTransform.localEulerAngles.y, -horizontalAngleLimit, horizontalAngleLimit),
+                    turretTransform.localEulerAngles.z)
+                + transform.eulerAngles);
+
+            turretTransform.rotation = clampedRotation;
+        }
+        else
+        {
+            turretTransform.rotation = Quaternion.LookRotation(lookAt);
+        }
     }
 
     private static float ClampAngle(float angle, float min, float max)

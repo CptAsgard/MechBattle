@@ -8,19 +8,27 @@ public class ProjectileWeapon : Weapon
     [SerializeField]
     private ProjectileWeaponView weaponView;
     [SerializeField]
-    private WeaponFireController fireController;
+    private WeaponReloadDelay reloadDelay;
     [SerializeField]
     private GameObject projectile;
     [SerializeField]
-    private Transform origin;
+    private Transform muzzleEnd;
 
+    private WeaponTargetRepository targetRepository;
     private bool inRange;
 
     public override WeaponData WeaponData => weaponData;
-    public override bool Armed => fireController.ReadyToFire && inRange;
+    public override bool Armed => reloadDelay.ReadyToFire && inRange;
     public override bool ShouldAim => true;
 
-    private void Update()
+    public override void Initialize(MechState owner)
+    {
+        base.Initialize(owner);
+
+        targetRepository = owner.GetComponent<WeaponTargetRepository>();
+    }
+
+    private void FixedUpdate()
     {
         if (!isServer)
         {
@@ -44,10 +52,10 @@ public class ProjectileWeapon : Weapon
             return;
         }
 
-        fireController.ResetCooldown();
+        reloadDelay.ResetCooldown();
 
-        Vector3 position = origin.position;
-        Vector3 forward = origin.forward;
+        Vector3 position = muzzleEnd.position;
+        Vector3 forward = muzzleEnd.forward;
 
         SpawnBullet(position, forward);
         weaponView.RpcFire(position, forward);
@@ -68,15 +76,15 @@ public class ProjectileWeapon : Weapon
 
     private void Aim()
     {
-        if (Owner.Target == null)
+        if (targetRepository.PriorityTarget == null)
         {
             inRange = false;
             return;
         }
 
-        Vector3 targetPositionWorld = Owner.Target.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
+        Vector3 targetPositionWorld = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
-        CalculateAngleToHitTarget(targetPositionWorld, out var highAngle, out var lowAngle);
+        CalculateAngleToHitTarget(targetPositionWorld, out float? highAngle, out float? lowAngle);
         inRange = lowAngle != null || highAngle != null;
 
         if (!inRange)
@@ -84,16 +92,19 @@ public class ProjectileWeapon : Weapon
             return;
         }
 
+        // ReSharper disable once PossibleInvalidOperationException because we already check inRange, one of them -has- to be not null.
         float angle = (float) (lowAngle ?? highAngle);
-        origin.LookAt(targetPositionWorld);
-        origin.localEulerAngles = new Vector3(360f - angle, origin.localEulerAngles.y, origin.localEulerAngles.z);
-        AimDirection = origin.forward;
+
+        muzzleEnd.LookAt(targetPositionWorld);
+        muzzleEnd.localEulerAngles = new Vector3(360f - angle, muzzleEnd.localEulerAngles.y, muzzleEnd.localEulerAngles.z);
+        
+        AimDirection = muzzleEnd.forward;
     }
 
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
     {
         float velocity = weaponData.muzzleVelocity;
-        Vector3 targetVector = target - origin.position;
+        Vector3 targetVector = target - muzzleEnd.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
 

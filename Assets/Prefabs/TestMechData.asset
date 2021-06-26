@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91ab3fdedb6061343a5c8a973925ca57, type: 3}
-  m_Name: TestMechFrameStats
+  m_Name: TestMechData
   m_EditorClassIdentifier: 
   TorsoHealth: 150
   HeadHealth: 25

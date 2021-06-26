@@ -10,25 +10,27 @@ public class MechWeaponsController : NetworkBehaviour
     [SerializeField]
     private MechState mechState;
 
-    private List<Weapon> weapons = new List<Weapon>();
+    private readonly List<Weapon> weapons = new List<Weapon>();
 
     public IEnumerable<Weapon> Weapons => weapons;
     public Transform WeaponsParent => weaponsParent;
     public bool Armed => weapons.Any(weapon => weapon.Armed);
 
-    private void FixedUpdate()
-    {
-        if (mechState.Target == null)
-        {
-            return;
-        }
+    //private void FixedUpdate()
+    //{
+        //if (mechState.Target == null)
+        //{
+        //    return;
+        //}
 
-        if (!mechState.Target.observers.ContainsValue(mechState.Owner) ||
-            mechState.Target.GetComponent<MechState>().PowerState == MechPowerState.Destroyed)
-        {
-            mechState.Target = null;
-        }
-    }
+        //if (!mechState.Target.observers.ContainsValue(mechState.Owner) ||
+        //    mechState.Target.GetComponent<MechState>().PowerState == MechPowerState.Destroyed)
+        //{
+        //    mechState.Target = null;
+        //}
+
+        // TODO : Sets target to null if target can't see us or if target is destroyed. Replicate in TargetController
+    //}
 
     public void Add(Weapon weapon)
     {
@@ -37,13 +39,8 @@ public class MechWeaponsController : NetworkBehaviour
         weapons.Add(weapon);
     }
 
-    public Vector2 GetPriorityDirection()
+    public Vector3 GetPriorityDirection()
     {
         return weapons.First(weapon => weapon.Armed).AimDirection;
-    }
-
-    public void Aim(NetworkIdentity target)
-    {
-        mechState.Target = target;
     }
 }
