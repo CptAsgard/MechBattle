@@ -72,7 +72,7 @@ public class ProjectileWeapon : Weapon
     {
         damageable?.TakeDamage(hitPosition, new DamageForce(weaponData.damageOnHit));
     }
-    
+
     private void Aim()
     {
         if (targetRepository.PriorityTarget == null)
@@ -95,9 +95,7 @@ public class ProjectileWeapon : Weapon
         float angle = (float) (lowAngle ?? highAngle);
 
         muzzleEnd.LookAt(targetPositionWorld);
-        muzzleEnd.eulerAngles = new Vector3(360f-angle, muzzleEnd.eulerAngles.y, muzzleEnd.eulerAngles.z);
-        
-        Debug.Log(360f-angle);
+        muzzleEnd.eulerAngles = new Vector3(360f - angle, muzzleEnd.eulerAngles.y, muzzleEnd.eulerAngles.z);
 
         AimDirection = muzzleEnd.forward;
     }

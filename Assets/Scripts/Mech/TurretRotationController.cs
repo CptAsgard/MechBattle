@@ -34,14 +34,11 @@ public class TurretRotationController : MonoBehaviour
         }
 
         float diffAngle = Vector3.Dot(targetTransform.forward, Target);
-        if (diffAngle < 0.999f || diffAngle > 1.001f)
+        if (diffAngle < 0.9999f || diffAngle > 1.0001f)
         {
             Quaternion from = Quaternion.LookRotation(targetTransform.forward);
             Quaternion to = Quaternion.LookRotation(Target);
             targetTransform.rotation = Quaternion.RotateTowards(from, to, rotationSpeed * Time.fixedDeltaTime * Mathf.Rad2Deg);
-
-            //Vector3 lookDir = Vector3.RotateTowards(targetTransform.forward, Target, rotationSpeed * Time.fixedDeltaTime, 0f);
-            //targetTransform.rotation = Quaternion.LookRotation(lookDir);
         }
         else
         {
