@@ -7,19 +7,18 @@ public class MechTurretView : MonoBehaviour
     [SerializeField]
     private Transform turretTransform = null;
     [SerializeField]
-    private float tempRotationSpeed = 1f;
-    [SerializeField]
     private float horizontalAngleLimit = 45f; // should never be 90d or turret will invert/snap at limits
     [SerializeField]
     private float verticalAngleLimit = 10f;
-
-    private Vector3 lookAt = Vector3.forward;
+    [SerializeField]
+    private MechDataScriptableObject mechData;
 
     public Vector3 Orientation => turretTransform.forward;
+    public Vector3 Target { get; private set; } = Vector3.forward;
 
     public void LookAt(Vector3 forward)
     {
-        lookAt = forward;
+        Target = forward;
     }
 
     private void FixedUpdate()
@@ -29,14 +28,15 @@ public class MechTurretView : MonoBehaviour
 
     private void UpdateTurretDirection()
     {
-        if (turretTransform.forward == lookAt)
+        if (turretTransform.forward == Target)
         {
             return;
         }
 
-        if (Vector3.Dot(turretTransform.forward, lookAt) < 0.9999f)
+        float diffAngle = Vector3.Dot(turretTransform.forward, Target);
+        if (diffAngle < 0.9999f || diffAngle > 1.0001f)
         {
-            Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, lookAt, tempRotationSpeed * Time.fixedDeltaTime, 0f);
+            Vector3 lookDir = Vector3.RotateTowards(turretTransform.forward, Target, mechData.RotationSpeed * Time.fixedDeltaTime, 0f);
 
             turretTransform.rotation = Quaternion.LookRotation(lookDir);
 
@@ -51,7 +51,7 @@ public class MechTurretView : MonoBehaviour
         }
         else
         {
-            turretTransform.rotation = Quaternion.LookRotation(lookAt);
+            turretTransform.rotation = Quaternion.LookRotation(Target);
         }
     }
 

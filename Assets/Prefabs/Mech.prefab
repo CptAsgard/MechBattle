@@ -361,9 +361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretTransform: {fileID: 3563438108850267960}
-  tempRotationSpeed: 1
   horizontalAngleLimit: 45
   verticalAngleLimit: 30
+  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &-8686500384392713775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ai: {fileID: 2894551261037655868}
   turretView: {fileID: 5976101462369990963}
-  tempLegsRotationSpeed: 1
+  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &-5377476768442471665
 MonoBehaviour:
   m_ObjectHideFlags: 0

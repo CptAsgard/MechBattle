@@ -28,12 +28,10 @@ public class MechTurretController : MonoBehaviour
         if (targetRepository.PriorityTarget != null && mechWeapons.Armed)
         {
             turretView.LookAt(mechWeapons.GetPriorityDirection());
-            Debug.Log("LookAt PriorityDirection");
         }
         else if (targetRepository.PriorityTarget == null && pathfinder.reachedEndOfPath)
         {
             turretView.LookAt(lookDirection);
-            Debug.Log("LookAt LookDirection");
         }
     }
 }
