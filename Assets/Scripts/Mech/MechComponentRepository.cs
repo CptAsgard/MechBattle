@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 
@@ -35,7 +34,7 @@ public class MechComponentRepository : NetworkBehaviour
     [SyncVar]
     private MechComponent rightLegComponent;
 
-    private Array enumValues;
+    private System.Array enumValues;
 
     private void Awake()
     {
@@ -46,7 +45,7 @@ public class MechComponentRepository : NetworkBehaviour
         leftLegComponent = new MechComponent(MechComponentLocation.LeftLeg, mechDataScriptableObject.LeftLegHealth);
         rightLegComponent = new MechComponent(MechComponentLocation.RightLeg, mechDataScriptableObject.RightLegHealth);
 
-        enumValues = Enum.GetValues(typeof(MechComponentLocation));
+        enumValues = System.Enum.GetValues(typeof(MechComponentLocation));
     }
 
     public MechComponent GetComponent(MechComponentLocation target)

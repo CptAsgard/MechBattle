@@ -2,7 +2,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-public class MechTurretView : MonoBehaviour
+public class MechTurretRotationController : MonoBehaviour
 {
     [SerializeField]
     private Transform turretTransform = null;

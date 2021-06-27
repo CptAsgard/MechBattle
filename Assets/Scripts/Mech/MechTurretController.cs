@@ -4,7 +4,7 @@ using UnityEngine;
 public class MechTurretController : MonoBehaviour
 {
     [SerializeField]
-    private MechTurretView turretView;
+    private MechTurretRotationController turretRotation;
     [SerializeField]
     private MechWeaponsController mechWeapons;
     [SerializeField]
@@ -19,7 +19,7 @@ public class MechTurretController : MonoBehaviour
         lookDirection = direction;
         if (targetRepository.PriorityTarget == null || !mechWeapons.Armed)
         {
-            turretView.LookAt(lookDirection);
+            turretRotation.LookAt(lookDirection);
         }
     }
 
@@ -27,11 +27,11 @@ public class MechTurretController : MonoBehaviour
     {
         if (targetRepository.PriorityTarget != null && mechWeapons.Armed)
         {
-            turretView.LookAt(mechWeapons.GetPriorityDirection());
+            turretRotation.LookAt(mechWeapons.GetPriorityDirection());
         }
         else if (targetRepository.PriorityTarget == null && pathfinder.reachedEndOfPath)
         {
-            turretView.LookAt(lookDirection);
+            turretRotation.LookAt(lookDirection);
         }
     }
 }

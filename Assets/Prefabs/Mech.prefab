@@ -85,11 +85,11 @@ GameObject:
   - component: {fileID: 1376226690}
   - component: {fileID: 162267820753287055}
   - component: {fileID: 2138734003613044796}
-  - component: {fileID: 5976101462369990963}
   - component: {fileID: -8686500384392713775}
   - component: {fileID: 4531279283716984758}
   - component: {fileID: 2585438111749325341}
   - component: {fileID: 1949132100923613145}
+  - component: {fileID: 5976101462369990963}
   - component: {fileID: 1117604622}
   - component: {fileID: -5377476768442471665}
   m_Layer: 9
@@ -344,26 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da26a71285edea4bb7a3d0177346294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretView: {fileID: 5976101462369990963}
+  turretRotation: {fileID: 5976101462369990963}
   mechWeapons: {fileID: -8686500384392713775}
   targetRepository: {fileID: -5377476768442471665}
   pathfinder: {fileID: 2894551261037655868}
---- !u!114 &5976101462369990963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3563438109148196198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretTransform: {fileID: 3563438108850267960}
-  horizontalAngleLimit: 45
-  verticalAngleLimit: 30
-  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &-8686500384392713775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +418,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   weaponsController: {fileID: -8686500384392713775}
+--- !u!114 &5976101462369990963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563438109148196198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretTransform: {fileID: 3563438108850267960}
+  horizontalAngleLimit: 45
+  verticalAngleLimit: 30
+  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &1117604622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ai: {fileID: 2894551261037655868}
-  turretView: {fileID: 5976101462369990963}
+  turretRotation: {fileID: 5976101462369990963}
   mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &-5377476768442471665
 MonoBehaviour:

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 4512524148914312566}
   - component: {fileID: 5323250688621236474}
   - component: {fileID: -8271884349800700090}
+  - component: {fileID: 8126822962888078695}
   m_Layer: 9
   m_Name: Cannon
   m_TagString: Untagged
@@ -229,3 +230,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 4512524148914312566}
+--- !u!114 &8126822962888078695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223662892337230678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada6ab82ccb6242409e546b9b9239ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 4512524148914312566}
+  FireAngleThreshold: 0.0001

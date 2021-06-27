@@ -18,3 +18,4 @@ MonoBehaviour:
   RightArmHealth: 75
   LeftLegHealth: 75
   RightLegHealth: 75
+  RotationSpeed: 0.75

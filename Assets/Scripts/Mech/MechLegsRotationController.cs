@@ -6,7 +6,7 @@ public class MechLegsRotationController : MonoBehaviour
     [SerializeField]
     private AIPath ai = null;
     [SerializeField]
-    private MechTurretView turretView;
+    private MechTurretRotationController turretRotation;
     [SerializeField]
     private MechDataScriptableObject mechData;
 
@@ -22,7 +22,7 @@ public class MechLegsRotationController : MonoBehaviour
 
     private void UpdateLegsDirection()
     {
-        Vector3 feetDir = Vector3.RotateTowards(transform.forward, turretView.Target, mechData.RotationSpeed * Time.fixedDeltaTime, 0f);
+        Vector3 feetDir = Vector3.RotateTowards(transform.forward, turretRotation.Target, mechData.RotationSpeed * Time.fixedDeltaTime, 0f);
         feetDir.y = 0;
 
         Quaternion feetRotation = Quaternion.LookRotation(feetDir, Vector3.up);
