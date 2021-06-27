@@ -1,6 +1,5 @@
 using Mirror;
 using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
 
 public class ProjectileWeapon : Weapon
 {
@@ -20,7 +19,6 @@ public class ProjectileWeapon : Weapon
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadDelay.ReadyToFire && inRange;
-    public override bool ShouldAim => true;
 
     private void FixedUpdate()
     {
@@ -38,9 +36,9 @@ public class ProjectileWeapon : Weapon
         Aim();
     }
 
-    public override void Initialize(MechState owner)
+    public override void Initialize(MechState owner, Transform parent)
     {
-        base.Initialize(owner);
+        base.Initialize(owner, parent);
 
         targetRepository = owner.GetComponent<WeaponTargetRepository>();
     }
@@ -74,7 +72,7 @@ public class ProjectileWeapon : Weapon
     {
         damageable?.TakeDamage(hitPosition, new DamageForce(weaponData.damageOnHit));
     }
-
+    
     private void Aim()
     {
         if (targetRepository.PriorityTarget == null)
@@ -92,18 +90,15 @@ public class ProjectileWeapon : Weapon
         {
             return;
         }
-
+        
         // ReSharper disable once PossibleInvalidOperationException because we already check inRange, one of them -has- to be not null.
         float angle = (float) (lowAngle ?? highAngle);
 
         muzzleEnd.LookAt(targetPositionWorld);
         muzzleEnd.eulerAngles = new Vector3(360f-angle, muzzleEnd.eulerAngles.y, muzzleEnd.eulerAngles.z);
-
-        Debug.DrawLine(muzzleEnd.position, targetPositionWorld, Color.blue, 0.5f);
-        Debug.DrawRay(muzzleEnd.position, muzzleEnd.forward * 5f, Color.cyan, 0.5f);
-
-        Debug.Log(Vector3.Angle(targetPositionWorld - muzzleEnd.position, muzzleEnd.forward));
         
+        Debug.Log(360f-angle);
+
         AimDirection = muzzleEnd.forward;
     }
 

@@ -30,7 +30,7 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
             aiPath.isStopped = true;
             aiPath.canMove = false;
 
-            GetComponent<MechTurretRotationController>().enabled = false;
+            GetComponent<TurretRotationController>().enabled = false;
             GetComponent<MechWeaponsController>().enabled = false;
             GetComponent<MechTurretController>().enabled = false;
 

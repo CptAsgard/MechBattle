@@ -6,7 +6,7 @@ public class MechLegsRotationController : MonoBehaviour
     [SerializeField]
     private AIPath ai = null;
     [SerializeField]
-    private MechTurretRotationController turretRotation;
+    private TurretRotationController turretRotation;
     [SerializeField]
     private MechDataScriptableObject mechData;
 

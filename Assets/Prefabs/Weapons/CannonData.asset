@@ -15,5 +15,5 @@ MonoBehaviour:
   pointsCost: 0
   maxAngleDeviation: 0.5
   reloadDelay: 5
-  muzzleVelocity: 410
+  muzzleVelocity: 420
   damageOnHit: 10

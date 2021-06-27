@@ -1,5 +1,99 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &354959300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354959301}
+  - component: {fileID: 319175614}
+  m_Layer: 9
+  m_Name: LeftPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354959301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354959300}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.535, y: 0.207, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1891762823}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319175614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354959300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1
+  targetTransform: {fileID: 354959301}
+  horizontalAngleLimit: 5
+  verticalAngleLimit: 5
+--- !u!1 &1025080477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1025080478}
+  - component: {fileID: 319175613}
+  m_Layer: 9
+  m_Name: RightPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1025080478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025080477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.535, y: 0.20700002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1891762823}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319175613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025080477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1
+  targetTransform: {fileID: 1025080478}
+  horizontalAngleLimit: 5
+  verticalAngleLimit: 5
 --- !u!1 &1891762822
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,7 +120,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 354959301}
+  - {fileID: 1025080478}
   m_Father: {fileID: 3563438108850267960}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -348,6 +444,7 @@ MonoBehaviour:
   mechWeapons: {fileID: -8686500384392713775}
   targetRepository: {fileID: -5377476768442471665}
   pathfinder: {fileID: 2894551261037655868}
+  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &-8686500384392713775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  weaponsParent: {fileID: 1891762823}
+  weaponsParentLeft: {fileID: 354959301}
+  weaponsParentRight: {fileID: 1025080478}
   mechState: {fileID: 162267820753287055}
 --- !u!114 &4531279283716984758
 MonoBehaviour:
@@ -430,10 +528,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretTransform: {fileID: 3563438108850267960}
+  rotationSpeed: 0
+  targetTransform: {fileID: 3563438108850267960}
   horizontalAngleLimit: 45
   verticalAngleLimit: 30
-  mechData: {fileID: 11400000, guid: ed93f9a11fc327343907fe9301192ab2, type: 2}
 --- !u!114 &1117604622
 MonoBehaviour:
   m_ObjectHideFlags: 0

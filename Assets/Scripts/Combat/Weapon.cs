@@ -10,12 +10,11 @@ public abstract class Weapon : NetworkBehaviour
 
     public abstract WeaponData WeaponData { get; }
     public abstract bool Armed { get; }
-    public abstract bool ShouldAim { get; }
 
-    public virtual void Initialize(MechState owner)
+    public virtual void Initialize(MechState owner, Transform parent)
     {
         Owner = owner;
-        transform.parent = owner.GetComponent<MechWeaponsController>().WeaponsParent;
+        transform.parent = parent;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;;
     }

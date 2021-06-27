@@ -30,7 +30,7 @@ public class MechRoomManager : NetworkRoomManager
             mechRepository.Add(newMechState);
 
             mech.GetComponent<AIPathBlocker>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
-            mech.GetComponent<MechWeaponsController>().Add(weapon.GetComponent<Weapon>());
+            mech.GetComponent<MechWeaponsController>().Add(weapon.GetComponent<Weapon>(), WeaponAttachmentPoint.Left);
         }
 
         gamePlayer.GetComponent<Player>().identity = index + 1;

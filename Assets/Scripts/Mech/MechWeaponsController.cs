@@ -3,17 +3,24 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 
+public enum WeaponAttachmentPoint
+{
+    Left,
+    Right
+}
+
 public class MechWeaponsController : NetworkBehaviour
 {
     [SerializeField]
-    private Transform weaponsParent;
+    private Transform weaponsParentLeft;
+    [SerializeField]
+    private Transform weaponsParentRight;
     [SerializeField]
     private MechState mechState;
 
     private readonly List<Weapon> weapons = new List<Weapon>();
 
     public IEnumerable<Weapon> Weapons => weapons;
-    public Transform WeaponsParent => weaponsParent;
     public bool Armed => weapons.Any(weapon => weapon.Armed);
 
     //private void FixedUpdate()
@@ -32,10 +39,12 @@ public class MechWeaponsController : NetworkBehaviour
         // TODO : Sets target to null if target can't see us or if target is destroyed. Replicate in TargetController
     //}
 
-    public void Add(Weapon weapon)
+    public void Add(Weapon weapon, WeaponAttachmentPoint attachmentPoint)
     {
-        weapon.transform.parent = weaponsParent;
-        weapon.Initialize(mechState);
+        Transform parent = attachmentPoint == WeaponAttachmentPoint.Left ? weaponsParentLeft : weaponsParentRight;
+
+        weapon.transform.parent = parent;
+        weapon.Initialize(mechState, parent);
         weapons.Add(weapon);
     }
 

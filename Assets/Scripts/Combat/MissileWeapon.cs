@@ -9,7 +9,6 @@ public class MissileWeapon : Weapon
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadDelay.ReadyToFire;
-    public override bool ShouldAim => false;
 
     public override void Fire()
     {
