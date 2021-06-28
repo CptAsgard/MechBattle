@@ -7,12 +7,12 @@ public class ProjectileWeaponView : NetworkBehaviour
     private ProjectileWeapon weapon;
     [SerializeField]
     private GameObject bulletPrefab;
-
+    [SerializeField]
     private TurretRotationController turretRotation;
 
     private void Start()
     {
-        turretRotation = transform.parent.GetComponent<TurretRotationController>();
+        transform.localPosition = Vector3.zero;
     }
 
     private void FixedUpdate()

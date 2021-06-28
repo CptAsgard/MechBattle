@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 5323250688621236474}
   - component: {fileID: -8271884349800700090}
   - component: {fileID: 8126822962888078695}
+  - component: {fileID: -2339933857936471663}
   m_Layer: 9
   m_Name: Cannon
   m_TagString: Untagged
@@ -219,6 +220,7 @@ MonoBehaviour:
   weapon: {fileID: 4512524148914312566}
   bulletPrefab: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
     type: 3}
+  turretRotation: {fileID: -2339933857936471663}
 --- !u!114 &-8271884349800700090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,3 +248,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 4512524148914312566}
   FireAngleThreshold: 0.0001
+--- !u!114 &-2339933857936471663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223662892337230678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1
+  targetTransform: {fileID: 4223662892337230679}
+  horizontalAngleLimit: 5
+  verticalAngleLimit: 5

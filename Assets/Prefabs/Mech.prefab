@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354959301}
-  - component: {fileID: 319175614}
   m_Layer: 9
   m_Name: LeftPivot
   m_TagString: Untagged
@@ -31,22 +30,6 @@ Transform:
   m_Father: {fileID: 1891762823}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &319175614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354959300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 1
-  targetTransform: {fileID: 354959301}
-  horizontalAngleLimit: 5
-  verticalAngleLimit: 5
 --- !u!1 &1025080477
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +39,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1025080478}
-  - component: {fileID: 319175613}
   m_Layer: 9
   m_Name: RightPivot
   m_TagString: Untagged
@@ -78,22 +60,6 @@ Transform:
   m_Father: {fileID: 1891762823}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &319175613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025080477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c962a6f072f7240a743b3849df246b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 1
-  targetTransform: {fileID: 1025080478}
-  horizontalAngleLimit: 5
-  verticalAngleLimit: 5
 --- !u!1 &1891762822
 GameObject:
   m_ObjectHideFlags: 0
