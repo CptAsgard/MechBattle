@@ -24,6 +24,6 @@ public class WeaponReloadDelay : MonoBehaviour
 
     public void ResetCooldown()
     {
-        timer = weapon.WeaponData.reloadDelay;
+        timer = weapon.WeaponData.ReloadDelay;
     }
 }

@@ -1,21 +1,27 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]
-    private TrailRenderer trail;
+    public System.Action<Vector3> OnStepEvent;
+    public System.Action<IDamageable, Vector3> OnHitEvent;
+    public UnityEvent<Vector3> OnSpawnEvent;
+
     [SerializeField]
     private LayerMask layerMask;
+    [SerializeField]
+    private ProjectileData projectileData;
+
+    public ProjectileData ProjectileData => projectileData;
 
     private Vector3 currentPosition;
     private Vector3 currentVelocity;
-    private System.Action<IDamageable, Vector3> onHitAction;
     private float timer;
 
     private void FixedUpdate()
     {
         StepBullet();
-        trail.emitting = true;
+        OnStepEvent?.Invoke(currentPosition);
 
         timer += Time.fixedDeltaTime;
         if (timer >= 10f)
@@ -24,13 +30,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 initialPosition, Vector3 direction, ProjectileWeaponData weaponData, System.Action<IDamageable, Vector3> callback = null)
+    public void Initialize(Vector3 initialPosition, Vector3 direction)
     {
         currentPosition = initialPosition;
-        currentVelocity = direction * weaponData.muzzleVelocity;
-        onHitAction = callback;
-        
-        trail.AddPosition(currentPosition);
+        currentVelocity = direction * projectileData.MuzzleVelocity;
+
+        OnSpawnEvent?.Invoke(initialPosition);
     }
 
     private void StepBullet()
@@ -42,7 +47,7 @@ public class Projectile : MonoBehaviour
             newPosition = hitInfo.point;
 
             IDamageable damageable = hitInfo.transform.GetComponentInParent<IDamageable>();
-            onHitAction?.Invoke(damageable, newPosition);
+            OnHitEvent?.Invoke(damageable, newPosition);
             Destroy(gameObject);
         }
 
@@ -51,11 +56,5 @@ public class Projectile : MonoBehaviour
 
         transform.position = currentPosition;
         transform.forward = currentVelocity.normalized;
-    }
-
-    private void OnDestroy()
-    {
-        trail.transform.parent = null;
-        trail.autodestruct = true;
     }
 }

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938e66ab159b7384bb9a0ed36a75ebb5, type: 3}
-  m_Name: CannonData
+  m_Script: {fileID: 11500000, guid: 28ed199c6a9addb45ad8767da5e13124, type: 3}
+  m_Name: CannonProjectileData
   m_EditorClassIdentifier: 
-  PointsCost: 0
-  ReloadDelay: 5
+  MuzzleVelocity: 410
+  DamageOnHit: 5

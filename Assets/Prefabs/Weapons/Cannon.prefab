@@ -197,9 +197,11 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 0e23b78976ba52148b3c6b4f8e5e67c3, type: 2}
   weaponView: {fileID: 5323250688621236474}
   reloadDelay: {fileID: -8271884349800700090}
-  projectile: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
-    type: 3}
   muzzleEnd: {fileID: 269405566}
+  projectileClient: {fileID: 4046309565237019015, guid: 65593d3edd3087a4fa52cd31951b8eaa,
+    type: 3}
+  projectileServer: {fileID: 8243388369155888945, guid: f7940ecee8e3cbb42886f17ce1eb61d8,
+    type: 3}
 --- !u!114 &5323250688621236474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +219,6 @@ MonoBehaviour:
   weapon: {fileID: 4512524148914312566}
   bulletPrefab: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
     type: 3}
-  turretRotation: {fileID: 0}
 --- !u!114 &-8271884349800700090
 MonoBehaviour:
   m_ObjectHideFlags: 0

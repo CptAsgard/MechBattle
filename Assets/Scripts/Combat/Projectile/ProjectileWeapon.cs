@@ -10,12 +10,15 @@ public class ProjectileWeapon : Weapon
     [SerializeField]
     private WeaponReloadDelay reloadDelay;
     [SerializeField]
-    private GameObject projectile;
-    [SerializeField]
     private Transform muzzleEnd;
+    [SerializeField]
+    private Projectile projectileClient;
+    [SerializeField]
+    private Projectile projectileServer;
 
     private WeaponTargetRepository targetRepository;
     private bool inRange;
+    private ProjectileData projectileData;
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadDelay.ReadyToFire && inRange;
@@ -41,6 +44,7 @@ public class ProjectileWeapon : Weapon
         base.Initialize(owner, parent);
 
         targetRepository = owner.GetComponent<WeaponTargetRepository>();
+        projectileData = projectileServer.ProjectileData;
     }
 
     [Server]
@@ -56,21 +60,20 @@ public class ProjectileWeapon : Weapon
         Vector3 position = muzzleEnd.position;
         Vector3 forward = muzzleEnd.forward;
 
-        SpawnBullet(position, forward);
-        weaponView.RpcFire(position, forward);
+        SpawnBullet(projectileServer.gameObject, position, forward);
+        RpcSpawnBullet(position, forward);
     }
 
-    [Server]
-    private void SpawnBullet(Vector3 position, Vector3 forward)
+    [ClientRpc]
+    private void RpcSpawnBullet(Vector3 position, Vector3 forward)
     {
-        GameObject pr = Instantiate(projectile);
-        pr.GetComponent<Projectile>().Initialize(position, forward, weaponData, OnProjectileHit);
+        SpawnBullet(projectileClient.gameObject, position, forward);
     }
-
-    [Server]
-    private void OnProjectileHit(IDamageable damageable, Vector3 hitPosition)
+    
+    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward)
     {
-        damageable?.TakeDamage(hitPosition, new DamageForce(weaponData.damageOnHit));
+        GameObject pr = Instantiate(prefab);
+        pr.GetComponent<Projectile>().Initialize(position, forward);
     }
 
     private void Aim()
@@ -102,7 +105,7 @@ public class ProjectileWeapon : Weapon
 
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
     {
-        float velocity = weaponData.muzzleVelocity;
+        float velocity = projectileData.MuzzleVelocity;
         Vector3 targetVector = target - muzzleEnd.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;

@@ -22,11 +22,4 @@ public class ProjectileWeaponView : NetworkBehaviour
             turretRotation.LookAt(weapon.AimDirection);
         }
     }
-
-    [ClientRpc]
-    public void RpcFire(Vector3 position, Vector3 forward)
-    {
-        GameObject pr = Instantiate(bulletPrefab);
-        pr.GetComponent<Projectile>().Initialize(position, forward, (ProjectileWeaponData) weapon.WeaponData);
-    }
 }
