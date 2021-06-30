@@ -31,6 +31,17 @@ public class MRLWeapon : Weapon
 
     private void FixedUpdate()
     {
+        if (!isServer)
+        {
+            enabled = false;
+            return;
+        }
+
+        if (!Owner)
+        {
+            return;
+        }
+
         if (!Armed)
         {
             return;
