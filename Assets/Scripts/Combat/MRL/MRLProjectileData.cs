@@ -6,4 +6,5 @@ public class MRLProjectileData : ProjectileData
     public float RotationSpeed;
     public float ExplosionRadius;
     public AnimationCurve TurnControlCurve;
+    public float RandomConeAngle;
 }
