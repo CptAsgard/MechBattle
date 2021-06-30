@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ProjectileDamageHandler : MonoBehaviour
+public class MRLProjectileDamageHandler : MonoBehaviour
 {
     [SerializeField]
-    private Projectile projectile;
+    private MRLProjectile projectile;
 
     private void Awake()
     {

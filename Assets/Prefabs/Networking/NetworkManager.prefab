@@ -83,7 +83,9 @@ MonoBehaviour:
   clientIndex: 0
   mechPrefab: {fileID: 3563438109148196198, guid: 0c0e2986cccbb98478065c45f634cc19,
     type: 3}
-  projectileWeaponPrefab: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
+  leftWeaponPrefab: {fileID: 431009206060260573, guid: 3315cf65466127c47805331d9ad182b3,
+    type: 3}
+  rightWeaponPrefab: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
     type: 3}
   mechRepository: {fileID: 1226381653}
 --- !u!114 &609192954014754095

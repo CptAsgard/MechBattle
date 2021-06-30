@@ -16,34 +16,16 @@ public class ProjectileWeapon : Weapon
     [SerializeField]
     private Projectile projectileServer;
 
-    private WeaponTargetRepository targetRepository;
     private bool inRange;
     private ProjectileData projectileData;
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadDelay.ReadyToFire && inRange;
-
-    private void FixedUpdate()
-    {
-        if (!isServer)
-        {
-            enabled = false;
-            return;
-        }
-
-        if (!Owner)
-        {
-            return;
-        }
-
-        Aim();
-    }
+    public override bool AutoAim => true;
 
     public override void Initialize(MechState owner, Transform parent)
     {
         base.Initialize(owner, parent);
-
-        targetRepository = owner.GetComponent<WeaponTargetRepository>();
         projectileData = projectileServer.ProjectileData;
     }
 
@@ -63,28 +45,17 @@ public class ProjectileWeapon : Weapon
         SpawnBullet(projectileServer.gameObject, position, forward);
         RpcSpawnBullet(position, forward);
     }
-
-    [ClientRpc]
-    private void RpcSpawnBullet(Vector3 position, Vector3 forward)
-    {
-        SpawnBullet(projectileClient.gameObject, position, forward);
-    }
     
-    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward)
+    [Server]
+    protected override void Aim()
     {
-        GameObject pr = Instantiate(prefab);
-        pr.GetComponent<Projectile>().Initialize(position, forward);
-    }
-
-    private void Aim()
-    {
-        if (targetRepository.PriorityTarget == null)
+        if (TargetRepository.PriorityTarget == null)
         {
             inRange = false;
             return;
         }
 
-        Vector3 targetPositionWorld = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
+        Vector3 targetPositionWorld = TargetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
         CalculateAngleToHitTarget(targetPositionWorld, out float? highAngle, out float? lowAngle);
         inRange = lowAngle != null || highAngle != null;
@@ -101,6 +72,18 @@ public class ProjectileWeapon : Weapon
         muzzleEnd.eulerAngles = new Vector3(360f - angle, muzzleEnd.eulerAngles.y, muzzleEnd.eulerAngles.z);
 
         AimDirection = muzzleEnd.forward;
+    }
+
+    [ClientRpc]
+    private void RpcSpawnBullet(Vector3 position, Vector3 forward)
+    {
+        SpawnBullet(projectileClient.gameObject, position, forward);
+    }
+    
+    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward)
+    {
+        GameObject pr = Instantiate(prefab);
+        pr.GetComponent<Projectile>().Initialize(position, forward);
     }
 
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)

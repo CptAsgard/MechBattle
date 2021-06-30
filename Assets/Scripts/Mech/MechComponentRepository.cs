@@ -48,6 +48,20 @@ public class MechComponentRepository : NetworkBehaviour
         enumValues = System.Enum.GetValues(typeof(MechComponentLocation));
     }
 
+    private BoxCollider GetBaseCollider(MechComponentLocation target)
+    {
+        return target switch
+        {
+            MechComponentLocation.Torso => torsoBounds,
+            MechComponentLocation.Head => headBounds,
+            MechComponentLocation.LeftArm => leftArmBounds,
+            MechComponentLocation.RightArm => rightArmBounds,
+            MechComponentLocation.LeftLeg => leftLegBounds,
+            MechComponentLocation.RightLeg => rightLegBounds,
+            _ => throw new System.ArgumentOutOfRangeException(nameof(target), target, null)
+        };
+    }
+
     public MechComponent GetComponent(MechComponentLocation target)
     {
         return target switch
@@ -61,19 +75,10 @@ public class MechComponentRepository : NetworkBehaviour
             _ => throw new System.ArgumentOutOfRangeException(nameof(target), target, null)
         };
     }
-
+    
     public Bounds GetBounds(MechComponentLocation target)
     {
-        return target switch
-        {
-            MechComponentLocation.Torso => torsoBounds.bounds,
-            MechComponentLocation.Head => headBounds.bounds,
-            MechComponentLocation.LeftArm => leftArmBounds.bounds,
-            MechComponentLocation.RightArm => rightArmBounds.bounds,
-            MechComponentLocation.LeftLeg => leftLegBounds.bounds,
-            MechComponentLocation.RightLeg => rightLegBounds.bounds,
-            _ => throw new System.ArgumentOutOfRangeException(nameof(target), target, null)
-        };
+        return GetBaseCollider(target).bounds;
     }
 
     public Vector3 GetWorldPosition(MechComponentLocation target)
@@ -81,6 +86,11 @@ public class MechComponentRepository : NetworkBehaviour
         return GetBounds(target).center;
     }
 
+    public Transform GetTransform(MechComponentLocation target)
+    {
+        return GetBaseCollider(target).transform;
+    }
+    
     public MechComponentLocation GetNearestComponent(Vector3 position)
     {
         float nearestDistance = float.MaxValue;

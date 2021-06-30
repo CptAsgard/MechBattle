@@ -23,6 +23,8 @@ public class MechWeaponsController : NetworkBehaviour
     public IEnumerable<Weapon> Weapons => weapons;
     public bool Armed => weapons.Any(weapon => weapon.Armed);
 
+    private Vector3 lastDirection;
+
     //private void FixedUpdate()
     //{
         //if (mechState.Target == null)
@@ -50,6 +52,11 @@ public class MechWeaponsController : NetworkBehaviour
 
     public Vector3 GetPriorityDirection()
     {
-        return weapons.First(weapon => weapon.Armed).AimDirection;
+        Weapon firstWeapon = weapons.FirstOrDefault(weapon => weapon.AutoAim && weapon.Armed);
+        if (firstWeapon != null)
+        {
+            lastDirection = firstWeapon.AimDirection;
+        }
+        return lastDirection;
     }
 }
