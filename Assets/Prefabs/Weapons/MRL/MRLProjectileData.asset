@@ -12,7 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1071d2b2d01d6f40a027739eafe6957, type: 3}
   m_Name: MRLProjectileData
   m_EditorClassIdentifier: 
-  MuzzleVelocity: 9.69
+  MuzzleVelocity: 25
   DamageOnHit: 1
   RotationSpeed: 5
   ExplosionRadius: 1.05
+  TurnControlCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.018612783
+      value: 0.29879048
+      inSlope: 0.054134328
+      outSlope: 0.054134328
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1098591
+    - serializedVersion: 3
+      time: 5.02746
+      value: 0.6
+      inSlope: 0.060041983
+      outSlope: 0.060041983
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15774652
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RandomConeAngle: 5
