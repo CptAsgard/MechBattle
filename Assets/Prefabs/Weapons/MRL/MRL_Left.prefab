@@ -86,6 +86,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1994850384433606464, guid: aac625fd1f2e05c4aaea2ea0d1abeb6e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3099435834069130898, guid: aac625fd1f2e05c4aaea2ea0d1abeb6e,
         type: 3}
       propertyPath: m_AssetId
@@ -94,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 5160974229249093802, guid: aac625fd1f2e05c4aaea2ea0d1abeb6e,
         type: 3}
       propertyPath: m_Name
-      value: MissileLauncher_Left
+      value: MRL_Left
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac625fd1f2e05c4aaea2ea0d1abeb6e, type: 3}
