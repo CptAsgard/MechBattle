@@ -23,9 +23,9 @@ public class ProjectileWeapon : Weapon
     public override bool Armed => reloadDelay.ReadyToFire && inRange;
     public override bool AutoAim => true;
 
-    public override void Initialize(MechState owner, Transform parent)
+    public override void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
     {
-        base.Initialize(owner, parent);
+        base.Initialize(mech, attachmentPoint);
         projectileData = projectileServer.ProjectileData;
     }
 

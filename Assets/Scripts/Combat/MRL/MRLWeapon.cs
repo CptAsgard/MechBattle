@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MLAPI.Messaging;
+using Mirror;
 using UnityEngine;
 
 public class MRLWeapon : Weapon
@@ -61,14 +61,16 @@ public class MRLWeapon : Weapon
         Fire();
     }
 
+    [Server]
     public override void Fire()
     {
         Transform target = TargetRepository.PriorityTarget.GetComponent<MechComponentRepository>()
             .GetTransform(MechComponentLocation.Torso);
 
         Transform launchTubeEnd = launchTubeEnds[rocketsRemaining - 1];
-        SpawnBullet(serverProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target);
-        RpcSpawnBullet(launchTubeEnd, target);
+
+        SpawnRocket(serverProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target);
+        RpcSpawnRocket(rocketsRemaining - 1, TargetRepository.PriorityTarget, MechComponentLocation.Torso);
 
         rocketsRemaining--;
         if (rocketsRemaining <= 0)
@@ -83,12 +85,14 @@ public class MRLWeapon : Weapon
     }
 
     [ClientRpc]
-    private void RpcSpawnBullet(Transform origin, Transform target)
+    private void RpcSpawnRocket(int index, NetworkIdentity enemy, MechComponentLocation location)
     {
-        SpawnBullet(clientProjectile.gameObject, origin.position, origin.up, target);
+        Transform origin = launchTubeEnds[index];
+        Transform target = enemy.GetComponent<MechComponentRepository>().GetTransform(location);
+        SpawnRocket(clientProjectile.gameObject, origin.position, origin.up, target);
     }
 
-    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward, Transform target)
+    private static void SpawnRocket(GameObject prefab, Vector3 position, Vector3 forward, Transform target)
     {
         GameObject pr = Instantiate(prefab);
         pr.GetComponent<MRLProjectile>().Initialize(position, forward, target);

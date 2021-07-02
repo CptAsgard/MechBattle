@@ -41,15 +41,14 @@ public class MechWeaponsController : NetworkBehaviour
         // TODO : Sets target to null if target can't see us or if target is destroyed. Replicate in TargetController
     //}
 
-    public void Add(Weapon weapon, WeaponAttachmentPoint attachmentPoint)
+    public Transform Add(Weapon weapon, WeaponAttachmentPoint attachmentPoint)
     {
-        Transform parent = attachmentPoint == WeaponAttachmentPoint.Left ? weaponsParentLeft : weaponsParentRight;
-
-        weapon.transform.parent = parent;
-        weapon.Initialize(mechState, parent);
         weapons.Add(weapon);
-    }
 
+        Transform parent = attachmentPoint == WeaponAttachmentPoint.Left ? weaponsParentLeft : weaponsParentRight;
+        return parent;
+    }
+    
     public Vector3 GetPriorityDirection()
     {
         Weapon firstWeapon = weapons.FirstOrDefault(weapon => weapon.AutoAim && weapon.Armed);
