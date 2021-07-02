@@ -37,12 +37,7 @@ public class MRLWeapon : Weapon
             return;
         }
 
-        if (!Owner)
-        {
-            return;
-        }
-
-        if (!Armed)
+        if (!Owner || !Armed || TargetRepository.PriorityTarget == null)
         {
             return;
         }
@@ -50,11 +45,6 @@ public class MRLWeapon : Weapon
         if (launchSpacingDelay > 0f)
         {
             launchSpacingDelay -= Time.fixedDeltaTime;
-            return;
-        }
-
-        if (TargetRepository.PriorityTarget == null)
-        {
             return;
         }
 
