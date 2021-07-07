@@ -6,6 +6,7 @@ public class WeaponReloadDelay : MonoBehaviour
     private Weapon weapon;
 
     public bool ReadyToFire => timer <= 0f;
+    public float TimeLeft => timer;
 
     private float timer;
 

@@ -16,7 +16,7 @@ public class MRLWeapon : Weapon
     private int maxRockets;
     [SerializeField]
     private List<Transform> launchTubeEnds;
-
+    
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadDelay.ReadyToFire;
     public override bool AutoAim => false;
@@ -37,7 +37,17 @@ public class MRLWeapon : Weapon
             return;
         }
 
-        if (!Owner || !Armed || TargetRepository.PriorityTarget == null)
+        if (!Owner || TargetRepository.PriorityTarget == null)
+        {
+            return;
+        }
+
+        if (reloadDelay.TimeLeft <= 1f && !IgnoreLOSRepository.Instance.Contains(netIdentity))
+        {
+            IgnoreLOSRepository.Instance.Add(netIdentity);
+        }
+
+        if (!Armed)
         {
             return;
         }
@@ -67,6 +77,7 @@ public class MRLWeapon : Weapon
         {
             reloadDelay.ResetCooldown();
             rocketsRemaining = maxRockets;
+            IgnoreLOSRepository.Instance.Remove(netIdentity);
         }
         else
         {
@@ -77,9 +88,9 @@ public class MRLWeapon : Weapon
     [ClientRpc]
     private void RpcSpawnRocket(int index, NetworkIdentity enemy, MechComponentLocation location)
     {
-        Transform origin = launchTubeEnds[index];
+        Transform launchTubeEnd = launchTubeEnds[index];
         Transform target = enemy.GetComponent<MechComponentRepository>().GetTransform(location);
-        SpawnRocket(clientProjectile.gameObject, origin.position, origin.up, target);
+        SpawnRocket(clientProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target);
     }
 
     private static void SpawnRocket(GameObject prefab, Vector3 position, Vector3 forward, Transform target)

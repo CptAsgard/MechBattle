@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/RoomMenu.unity
     guid: b4a362358540808448e758292843abbe
   - enabled: 1
-    path: Assets/Scenes/SnowArena.unity
+    path: Assets/Scenes/TestArena.unity
     guid: e7bbd05e9067e334fb4f5b5e9f7c1ab8
   m_configObjects: {}

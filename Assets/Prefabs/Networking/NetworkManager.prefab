@@ -79,7 +79,7 @@ MonoBehaviour:
   roomPlayerPrefab: {fileID: 3706078414028804418, guid: 5ee7f3c0e60e0ed4f853d1a46e56c66a,
     type: 3}
   RoomScene: Assets/Scenes/RoomMenu.unity
-  GameplayScene: Assets/Scenes/SnowArena.unity
+  GameplayScene: Assets/Scenes/TestArena.unity
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c3983e0e54d4847bdbc81f456b6087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rebuildInterval: 1
+  rebuildInterval: 0.5
   mechRepository: {fileID: 1226381653}
 --- !u!114 &1226381653
 MonoBehaviour:
