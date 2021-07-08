@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public abstract class Weapon : NetworkBehaviour
+public abstract class WeaponController : NetworkBehaviour
 {
     [field: SyncVar]
     public MechState Owner { get; private set; }

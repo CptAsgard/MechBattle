@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class ProjectileWeapon : Weapon
+public class ProjectileWeaponController : WeaponController
 {
     [SerializeField]
     private ProjectileWeaponData weaponData;

@@ -3,20 +3,20 @@ using UnityEngine;
 public class WeaponFireController : MonoBehaviour
 {
     [SerializeField]
-    private Weapon weapon;
+    private WeaponController weaponController;
     [SerializeField]
     private float FireAngleThreshold;
 
     private void FixedUpdate()
     {
-        if (!weapon.Armed)
+        if (!weaponController.Armed)
         {
             return;
         }
 
-        if (Vector3.Angle(transform.forward, weapon.AimDirection) < FireAngleThreshold)
+        if (Vector3.Angle(transform.forward, weaponController.AimDirection) < FireAngleThreshold)
         {
-            weapon.Fire();
+            weaponController.Fire();
         }
     }
 }

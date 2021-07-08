@@ -34,8 +34,8 @@ public class MechRoomManager : NetworkRoomManager
             GameObject leftWeapon = Instantiate(leftWeaponPrefab);
             GameObject rightWeapon = Instantiate(rightWeaponPrefab);
 
-            leftWeapon.GetComponent<Weapon>().Initialize(mech, WeaponAttachmentPoint.Left);
-            rightWeapon.GetComponent<Weapon>().Initialize(mech, WeaponAttachmentPoint.Right);
+            leftWeapon.GetComponent<WeaponController>().Initialize(mech, WeaponAttachmentPoint.Left);
+            rightWeapon.GetComponent<WeaponController>().Initialize(mech, WeaponAttachmentPoint.Right);
 
             NetworkServer.Spawn(leftWeapon);
             NetworkServer.Spawn(rightWeapon);

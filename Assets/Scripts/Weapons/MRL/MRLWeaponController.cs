@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class MRLWeapon : Weapon
+public class MRLWeaponController : WeaponController
 {
     [SerializeField]
     private MRLProjectile clientProjectile;

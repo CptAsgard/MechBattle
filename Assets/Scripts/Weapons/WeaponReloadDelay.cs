@@ -3,7 +3,7 @@ using UnityEngine;
 public class WeaponReloadDelay : MonoBehaviour
 {
     [SerializeField]
-    private Weapon weapon;
+    private WeaponController weaponController;
 
     public bool ReadyToFire => timer <= 0f;
     public float TimeLeft => timer;
@@ -25,6 +25,6 @@ public class WeaponReloadDelay : MonoBehaviour
 
     public void ResetCooldown()
     {
-        timer = weapon.WeaponData.ReloadDelay;
+        timer = weaponController.WeaponData.ReloadDelay;
     }
 }

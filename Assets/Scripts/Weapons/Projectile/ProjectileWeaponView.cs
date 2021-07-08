@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileWeaponView : NetworkBehaviour
 {
     [SerializeField]
-    private ProjectileWeapon weapon;
+    private ProjectileWeaponController weaponController;
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
@@ -17,9 +17,9 @@ public class ProjectileWeaponView : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (weapon.Armed)
+        if (weaponController.Armed)
         {
-            turretRotation.LookAt(weapon.AimDirection);
+            turretRotation.LookAt(weaponController.AimDirection);
         }
     }
 }

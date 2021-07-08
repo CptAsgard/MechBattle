@@ -18,9 +18,9 @@ public class MechWeaponsController : NetworkBehaviour
     [SerializeField]
     private MechState mechState;
 
-    private readonly List<Weapon> weapons = new List<Weapon>();
+    private readonly List<WeaponController> weapons = new List<WeaponController>();
 
-    public IEnumerable<Weapon> Weapons => weapons;
+    public IEnumerable<WeaponController> Weapons => weapons;
     public bool Armed => weapons.Any(weapon => weapon.Armed);
 
     private Vector3 lastDirection;
@@ -41,9 +41,9 @@ public class MechWeaponsController : NetworkBehaviour
         // TODO : Sets target to null if target can't see us or if target is destroyed. Replicate in TargetController
     //}
 
-    public Transform Add(Weapon weapon, WeaponAttachmentPoint attachmentPoint)
+    public Transform Add(WeaponController weaponController, WeaponAttachmentPoint attachmentPoint)
     {
-        weapons.Add(weapon);
+        weapons.Add(weaponController);
 
         Transform parent = attachmentPoint == WeaponAttachmentPoint.Left ? weaponsParentLeft : weaponsParentRight;
         return parent;
@@ -51,7 +51,7 @@ public class MechWeaponsController : NetworkBehaviour
     
     public Vector3 GetPriorityDirection()
     {
-        Weapon firstWeapon = weapons.FirstOrDefault(weapon => weapon.AutoAim && weapon.Armed);
+        WeaponController firstWeapon = weapons.FirstOrDefault(weapon => weapon.AutoAim && weapon.Armed);
         if (firstWeapon != null)
         {
             lastDirection = firstWeapon.AimDirection;
