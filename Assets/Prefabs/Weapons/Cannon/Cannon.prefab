@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  weapon: {fileID: 4512524148914312566}
+  weaponController: {fileID: 4512524148914312566}
   bulletPrefab: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
     type: 3}
   turretRotation: {fileID: -2339933857936471663}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20eac411ae736745a05d0457b89f86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4512524148914312566}
+  weaponController: {fileID: 4512524148914312566}
 --- !u!114 &8126822962888078695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada6ab82ccb6242409e546b9b9239ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4512524148914312566}
+  weaponController: {fileID: 4512524148914312566}
   FireAngleThreshold: 0.0001
 --- !u!114 &-2339933857936471663
 MonoBehaviour:

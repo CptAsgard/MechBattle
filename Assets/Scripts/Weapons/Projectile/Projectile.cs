@@ -18,6 +18,16 @@ public class Projectile : MonoBehaviour
     private Vector3 currentVelocity;
     private float timer;
 
+    private void Awake()
+    {
+        OnHitEvent += OnHit;
+    }
+
+    private void OnHit(IDamageable damageable, Vector3 point)
+    {
+        damageable.TakeDamage(point, new DamageForce(ProjectileData.DamageOnHit));
+    }
+
     private void FixedUpdate()
     {
         StepBullet();
