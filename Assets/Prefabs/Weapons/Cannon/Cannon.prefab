@@ -137,9 +137,6 @@ GameObject:
   - component: {fileID: 2706257983666497423}
   - component: {fileID: 4228166710167486396}
   - component: {fileID: 4512524148914312566}
-  - component: {fileID: 5323250688621236474}
-  - component: {fileID: -8271884349800700090}
-  - component: {fileID: 8126822962888078695}
   - component: {fileID: -2339933857936471663}
   - component: {fileID: -5464871884001430460}
   m_Layer: 9
@@ -218,59 +215,14 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   AimDirection: {x: 0, y: 0, z: 0}
-  weaponData: {fileID: 11400000, guid: 0e23b78976ba52148b3c6b4f8e5e67c3, type: 2}
-  weaponView: {fileID: 5323250688621236474}
-  reloadDelay: {fileID: -8271884349800700090}
-  muzzleEnd: {fileID: 269405566}
-  projectileClient: {fileID: 4046309565237019015, guid: 65593d3edd3087a4fa52cd31951b8eaa,
-    type: 3}
-  projectileServer: {fileID: 8243388369155888945, guid: f7940ecee8e3cbb42886f17ce1eb61d8,
-    type: 3}
---- !u!114 &5323250688621236474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223662892337230678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ff7295d1e32afa4aba0e30d4a1996f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  weaponController: {fileID: 4512524148914312566}
-  bulletPrefab: {fileID: 7510768159891794021, guid: 4e4969e95021595468f3876798449a04,
-    type: 3}
+  weaponData: {fileID: 11400000, guid: ac9afcf7bc148144c8493509e2707568, type: 2}
   turretRotation: {fileID: -2339933857936471663}
---- !u!114 &-8271884349800700090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223662892337230678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d20eac411ae736745a05d0457b89f86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponController: {fileID: 4512524148914312566}
---- !u!114 &8126822962888078695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223662892337230678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada6ab82ccb6242409e546b9b9239ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponController: {fileID: 4512524148914312566}
-  FireAngleThreshold: 0.0001
+  muzzleEnd: {fileID: 269405566}
+  projectileClient: {fileID: 6203152462085402812, guid: 65593d3edd3087a4fa52cd31951b8eaa,
+    type: 3}
+  projectileServer: {fileID: 2042102450417624586, guid: f7940ecee8e3cbb42886f17ce1eb61d8,
+    type: 3}
+  fireAngleThreshold: 0.001
 --- !u!114 &-2339933857936471663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +257,4 @@ MonoBehaviour:
   clientOnly: []
   serverOnly:
   - {fileID: -2339933857936471663}
-  - {fileID: 8126822962888078695}
-  - {fileID: -8271884349800700090}
-  - {fileID: 5323250688621236474}
   authorityOnly: []

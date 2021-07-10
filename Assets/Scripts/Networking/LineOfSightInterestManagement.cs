@@ -27,7 +27,7 @@ public class LineOfSightInterestManagement : InterestManagement
     {
         foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
         {
-            if (identity.connectionToClient == conn || conn.clientOwnedObjects.Contains(identity) || IgnoreLOSRepository.Instance != null && IgnoreLOSRepository.Instance.Contains(identity))
+            if (identity.connectionToClient == conn || conn.clientOwnedObjects.Contains(identity) || LineOfSightIgnoredRepository.Instance != null && LineOfSightIgnoredRepository.Instance.Contains(identity))
             {
                 newObservers.Add(conn);
                 continue;

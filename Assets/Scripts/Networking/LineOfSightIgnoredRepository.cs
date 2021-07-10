@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mirror;
 
-public class IgnoreLOSRepository : SingletonComponent<IgnoreLOSRepository>
+public class LineOfSightIgnoredRepository : SingletonComponent<LineOfSightIgnoredRepository>
 {
     private readonly List<NetworkIdentity> ignoredIdentities = new List<NetworkIdentity>();
 

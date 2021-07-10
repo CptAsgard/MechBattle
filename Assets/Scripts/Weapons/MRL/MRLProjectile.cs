@@ -1,23 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
-public class MRLProjectile : MonoBehaviour
+public class MRLProjectile : Projectile
 {
-    public System.Action<IDamageable, Vector3> OnHitEvent;
-
     [SerializeField]
     private MRLProjectileData projectileData;
-    [SerializeField]
-    private LayerMask layerMask;
 
     private Transform target;
     private float flightTime;
-    private Vector3 currentPosition;
     private float initialDistance;
     private float randomX, randomZ;
 
-    public MRLProjectileData ProjectileData => projectileData;
+    public override ProjectileData ProjectileData => projectileData;
+
+    public override void Initialize(Vector3 initialPosition, bool withAuthority)
+    {
+        base.Initialize(initialPosition, withAuthority);
+
+        if (hasAuthority)
+        {
+            OnHitEvent += OnHit;
+        }
+    }
+
+    public void Initialize(Vector3 initialPosition, Vector3 forward, Transform target, bool withAuthority)
+    {
+        base.Initialize(initialPosition, withAuthority);
+        this.target = target;
+
+        transform.position = initialPosition;
+        transform.forward = forward;
+        
+        initialDistance = (target.position - transform.position).magnitude;        
+        
+        if (hasAuthority)
+        {
+            OnHitEvent += OnHit;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -64,15 +84,9 @@ public class MRLProjectile : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public void Initialize(Vector3 position, Vector3 forward, Transform target)
+    private void OnHit(IDamageable damageable, Vector3 point)
     {
-        this.target = target;
-
-        transform.position = position;
-        transform.forward = forward;
-
-        currentPosition = position;
-        initialDistance = (target.position - transform.position).magnitude;
+        damageable.TakeDamage(point, new DamageForce(ProjectileData.DamageOnHit));
     }
 
     private void OnDrawGizmos()

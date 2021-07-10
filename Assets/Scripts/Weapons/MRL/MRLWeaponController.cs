@@ -11,40 +11,36 @@ public class MRLWeaponController : WeaponController
     [SerializeField]
     private MRLWeaponData weaponData;
     [SerializeField]
-    private WeaponReloadDelay reloadDelay;
-    [SerializeField]
     private int maxRockets;
     [SerializeField]
     private List<Transform> launchTubeEnds;
     
     public override WeaponData WeaponData => weaponData;
-    public override bool Armed => reloadDelay.ReadyToFire;
+    public override bool Armed => reloadTime > weaponData.ReloadDelay;
     public override bool AutoAim => false;
 
     private int rocketsRemaining;
     private float launchSpacingDelay;
 
+    [Server]
     private void Start()
     {
         rocketsRemaining = maxRockets;
     }
-
+    
+    [Server]
     private void FixedUpdate()
     {
-        if (!isServer)
-        {
-            enabled = false;
-            return;
-        }
-
-        if (!Owner || TargetRepository.PriorityTarget == null)
+        if (!Owner || targetRepository.PriorityTarget == null)
         {
             return;
         }
+        
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
-        if (reloadDelay.TimeLeft <= 1f && !IgnoreLOSRepository.Instance.Contains(netIdentity))
+        if (weaponData.ReloadDelay - reloadTime <= 1f && !LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
         {
-            IgnoreLOSRepository.Instance.Add(netIdentity);
+            LineOfSightIgnoredRepository.Instance.Add(netIdentity);
         }
 
         if (!Armed)
@@ -64,20 +60,20 @@ public class MRLWeaponController : WeaponController
     [Server]
     public override void Fire()
     {
-        Transform target = TargetRepository.PriorityTarget.GetComponent<MechComponentRepository>()
+        Transform target = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>()
             .GetTransform(MechComponentLocation.Torso);
 
         Transform launchTubeEnd = launchTubeEnds[rocketsRemaining - 1];
 
-        SpawnRocket(serverProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target);
-        RpcSpawnRocket(rocketsRemaining - 1, TargetRepository.PriorityTarget, MechComponentLocation.Torso);
+        SpawnRocket(serverProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target, true);
+        RpcSpawnRocket(rocketsRemaining - 1, targetRepository.PriorityTarget, MechComponentLocation.Torso);
 
         rocketsRemaining--;
         if (rocketsRemaining <= 0)
         {
-            reloadDelay.ResetCooldown();
+            reloadTime = 0f;
             rocketsRemaining = maxRockets;
-            IgnoreLOSRepository.Instance.Remove(netIdentity);
+            LineOfSightIgnoredRepository.Instance.Remove(netIdentity);
         }
         else
         {
@@ -90,12 +86,12 @@ public class MRLWeaponController : WeaponController
     {
         Transform launchTubeEnd = launchTubeEnds[index];
         Transform target = enemy.GetComponent<MechComponentRepository>().GetTransform(location);
-        SpawnRocket(clientProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target);
+        SpawnRocket(clientProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target, false);
     }
 
-    private static void SpawnRocket(GameObject prefab, Vector3 position, Vector3 forward, Transform target)
+    private static void SpawnRocket(GameObject prefab, Vector3 position, Vector3 forward, Transform target, bool withAuthority)
     {
         GameObject pr = Instantiate(prefab);
-        pr.GetComponent<MRLProjectile>().Initialize(position, forward, target);
+        pr.GetComponent<MRLProjectile>().Initialize(position, forward, target, withAuthority);
     }
 }

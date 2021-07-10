@@ -1,51 +1,39 @@
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Projectile : MonoBehaviour
+public class CannonProjectile : Projectile
 {
-    public System.Action<Vector3> OnStepEvent;
-    public System.Action<IDamageable, Vector3> OnHitEvent;
-    public UnityEvent<Vector3> OnSpawnEvent;
-
-    [SerializeField]
-    private LayerMask layerMask;
     [SerializeField]
     private ProjectileData projectileData;
 
-    public ProjectileData ProjectileData => projectileData;
-
-    private Vector3 currentPosition;
     private Vector3 currentVelocity;
-    private float timer;
-
-    private void Awake()
-    {
-        OnHitEvent += OnHit;
-    }
-
-    private void OnHit(IDamageable damageable, Vector3 point)
-    {
-        damageable.TakeDamage(point, new DamageForce(ProjectileData.DamageOnHit));
-    }
+    
+    public override ProjectileData ProjectileData => projectileData;
 
     private void FixedUpdate()
     {
         StepBullet();
         OnStepEvent?.Invoke(currentPosition);
 
-        timer += Time.fixedDeltaTime;
-        if (timer >= 10f)
+        if (sinceSpawn > 10f)
         {
             Destroy(gameObject);
         }
     }
 
-    public void Initialize(Vector3 initialPosition, Vector3 direction)
+    public void Initialize(Vector3 initialPosition, Vector3 direction, bool withAuthority)
     {
-        currentPosition = initialPosition;
+        base.Initialize(initialPosition, withAuthority);
         currentVelocity = direction * projectileData.MuzzleVelocity;
 
-        OnSpawnEvent?.Invoke(initialPosition);
+        if (hasAuthority)
+        {
+            OnHitEvent += OnHit;
+        }
+    }
+
+    private void OnHit(IDamageable damageable, Vector3 point)
+    {
+        damageable.TakeDamage(point, new DamageForce(ProjectileData.DamageOnHit));
     }
 
     private void StepBullet()

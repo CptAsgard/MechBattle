@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ProjectileView : MonoBehaviour
+public class CannonProjectileView : MonoBehaviour
 {
     [SerializeField]
-    private Projectile projectile;
+    private CannonProjectile projectile;
     [SerializeField]
     private TrailRenderer trail;
     
@@ -11,6 +11,11 @@ public class ProjectileView : MonoBehaviour
     {
         trail.transform.parent = null;
         trail.autodestruct = true;
+    }
+
+    private void Awake()
+    {
+        projectile.OnSpawnEvent += Initialize;
     }
 
     public void Initialize(Vector3 initialPosition)

@@ -363,9 +363,6 @@ GameObject:
   - component: {fileID: 3099435834069130898}
   - component: {fileID: -26500764991291524}
   - component: {fileID: 8928354181081602523}
-  - component: {fileID: 8092661821153330073}
-  - component: {fileID: -265211833985605825}
-  - component: {fileID: -2471284504595750694}
   m_Layer: 0
   m_Name: MRL
   m_TagString: Untagged
@@ -447,7 +444,6 @@ MonoBehaviour:
   serverProjectile: {fileID: 983816845070627645, guid: 33c59901214f1e0498db77bf948b7acd,
     type: 3}
   weaponData: {fileID: 11400000, guid: da683de8e3984824a9030af4b15d2d48, type: 2}
-  reloadDelay: {fileID: 8092661821153330073}
   maxRockets: 16
   launchTubeEnds:
   - {fileID: 7087248888570458655}
@@ -466,51 +462,6 @@ MonoBehaviour:
   - {fileID: 9172926781276398535}
   - {fileID: 8206991718902771846}
   - {fileID: 765908083113385221}
---- !u!114 &8092661821153330073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160974229249093802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d20eac411ae736745a05d0457b89f86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponController: {fileID: 8928354181081602523}
---- !u!114 &-265211833985605825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160974229249093802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad0f556d2eb7df46b60f17c0bc3dc43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2471284504595750694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160974229249093802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47583abbd10bd0e43b519f55c4ef019b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  destroyInstead: 0
-  clientOnly: []
-  serverOnly:
-  - {fileID: -265211833985605825}
-  - {fileID: 8092661821153330073}
-  authorityOnly: []
 --- !u!1 &5399292941874360553
 GameObject:
   m_ObjectHideFlags: 0

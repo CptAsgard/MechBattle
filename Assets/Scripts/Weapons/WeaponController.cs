@@ -7,11 +7,12 @@ public abstract class WeaponController : NetworkBehaviour
     public MechState Owner { get; private set; }
 
     public Vector3 AimDirection = new Vector3();
-    
-    protected WeaponTargetRepository TargetRepository;
 
-    public abstract WeaponData WeaponData { get; }
+    protected WeaponTargetRepository targetRepository;
+    protected TimeSince reloadTime;
+
     public abstract bool Armed { get; }
+    public abstract WeaponData WeaponData { get; }
     public abstract bool AutoAim { get; }
 
     [SyncVar]
@@ -19,31 +20,18 @@ public abstract class WeaponController : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        if (!isServer)
+        if (isServer)
         {
-            SetParent();
+            return;
         }
+
+        SetParent();
+        enabled = false;
     }
-    
+
     public override void OnStartServer()
     {
         SetParent();
-    }
-    
-    private void FixedUpdate()
-    {
-        if (!isServer)
-        {
-            enabled = false;
-            return;
-        }
-
-        if (!Owner)
-        {
-            return;
-        }
-
-        Aim();
     }
     
     public virtual void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
@@ -54,16 +42,16 @@ public abstract class WeaponController : NetworkBehaviour
 
     public virtual void Fire()
     { }
-    
+
     protected virtual void Aim()
     { }
-    
+
     private void SetParent()
     {
-        TargetRepository = Owner.GetComponent<WeaponTargetRepository>();
+        targetRepository = Owner.GetComponent<WeaponTargetRepository>();
 
         Transform parent = Owner.GetComponent<MechWeaponsController>().Add(this, attachmentPoint);
-        
+
         transform.parent = parent;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;

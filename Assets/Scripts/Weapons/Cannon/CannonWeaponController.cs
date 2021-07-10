@@ -1,32 +1,57 @@
 using Mirror;
 using UnityEngine;
 
-public class ProjectileWeaponController : WeaponController
+public class CannonWeaponController : WeaponController
 {
     [SerializeField]
-    private ProjectileWeaponData weaponData;
+    private WeaponData weaponData;
     [SerializeField]
-    private ProjectileWeaponView weaponView;
-    [SerializeField]
-    private WeaponReloadDelay reloadDelay;
+    private TurretRotationController turretRotation;
     [SerializeField]
     private Transform muzzleEnd;
     [SerializeField]
-    private Projectile projectileClient;
+    private CannonProjectile projectileClient;
     [SerializeField]
-    private Projectile projectileServer;
+    private CannonProjectile projectileServer;
+    [SerializeField]
+    private float fireAngleThreshold;
 
     private bool inRange;
     private ProjectileData projectileData;
 
     public override WeaponData WeaponData => weaponData;
-    public override bool Armed => reloadDelay.ReadyToFire && inRange;
+    public override bool Armed => reloadTime > weaponData.ReloadDelay && inRange;
     public override bool AutoAim => true;
 
     public override void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
     {
         base.Initialize(mech, attachmentPoint);
+
         projectileData = projectileServer.ProjectileData;
+        transform.localPosition = Vector3.zero;
+    }
+
+    [Server]
+    private void FixedUpdate()
+    {        
+        if (!Owner || targetRepository.PriorityTarget == null)
+        {
+            return;
+        }
+
+        Aim();
+
+        if (!Armed)
+        {
+            return;
+        }
+
+        turretRotation.LookAt(AimDirection);
+
+        if (Vector3.Angle(transform.forward, AimDirection) < fireAngleThreshold)
+        {
+            Fire();
+        }
     }
 
     [Server]
@@ -37,25 +62,25 @@ public class ProjectileWeaponController : WeaponController
             return;
         }
 
-        reloadDelay.ResetCooldown();
+        reloadTime = 0f;
 
         Vector3 position = muzzleEnd.position;
         Vector3 forward = muzzleEnd.forward;
 
-        SpawnBullet(projectileServer.gameObject, position, forward);
+        SpawnBullet(projectileServer.gameObject, position, forward, true);
         RpcSpawnBullet(position, forward);
     }
     
     [Server]
     protected override void Aim()
     {
-        if (TargetRepository.PriorityTarget == null)
+        if (targetRepository.PriorityTarget == null)
         {
             inRange = false;
             return;
         }
 
-        Vector3 targetPositionWorld = TargetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
+        Vector3 targetPositionWorld = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
         CalculateAngleToHitTarget(targetPositionWorld, out float? highAngle, out float? lowAngle);
         inRange = lowAngle != null || highAngle != null;
@@ -77,13 +102,13 @@ public class ProjectileWeaponController : WeaponController
     [ClientRpc]
     private void RpcSpawnBullet(Vector3 position, Vector3 forward)
     {
-        SpawnBullet(projectileClient.gameObject, position, forward);
+        SpawnBullet(projectileClient.gameObject, position, forward, false);
     }
     
-    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward)
+    private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward, bool withAuthority)
     {
         GameObject pr = Instantiate(prefab);
-        pr.GetComponent<Projectile>().Initialize(position, forward);
+        pr.GetComponent<CannonProjectile>().Initialize(position, forward, withAuthority);
     }
 
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
