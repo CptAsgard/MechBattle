@@ -43,6 +43,8 @@ public class MRLWeaponController : WeaponController
         
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
+        // todo maybe after reloading done add 1 sec wind-up time to sync objects to save guessing on when weapon might want to fire & sync -1 sec ahead
+        // means there's always 1 sec delay before firing. Gameplay impact is unclear atm
         if (weaponData.ReloadDelay - reloadTime <= 1f && !LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
         {
             LineOfSightIgnoredRepository.Instance.Add(netIdentity);
