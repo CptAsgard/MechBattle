@@ -36,6 +36,11 @@ public class CannonWeaponController : WeaponController
     {
         if (!Owner || targetRepository.PriorityTarget == null)
         {
+            if (LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
+            {
+                LineOfSightIgnoredRepository.Instance.Remove(netIdentity);
+            }
+
             return;
         }
 
