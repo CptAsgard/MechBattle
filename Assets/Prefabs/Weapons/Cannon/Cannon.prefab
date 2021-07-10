@@ -222,7 +222,7 @@ MonoBehaviour:
     type: 3}
   projectileServer: {fileID: 2042102450417624586, guid: f7940ecee8e3cbb42886f17ce1eb61d8,
     type: 3}
-  fireAngleThreshold: 0.001
+  fireAngleThreshold: 0.01
 --- !u!114 &-2339933857936471663
 MonoBehaviour:
   m_ObjectHideFlags: 0

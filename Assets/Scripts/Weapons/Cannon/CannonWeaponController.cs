@@ -17,7 +17,7 @@ public class CannonWeaponController : WeaponController
     private float fireAngleThreshold;
 
     private bool inRange;
-    private ProjectileData projectileData;
+    private float muzzleVelocity;
 
     public override WeaponData WeaponData => weaponData;
     public override bool Armed => reloadTime > weaponData.ReloadDelay && inRange;
@@ -27,31 +27,38 @@ public class CannonWeaponController : WeaponController
     {
         base.Initialize(mech, attachmentPoint);
 
-        projectileData = projectileServer.ProjectileData;
+        muzzleVelocity = projectileServer.ProjectileData.MuzzleVelocity;
         transform.localPosition = Vector3.zero;
     }
 
     [Server]
     private void FixedUpdate()
-    {        
+    {
         if (!Owner || targetRepository.PriorityTarget == null)
         {
             return;
         }
 
         Aim();
+        turretRotation.LookAt(AimDirection);
+
+        if (weaponData.ReloadDelay - reloadTime <= 1f && !LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
+        {
+            LineOfSightIgnoredRepository.Instance.Add(netIdentity);
+        }
 
         if (!Armed)
         {
             return;
         }
 
-        turretRotation.LookAt(AimDirection);
-
-        if (Vector3.Angle(transform.forward, AimDirection) < fireAngleThreshold)
+        if (Vector3.Angle(transform.forward, AimDirection) > fireAngleThreshold)
         {
-            Fire();
+            return;
         }
+
+        Fire();
+        LineOfSightIgnoredRepository.Instance.Remove(netIdentity);
     }
 
     [Server]
@@ -70,7 +77,7 @@ public class CannonWeaponController : WeaponController
         SpawnBullet(projectileServer.gameObject, position, forward, true);
         RpcSpawnBullet(position, forward);
     }
-    
+
     [Server]
     protected override void Aim()
     {
@@ -89,7 +96,7 @@ public class CannonWeaponController : WeaponController
         {
             return;
         }
-        
+
         // ReSharper disable once PossibleInvalidOperationException because we already check inRange, one of them -has- to be not null.
         float angle = (float) (lowAngle ?? highAngle);
 
@@ -104,7 +111,7 @@ public class CannonWeaponController : WeaponController
     {
         SpawnBullet(projectileClient.gameObject, position, forward, false);
     }
-    
+
     private static void SpawnBullet(GameObject prefab, Vector3 position, Vector3 forward, bool withAuthority)
     {
         GameObject pr = Instantiate(prefab);
@@ -113,7 +120,7 @@ public class CannonWeaponController : WeaponController
 
     private void CalculateAngleToHitTarget(Vector3 target, out float? theta1, out float? theta2)
     {
-        float velocity = projectileData.MuzzleVelocity;
+        float velocity = muzzleVelocity;
         Vector3 targetVector = target - muzzleEnd.position;
         float x = new Vector3(targetVector.x, 0, targetVector.z).magnitude;
         float gravity = -Physics.gravity.y;
