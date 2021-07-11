@@ -22,8 +22,7 @@ public class MRLWeaponController : WeaponController
     private int rocketsRemaining;
     private float launchSpacingDelay;
 
-    [Server]
-    private void Start()
+    private void OnStartServer()
     {
         rocketsRemaining = maxRockets;
     }
