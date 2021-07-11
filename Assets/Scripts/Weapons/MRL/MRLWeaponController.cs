@@ -22,8 +22,9 @@ public class MRLWeaponController : WeaponController
     private int rocketsRemaining;
     private float launchSpacingDelay;
 
-    private void OnStartServer()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
         rocketsRemaining = maxRockets;
     }
     
