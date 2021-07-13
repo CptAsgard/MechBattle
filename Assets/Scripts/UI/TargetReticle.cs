@@ -8,8 +8,6 @@ public class TargetReticle : MonoBehaviour
     [SerializeField]
     private RectTransform rectTransform;
     [SerializeField]
-    private GameObject debugTarget;
-    [SerializeField]
     private Image image;
 
     [Header("Settings")]

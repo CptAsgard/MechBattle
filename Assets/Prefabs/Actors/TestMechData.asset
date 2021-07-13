@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestMechData
   m_EditorClassIdentifier: 
   TorsoHealth: 150
-  HeadHealth: 25
+  HeadHealth: 50
   LeftArmHealth: 75
   RightArmHealth: 75
   LeftLegHealth: 75
