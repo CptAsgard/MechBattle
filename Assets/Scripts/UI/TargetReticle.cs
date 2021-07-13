@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pixelplacement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,10 +21,46 @@ public class TargetReticle : MonoBehaviour
     private Bounds bounds;
     private RectTransform canvas;
     private MechSelectActions selectActions;
+    private bool isTweening;
+    private Vector2 currentPadding;
+    private GameObject previousSelected;
 
     private void Start()
     {
         canvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        currentPadding = scalePadding;
+    }
+
+    private void OnTargetChanged()
+    {
+        RecalculateBounds(selectActions.MechSelectionState.selected.gameObject);
+        Vector2 startScale = canvas.sizeDelta * 2f;
+        Vector2 endScale = scalePadding;
+
+        rectTransform.sizeDelta = startScale;
+
+        isTweening = true;
+        Tween.Value(startScale, endScale, OnTweenUpdateScale, .25f, 0f, Tween.EaseOutStrong, Tween.LoopType.None, () => image.enabled = true,
+            () => isTweening = false);
+    }
+
+    private void OnTargetLost()
+    {
+        Vector2 startScale = rectTransform.sizeDelta;
+        Vector2 endScale = canvas.sizeDelta * 2f;
+
+        isTweening = true;
+        Tween.Size(rectTransform, startScale, endScale, .15f, 0f, Tween.EaseInStrong, Tween.LoopType.None, null,
+            () =>
+            {
+                isTweening = false;
+                image.enabled = false;
+            });
+    }
+
+    private void OnTweenUpdateScale(Vector2 newScale)
+    {
+        currentPadding = newScale;
     }
 
     private void Update()
@@ -35,11 +72,27 @@ public class TargetReticle : MonoBehaviour
         }
 
         GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
-        image.enabled = selected != null;
-        if (image.enabled)
+        
+        if (image.enabled && selected != null)
         {
             RecalculateBounds(selected);
         }
+
+        if (isTweening)
+        {
+            return;
+        }
+
+        if (!image.enabled && selected != null || selected != null && selected != previousSelected)
+        {
+            OnTargetChanged();
+        }
+        else if (image.enabled && selected == null)
+        {
+            OnTargetLost();
+        }
+
+        previousSelected = selected;
     }
     
     private Vector2 ToCanvasPosition(Vector3 worldPoint)
@@ -76,7 +129,7 @@ public class TargetReticle : MonoBehaviour
         bounds = selectionBounds;
 
         Vector2 trueScale = max - min;
-        rectTransform.sizeDelta = Vector2.Max(trueScale + scalePadding, minSize);
+        rectTransform.sizeDelta = Vector2.Max(trueScale + currentPadding, minSize);
         rectTransform.anchoredPosition = min + trueScale / 2f;
     }
 
