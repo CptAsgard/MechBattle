@@ -31,7 +31,7 @@ public class MRLWeaponController : WeaponController
     [Server]
     private void FixedUpdate()
     {
-        if (!Owner || targetRepository.PriorityTarget == null)
+        if (!WeaponOwner.Owner || targetRepository.PriorityTarget == null)
         {            
             if (LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
             {

@@ -1,10 +1,27 @@
 using Mirror;
 using UnityEngine;
 
+public readonly struct WeaponOwner : System.IEquatable<WeaponOwner>
+{
+    public readonly MechState Owner;
+    public readonly WeaponAttachmentPoint AttachmentPoint;
+
+    public WeaponOwner(MechState owner, WeaponAttachmentPoint attachmentPoint)
+    {
+        Owner = owner;
+        AttachmentPoint = attachmentPoint;
+    }
+
+    public bool Equals(WeaponOwner other)
+    {
+        return Owner == other.Owner && AttachmentPoint == other.AttachmentPoint;
+    }
+}
+
 public abstract class WeaponController : NetworkBehaviour
 {
-    [field: SyncVar]
-    public MechState Owner { get; private set; }
+    [SyncVar(hook = nameof(OnOwnerChanged))]
+    public WeaponOwner WeaponOwner;
 
     public Vector3 AimDirection = new Vector3();
 
@@ -15,9 +32,6 @@ public abstract class WeaponController : NetworkBehaviour
     public abstract WeaponData WeaponData { get; }
     public abstract bool AutoAim { get; }
 
-    [SyncVar]
-    private WeaponAttachmentPoint attachmentPoint;
-
     public override void OnStartClient()
     {
         if (isServer)
@@ -25,19 +39,19 @@ public abstract class WeaponController : NetworkBehaviour
             return;
         }
 
-        SetParent();
+        //SetParent();
         enabled = false;
     }
 
-    public override void OnStartServer()
-    {
-        SetParent();
-    }
+    //public override void OnStartServer()
+    //{
+    //    SetParent();
+    //}
     
     public virtual void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
     {
-        Owner = mech.GetComponent<MechState>();
-        this.attachmentPoint = attachmentPoint;
+        WeaponOwner = new WeaponOwner(mech.GetComponent<MechState>(), attachmentPoint);
+        SetParent();
     }
 
     public virtual void Fire()
@@ -46,14 +60,23 @@ public abstract class WeaponController : NetworkBehaviour
     protected virtual void Aim()
     { }
 
+    private void OnOwnerChanged(WeaponOwner oldOwner, WeaponOwner newOwner)
+    {
+        if (!isServer)
+        {
+            SetParent();
+        }
+    }
+    
     private void SetParent()
     {
-        targetRepository = Owner.GetComponent<WeaponTargetRepository>();
+        targetRepository = WeaponOwner.Owner.GetComponent<WeaponTargetRepository>();
 
-        Transform parent = Owner.GetComponent<MechWeaponsController>().Add(this, attachmentPoint);
-
+        Transform parent = WeaponOwner.Owner.GetComponent<MechWeaponsController>().Attach(this, WeaponOwner.AttachmentPoint);
         transform.parent = parent;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        Debug.Log("setparent");
     }
 }

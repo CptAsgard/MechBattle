@@ -62,6 +62,7 @@ public class TargetReticle : MonoBehaviour
 
         previousSelected = selected;
     }
+
     private void OnTargetChanged()
     {
         RecalculateBounds(selectActions.MechSelectionState.selected.gameObject);

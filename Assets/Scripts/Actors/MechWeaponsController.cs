@@ -41,7 +41,7 @@ public class MechWeaponsController : NetworkBehaviour
         // TODO : Sets target to null if target can't see us or if target is destroyed. Replicate in TargetController
     //}
 
-    public Transform Add(WeaponController weaponController, WeaponAttachmentPoint attachmentPoint)
+    public Transform Attach(WeaponController weaponController, WeaponAttachmentPoint attachmentPoint)
     {
         weapons.Add(weaponController);
 
