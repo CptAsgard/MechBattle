@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetReticle : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class TargetReticle : MonoBehaviour
     private RectTransform rectTransform;
     [SerializeField]
     private GameObject debugTarget;
+    [SerializeField]
+    private Image image;
 
     [Header("Settings")]
     [SerializeField]
@@ -15,15 +18,33 @@ public class TargetReticle : MonoBehaviour
     private Vector2 scalePadding;
 
     private Bounds bounds;
+    private RectTransform canvas;
+    private MechSelectActions selectActions;
+
+    private void Start()
+    {
+        canvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+    }
 
     private void Update()
     {
-        RecalculateBounds(debugTarget);
+        if (selectActions == null)
+        {
+            selectActions = FindObjectOfType<MechSelectActions>();
+            return;
+        }
+
+        GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
+        image.enabled = selected != null;
+        if (image.enabled)
+        {
+            RecalculateBounds(selected);
+        }
     }
     
     private Vector2 ToCanvasPosition(Vector3 worldPoint)
     {
-        return Camera.main.WorldToViewportPoint(worldPoint) * GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+        return Camera.main.WorldToViewportPoint(worldPoint) * canvas.sizeDelta;
     }
 
     private void RecalculateBounds(GameObject newSelection)
