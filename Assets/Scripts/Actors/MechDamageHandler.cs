@@ -24,7 +24,8 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
 
     private void CheckDestructionState()
     {
-        if (componentRepository.GetComponent(MechComponentLocation.Torso).Health <= 0)
+        if (componentRepository.GetComponent(MechComponentLocation.Torso).Health <= 0 ||
+            componentRepository.GetComponent(MechComponentLocation.Head).Health <= 0)
         {
             mechState.PowerState = MechPowerState.Destroyed;
             aiPath.isStopped = true;
