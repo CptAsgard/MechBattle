@@ -91,3 +91,4 @@ MonoBehaviour:
   rectTransform: {fileID: 4603033112221413553}
   debugTarget: {fileID: 0}
   minSize: {x: 128, y: 128}
+  scalePadding: {x: 20, y: 20}

@@ -11,12 +11,19 @@ public class TargetReticle : MonoBehaviour
     [Header("Settings")]
     [SerializeField]
     private Vector2 minSize;
+    [SerializeField]
+    private Vector2 scalePadding;
 
-    private Vector2 ToScreen(Vector3 worldPoint) => Camera.main.WorldToScreenPoint(worldPoint);
+    private Bounds bounds;
 
     private void Update()
     {
         RecalculateBounds(debugTarget);
+    }
+    
+    private Vector2 ToCanvasPosition(Vector3 worldPoint)
+    {
+        return Camera.main.WorldToViewportPoint(worldPoint) * GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
     }
 
     private void RecalculateBounds(GameObject newSelection)
@@ -25,14 +32,14 @@ public class TargetReticle : MonoBehaviour
 
         IEnumerable<Vector2> boundPoints = new List<Vector2>
         {
-            ToScreen(selectionBounds.min),
-            ToScreen(selectionBounds.max),
-            ToScreen(new Vector3(selectionBounds.min.x, selectionBounds.min.y, selectionBounds.max.z)),
-            ToScreen(new Vector3(selectionBounds.min.x, selectionBounds.max.y, selectionBounds.min.z)),
-            ToScreen(new Vector3(selectionBounds.max.x, selectionBounds.min.y, selectionBounds.min.z)),
-            ToScreen(new Vector3(selectionBounds.min.x, selectionBounds.max.y, selectionBounds.max.z)),
-            ToScreen(new Vector3(selectionBounds.max.x, selectionBounds.min.y, selectionBounds.max.z)),
-            ToScreen(new Vector3(selectionBounds.max.x, selectionBounds.max.y, selectionBounds.min.z))
+            ToCanvasPosition(selectionBounds.min),
+            ToCanvasPosition(selectionBounds.max),
+            ToCanvasPosition(new Vector3(selectionBounds.min.x, selectionBounds.min.y, selectionBounds.max.z)),
+            ToCanvasPosition(new Vector3(selectionBounds.min.x, selectionBounds.max.y, selectionBounds.min.z)),
+            ToCanvasPosition(new Vector3(selectionBounds.max.x, selectionBounds.min.y, selectionBounds.min.z)),
+            ToCanvasPosition(new Vector3(selectionBounds.min.x, selectionBounds.max.y, selectionBounds.max.z)),
+            ToCanvasPosition(new Vector3(selectionBounds.max.x, selectionBounds.min.y, selectionBounds.max.z)),
+            ToCanvasPosition(new Vector3(selectionBounds.max.x, selectionBounds.max.y, selectionBounds.min.z))
         };
         
         Vector2 min = Vector2.positiveInfinity;
@@ -44,11 +51,12 @@ public class TargetReticle : MonoBehaviour
             if (boundPoint.x > max.x) max.x = boundPoint.x;
             if (boundPoint.y > max.y) max.y = boundPoint.y;
         }
-        
-        Vector2 center = ToScreen(selectionBounds.center);
 
-        rectTransform.anchoredPosition = center;
-        rectTransform.sizeDelta = Vector2.Max(max - min, minSize);
+        bounds = selectionBounds;
+
+        Vector2 trueScale = max - min;
+        rectTransform.sizeDelta = Vector2.Max(trueScale + scalePadding, minSize);
+        rectTransform.anchoredPosition = min + trueScale / 2f;
     }
 
     private Bounds CalculateSelectionBounds(GameObject selection)
@@ -62,5 +70,10 @@ public class TargetReticle : MonoBehaviour
         }
 
         return combinedBounds;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
 }
