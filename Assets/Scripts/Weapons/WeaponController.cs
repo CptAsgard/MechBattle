@@ -38,15 +38,9 @@ public abstract class WeaponController : NetworkBehaviour
         {
             return;
         }
-
-        //SetParent();
+        
         enabled = false;
     }
-
-    //public override void OnStartServer()
-    //{
-    //    SetParent();
-    //}
     
     public virtual void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
     {
