@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class WeaponTargetRepository : MonoBehaviour
+public class TurretTargetRepository : MonoBehaviour
 {
     public NetworkIdentity PriorityTarget { get; private set; }
 

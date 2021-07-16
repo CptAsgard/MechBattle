@@ -8,7 +8,7 @@ public class MechTurretController : MonoBehaviour
     [SerializeField]
     private MechWeaponsController mechWeapons;
     [SerializeField]
-    private WeaponTargetRepository targetRepository;
+    private TurretTargetRepository targetRepository;
     [SerializeField]
     private AIPath pathfinder;
     [SerializeField]

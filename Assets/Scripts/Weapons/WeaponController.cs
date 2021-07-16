@@ -25,7 +25,7 @@ public abstract class WeaponController : NetworkBehaviour
 
     public Vector3 AimDirection = new Vector3();
 
-    protected WeaponTargetRepository targetRepository;
+    protected TurretTargetRepository targetRepository;
     protected TimeSince reloadTime;
 
     public abstract bool Armed { get; }
@@ -64,7 +64,7 @@ public abstract class WeaponController : NetworkBehaviour
     
     private void SetParent()
     {
-        targetRepository = WeaponOwner.Owner.GetComponent<WeaponTargetRepository>();
+        targetRepository = WeaponOwner.Owner.GetComponent<TurretTargetRepository>();
 
         Transform parent = WeaponOwner.Owner.GetComponent<MechWeaponsController>().Attach(this, WeaponOwner.AttachmentPoint);
         transform.parent = parent;

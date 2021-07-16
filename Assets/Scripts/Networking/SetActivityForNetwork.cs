@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
+// TODO replace this hack with a preprocessing step with interfaces to delete/disable unnecessary components
 public class SetActivityForNetwork : NetworkBehaviour
 {
     [SerializeField]

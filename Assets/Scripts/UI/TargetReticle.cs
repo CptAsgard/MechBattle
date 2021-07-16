@@ -18,10 +18,9 @@ public class TargetReticle : MonoBehaviour
 
     private Bounds bounds;
     private RectTransform canvas;
-    private MechSelectActions selectActions;
-    private bool isTweening;
     private Vector2 currentPadding;
-    private GameObject previousSelected;
+    private GameObject currentTarget;
+    private GameObject previousTarget;
 
     private void Start()
     {
@@ -31,59 +30,46 @@ public class TargetReticle : MonoBehaviour
 
     private void Update()
     {
-        if (selectActions == null)
+        if (image.enabled && currentTarget != null)
         {
-            selectActions = FindObjectOfType<MechSelectActions>();
-            return;
+            RecalculateBounds(currentTarget);
         }
+    }
 
-        GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
+    public void SetTarget(GameObject target)
+    {
+        previousTarget = currentTarget;
+        currentTarget = target;
         
-        if (image.enabled && selected != null)
-        {
-            RecalculateBounds(selected);
-        }
-
-        if (isTweening)
-        {
-            return;
-        }
-
-        if (!image.enabled && selected != null || selected != null && selected != previousSelected)
+        if (currentTarget != null && currentTarget != previousTarget)
         {
             OnTargetChanged();
         }
-        else if (image.enabled && selected == null)
+        else if (currentTarget == null && previousTarget != null)
         {
             OnTargetLost();
         }
-
-        previousSelected = selected;
     }
 
     private void OnTargetChanged()
     {
-        RecalculateBounds(selectActions.MechSelectionState.selected.gameObject);
+        RecalculateBounds(currentTarget);
         Vector2 startScale = canvas.sizeDelta * 2f;
         Vector2 endScale = scalePadding;
 
         rectTransform.sizeDelta = startScale;
-
-        isTweening = true;
-        Tween.Value(startScale, endScale, OnTweenUpdateScale, .25f, 0f, Tween.EaseOutStrong, Tween.LoopType.None, () => image.enabled = true,
-            () => isTweening = false);
+        
+        Tween.Value(startScale, endScale, OnTweenUpdateScale, .25f, 0f, Tween.EaseOutStrong, Tween.LoopType.None, () => image.enabled = true);
     }
 
     private void OnTargetLost()
     {
         Vector2 startScale = rectTransform.sizeDelta;
         Vector2 endScale = canvas.sizeDelta * 2f;
-
-        isTweening = true;
+        
         Tween.Size(rectTransform, startScale, endScale, .15f, 0f, Tween.EaseInStrong, Tween.LoopType.None, null,
             () =>
             {
-                isTweening = false;
                 image.enabled = false;
             });
     }
