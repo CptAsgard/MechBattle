@@ -50,5 +50,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedReticlePrefab: {fileID: 4603033112221413566, guid: 3240455d6c87f354b9d2b90a67868fa9,
     type: 3}
-  targetReticlePrefab: {fileID: 4603033112221413566, guid: 3240455d6c87f354b9d2b90a67868fa9,
+  targetReticlePrefab: {fileID: 8193809728025549162, guid: a744c82cd486d3d4b9a52cf48225e3fb,
     type: 3}

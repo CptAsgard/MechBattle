@@ -1,8 +1,8 @@
 using Mirror;
-using UnityEngine;
 
-public class TurretTargetRepository : MonoBehaviour
+public class TurretTargetRepository : NetworkBehaviour
 {
+    [field: SyncVar]
     public NetworkIdentity PriorityTarget { get; private set; }
 
     public void SetPriorityTarget(NetworkIdentity target)

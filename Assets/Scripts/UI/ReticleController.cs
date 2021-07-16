@@ -9,10 +9,12 @@ public class ReticleController : MonoBehaviour
 
     private MechSelectActions selectActions;
     private TargetReticle selectedReticle;
+    private TargetReticle enemyReticle;
 
     private void Start()
     {
         selectedReticle = Instantiate(selectedReticlePrefab, transform).GetComponent<TargetReticle>();
+        enemyReticle = Instantiate(targetReticlePrefab, transform).GetComponent<TargetReticle>();
     }
 
     private void Update()
@@ -26,17 +28,7 @@ public class ReticleController : MonoBehaviour
         GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
         selectedReticle.SetTarget(selected);
         
-        if (selected == null)
-        {
-            return;
-        }
-
-        GameObject targetEnemy = selected.GetComponent<TurretTargetRepository>().PriorityTarget?.gameObject;
-        if (targetEnemy == null)
-        {
-            return;
-        }
-
-        // draw enemy target reticle
+        GameObject targetEnemy = selected?.GetComponent<TurretTargetRepository>().PriorityTarget?.gameObject;
+        enemyReticle.SetTarget(targetEnemy);
     }
 }
