@@ -23,22 +23,22 @@ public class MechRoomManager : NetworkRoomManager
         {
             GameObject mech = Instantiate(mechPrefab, spawn.spawnPoints[i - 1].position, spawn.spawnPoints[i - 1].rotation);
 
+            NetworkServer.Spawn(mech);
+
             MechState newMechState = mech.GetComponent<MechState>();
             newMechState.Initialize(conn, index + 1); // NOTE : we start at 1, uninitialized mechs start at 0 and are considered enemies
             mechRepository.Add(newMechState);
 
             mech.GetComponent<AIPathBlocker>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
-
-            NetworkServer.Spawn(mech);
             
             GameObject leftWeapon = Instantiate(leftWeaponPrefab);
             GameObject rightWeapon = Instantiate(rightWeaponPrefab);
 
-            leftWeapon.GetComponent<WeaponController>().Initialize(mech, WeaponAttachmentPoint.Left);
-            rightWeapon.GetComponent<WeaponController>().Initialize(mech, WeaponAttachmentPoint.Right);
-
             NetworkServer.Spawn(leftWeapon);
             NetworkServer.Spawn(rightWeapon);
+
+            leftWeapon.GetComponent<WeaponController>().OnServerInitialize(mech, WeaponAttachmentPoint.Left);
+            rightWeapon.GetComponent<WeaponController>().OnServerInitialize(mech, WeaponAttachmentPoint.Right);
         }
 
         gamePlayer.GetComponent<Player>().identity = index + 1;

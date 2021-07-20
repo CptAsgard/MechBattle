@@ -27,10 +27,8 @@ public class CannonWeaponController : WeaponController
     public override bool Armed => reloadTime > weaponData.ReloadDelay && inRange;
     public override bool AutoAim => true;
 
-    public override void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
+    public override void OnStartServer()
     {
-        base.Initialize(mech, attachmentPoint);
-
         muzzleVelocity = projectileServer.ProjectileData.MuzzleVelocity;
         transform.localPosition = Vector3.zero;
     }

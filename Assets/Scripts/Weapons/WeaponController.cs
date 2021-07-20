@@ -42,7 +42,7 @@ public abstract class WeaponController : NetworkBehaviour
         enabled = false;
     }
     
-    public virtual void Initialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
+    public virtual void OnServerInitialize(GameObject mech, WeaponAttachmentPoint attachmentPoint)
     {
         WeaponOwner = new WeaponOwner(mech.GetComponent<MechState>(), attachmentPoint);
         SetParent();

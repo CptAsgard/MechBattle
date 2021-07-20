@@ -31,6 +31,8 @@ public class MRLWeaponController : WeaponController
     [Server]
     private void FixedUpdate()
     {
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+
         if (!WeaponOwner.Owner || targetRepository.OverrideTarget == null)
         {            
             if (LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
@@ -40,8 +42,6 @@ public class MRLWeaponController : WeaponController
 
             return;
         }
-        
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
         // todo maybe after reloading done add 1 sec wind-up time to sync objects to save guessing on when weapon might want to fire & sync -1 sec ahead
         // means there's always 1 sec delay before firing. Gameplay impact is unclear atm
