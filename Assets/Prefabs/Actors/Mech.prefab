@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 2894551261037655868}
   - component: {fileID: 4584893096913787416}
   - component: {fileID: 1376226689}
-  - component: {fileID: 1376226690}
   - component: {fileID: 162267820753287055}
   - component: {fileID: 2138734003613044796}
   - component: {fileID: -8686500384392713775}
@@ -256,7 +255,6 @@ MonoBehaviour:
   serverOnly:
   - {fileID: 2894551261037655868}
   - {fileID: 1376226689}
-  - {fileID: 1376226690}
   - {fileID: 5976101462369990963}
   - {fileID: 4584893096913787416}
   - {fileID: -8686500384392713775}
@@ -357,28 +355,6 @@ MonoBehaviour:
   version: 1
   unwrap: 1
   splitAtEveryPortal: 0
---- !u!114 &1376226690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3563438109148196198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  smoothType: 1
-  subdivisions: 4
-  iterations: 5
-  strength: 0
-  uniformLength: 1
-  maxSegmentLength: 1
-  bezierTangentLength: 0.4
-  offset: 0.2
-  factor: 0.1
 --- !u!114 &162267820753287055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311d8fb38da23d44c8d906c4ddd0cda7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   sensorsTransform: {fileID: 5163078826690090876}
   blockingMask:
     serializedVersion: 2
