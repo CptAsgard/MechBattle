@@ -70,5 +70,7 @@ public abstract class WeaponController : NetworkBehaviour
         transform.parent = parent;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        Debug.Log($"owner changed to {WeaponOwner.Owner}");
     }
 }

@@ -74,9 +74,9 @@ public class CannonWeaponController : WeaponController
     [Server]
     private void UpdateTargets()
     {
-        if (targetRepository.PriorityTarget != null)
+        if (targetRepository.OverrideTarget != null)
         {
-            target = targetRepository.PriorityTarget;
+            target = targetRepository.OverrideTarget;
             return;
         }
         
@@ -101,7 +101,7 @@ public class CannonWeaponController : WeaponController
             targetRepository.Remove(target);
         }
 
-        if (!targetRepository.Contains(newTarget))
+        if (newTarget != null && !targetRepository.Contains(newTarget))
         {
             targetRepository.Add(newTarget);
         }

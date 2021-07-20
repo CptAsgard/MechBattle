@@ -28,6 +28,8 @@ public class MechDamageHandler : MonoBehaviour, IDamageable
             componentRepository.GetComponent(MechComponentLocation.Head).Health <= 0)
         {
             mechState.PowerState = MechPowerState.Destroyed;
+            TargetsRepository.Instance.Remove(mechState);
+
             aiPath.isStopped = true;
             aiPath.canMove = false;
 

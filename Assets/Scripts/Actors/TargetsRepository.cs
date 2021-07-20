@@ -1,12 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
-using UnityEngine;
 
 public class TargetsRepository : SingletonComponent<TargetsRepository>
 {
     private List<NetworkIdentity> targets = new List<NetworkIdentity>();
 
-    public IEnumerable<NetworkIdentity> Targets => targets;
+    public IEnumerable<NetworkIdentity> Targets => targets.Where(target => target != null);
 
     public void Add<T>(T target) where T : NetworkBehaviour, ITarget
     {

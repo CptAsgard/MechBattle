@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class WeaponTargetRepository : NetworkBehaviour
 {
-    [field: SyncVar]
-    public NetworkIdentity PriorityTarget { get; private set; }
+    public NetworkIdentity OverrideTarget { get; private set; }
 
     public IEnumerable<NetworkIdentity> Targets => targets;
     public int TargetsCount => targets.Count;
     
-    private List<NetworkIdentity> targets = new List<NetworkIdentity>();
+    private SyncList<NetworkIdentity> targets = new SyncList<NetworkIdentity>();
 
     public void SetPriorityTarget(NetworkIdentity target)
     {
-        PriorityTarget = target;
-        targets.Add(PriorityTarget);
+        OverrideTarget = target;
+        targets.Add(OverrideTarget);
     }
 
     public void ClearPriorityTarget()
     {
-        targets.Remove(PriorityTarget);
-        PriorityTarget = null;
+        targets.Remove(OverrideTarget);
+        OverrideTarget = null;
     }
 
     public void Add(NetworkIdentity target)

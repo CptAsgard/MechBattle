@@ -47,6 +47,7 @@ public class MechVisibilityHandler : NetworkBehaviour
 
     private bool Test(Vector3 a, Vector3 b)
     {
+        Debug.DrawRay(a, b - a, Color.red);
         return !Physics.Linecast(a, b, blockingMask);
     }
 }

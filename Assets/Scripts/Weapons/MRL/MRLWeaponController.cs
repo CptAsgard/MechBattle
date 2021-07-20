@@ -31,7 +31,7 @@ public class MRLWeaponController : WeaponController
     [Server]
     private void FixedUpdate()
     {
-        if (!WeaponOwner.Owner || targetRepository.PriorityTarget == null)
+        if (!WeaponOwner.Owner || targetRepository.OverrideTarget == null)
         {            
             if (LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
             {
@@ -67,13 +67,13 @@ public class MRLWeaponController : WeaponController
     [Server]
     public override void Fire()
     {
-        Transform target = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>()
+        Transform target = targetRepository.OverrideTarget.GetComponent<MechComponentRepository>()
             .GetTransform(MechComponentLocation.Torso);
 
         Transform launchTubeEnd = launchTubeEnds[rocketsRemaining - 1];
 
         SpawnRocket(serverProjectile.gameObject, launchTubeEnd.position, launchTubeEnd.up, target, true);
-        RpcSpawnRocket(rocketsRemaining - 1, targetRepository.PriorityTarget, MechComponentLocation.Torso);
+        RpcSpawnRocket(rocketsRemaining - 1, targetRepository.OverrideTarget, MechComponentLocation.Torso);
 
         rocketsRemaining--;
         if (rocketsRemaining <= 0)
