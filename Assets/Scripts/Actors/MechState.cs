@@ -21,7 +21,7 @@ public class MechState : NetworkBehaviour, ITarget
     {
         if (isServer)
         {
-            TargetsRepository.Instance.Remove(this);
+            TargetsRepository.Instance?.Remove(this);
         }
     }
 
