@@ -1,14 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
-using UnityEngine;
 
-// TODO : great now we need to reset this list when we reset the game state :(
-public class MechRepository : MonoBehaviour
+public class MechRepository : SingletonComponent<MechRepository>
 {
     private List<MechState> mechs = new List<MechState>();
 
-    public IEnumerable<MechState> GetMechsByOwner(NetworkConnection owner)
+    public IEnumerable<MechState> Mechs => mechs;
+
+    public IEnumerable<MechState> GetFriendly(int playerIndex)
+    {
+        return mechs.Where(mech => mech.PlayerIndex == playerIndex);
+    }
+
+    public IEnumerable<MechState> GetEnemy(int playerIndex)
+    {
+        return mechs.Where(mech => mech.PlayerIndex != playerIndex);
+    }
+
+    public IEnumerable<MechState> GetByOwner(NetworkConnection owner)
     {
         return mechs.Where(mech => mech.Owner == owner);
     }

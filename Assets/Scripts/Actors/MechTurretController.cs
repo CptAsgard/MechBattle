@@ -8,7 +8,7 @@ public class MechTurretController : MonoBehaviour
     [SerializeField]
     private MechWeaponsController mechWeapons;
     [SerializeField]
-    private TurretTargetRepository targetRepository;
+    private WeaponTargetRepository targetRepository;
     [SerializeField]
     private AIPath pathfinder;
     [SerializeField]
@@ -23,11 +23,11 @@ public class MechTurretController : MonoBehaviour
 
     private void Update()
     {
-        if (targetRepository.PriorityTarget != null && mechWeapons.Armed)
+        if (targetRepository.TargetsCount != 0 && mechWeapons.Armed)
         {
             turretRotation.LookAt(mechWeapons.GetPriorityDirection());
         }
-        else if (targetRepository.PriorityTarget == null && pathfinder.reachedEndOfPath)
+        else if (targetRepository.TargetsCount == 0 && pathfinder.reachedEndOfPath)
         {
             turretRotation.LookAt(lookDirection);
         }
@@ -36,7 +36,7 @@ public class MechTurretController : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         lookDirection = direction;
-        if (targetRepository.PriorityTarget == null || !mechWeapons.Armed)
+        if (targetRepository.TargetsCount == 0 || !mechWeapons.Armed)
         {
             turretRotation.LookAt(lookDirection);
         }

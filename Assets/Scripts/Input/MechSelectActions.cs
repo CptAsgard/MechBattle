@@ -46,6 +46,6 @@ public class MechSelectActions : NetworkBehaviour
     [Command]
     private void SetTarget(GameObject from, GameObject target, NetworkConnectionToClient sender = null)
     {
-        from.GetComponentInParent<TurretTargetRepository>().SetPriorityTarget(target.GetComponent<NetworkIdentity>());
+        from.GetComponentInParent<WeaponTargetRepository>().SetPriorityTarget(target.GetComponent<NetworkIdentity>());
     }
 }

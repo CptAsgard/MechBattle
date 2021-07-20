@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
 
-public class MechVisibilityHandler : MonoBehaviour
+public class MechVisibilityHandler : NetworkBehaviour
 {
     [SerializeField]
     private Transform sensorsTransform;
@@ -10,6 +11,23 @@ public class MechVisibilityHandler : MonoBehaviour
     private LayerMask blockingMask;
     [SerializeField]
     private MechWeaponsController weaponsController;
+
+    private List<NetworkIdentity> visibleIdentities = new List<NetworkIdentity>();
+
+    public IEnumerable<NetworkIdentity> Visible => visibleIdentities;
+
+    private void FixedUpdate()
+    {
+        visibleIdentities.Clear();
+        foreach (NetworkIdentity identity in FindObjectsOfType<NetworkIdentity>().Where(id => id.gameObject.layer == LayerMask.NameToLayer("Player") && 
+            id.gameObject.GetComponent<MechState>()?.PlayerIndex != GetComponent<MechState>().PlayerIndex))
+        {
+            if (CanSee(identity))
+            {
+                visibleIdentities.Add(identity);
+            }
+        }
+    }
 
     public bool CanSee(NetworkIdentity identity)
     {

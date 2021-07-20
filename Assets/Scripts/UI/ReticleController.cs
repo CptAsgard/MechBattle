@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class ReticleController : MonoBehaviour
@@ -28,7 +29,7 @@ public class ReticleController : MonoBehaviour
         GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
         selectedReticle.SetTarget(selected);
         
-        GameObject targetEnemy = selected?.GetComponent<TurretTargetRepository>().PriorityTarget?.gameObject;
+        GameObject targetEnemy = selected?.GetComponent<WeaponTargetRepository>().Targets.FirstOrDefault()?.gameObject;
         enemyReticle.SetTarget(targetEnemy);
     }
 }

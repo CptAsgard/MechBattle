@@ -19,7 +19,7 @@ public class LineOfSightInterestManagement : InterestManagement
             return true;
         }
         
-        var mechs = mechRepository.GetMechsByOwner(newObserver);
+        var mechs = mechRepository.GetByOwner(newObserver);
         return mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity));
     }
 
@@ -35,7 +35,7 @@ public class LineOfSightInterestManagement : InterestManagement
 
             if (conn.isAuthenticated && conn.identity != null)
             {
-                var mechs = mechRepository.GetMechsByOwner(conn);
+                var mechs = mechRepository.GetByOwner(conn);
                 if (mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity)))
                 {
                     newObservers.Add(conn);

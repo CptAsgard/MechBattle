@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2269696971877641836
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ViewConeInner
+  m_Name: TacticalGrid
   m_Shader: {fileID: -6465566751694194690, guid: 70aaf8a6882297740aaa73070507a133,
     type: 3}
   m_ShaderKeywords: _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -42,10 +29,6 @@ Material:
     m_TexEnvs:
     - Texture2D_772021fec0da46baa2fa5a89e3f228e2:
         m_Texture: {fileID: 2800000, guid: 2950b110d40ec5f4dad782468209c60e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_96195bb55f644c11bf0ca76ef338177e:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -104,14 +87,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_640c36b763ac453bb51dca1996a0aa16_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 44ac9bf6dbf040a449a337b87926978b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_900e373dfc89443da604215c73d66d8a_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 44ac9bf6dbf040a449a337b87926978b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -149,18 +124,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_3fac1ba92c8c49668ece5b33a67572aa: -0.03
-    - Vector1_5324c2e3b7464b3eb3c6b9298774d90a: 0.17
-    - Vector1_a269119a0842465683369358710261b1: 0.82
-    - Vector1_df6eaaee0c2549488be21f152d6c0157: 0.75
+    - Vector1_5324c2e3b7464b3eb3c6b9298774d90a: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
-    - _AffectAlbedo: 1
-    - _AffectMetal: 1
-    - _AffectNormal: 1
-    - _AffectSmoothness: 1
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
@@ -177,15 +145,6 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DecalColorMask0: 15
-    - _DecalColorMask1: 15
-    - _DecalColorMask2: 11
-    - _DecalColorMask3: 8
-    - _DecalMeshBiasType: 0
-    - _DecalMeshDepthBias: 0
-    - _DecalMeshViewBias: 0
-    - _DecalStencilRef: 16
-    - _DecalStencilWriteMask: 16
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -197,7 +156,6 @@ Material:
     - _DisplacementMode: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
-    - _DrawOrder: 0
     - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
@@ -279,9 +237,8 @@ Material:
     - _ZTestTransparent: 8
     - _ZWrite: 0
     m_Colors:
-    - Color_712a604479d74df99362579ec118e1ea: {r: 1, g: 0, b: 0, a: 0.7450981}
-    - Color_eee43060860d426d80f0cde29251e9f1: {r: 1, g: 1, b: 1, a: 1}
-    - Vector2_75645f89b6804d50bf0da215725322a9: {r: 0.25, g: 0.25, b: 0, a: 0}
+    - Color_eee43060860d426d80f0cde29251e9f1: {r: 0.7122642, g: 0.846398, b: 1, a: 0.13725491}
+    - Vector2_75645f89b6804d50bf0da215725322a9: {r: 0.125, g: 0.125, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -299,3 +256,16 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &5446435642002864698
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11

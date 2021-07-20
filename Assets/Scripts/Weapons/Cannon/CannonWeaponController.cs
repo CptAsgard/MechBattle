@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
+using NetworkIdentity = Mirror.NetworkIdentity;
 
 public class CannonWeaponController : WeaponController
 {
@@ -16,6 +19,7 @@ public class CannonWeaponController : WeaponController
     [SerializeField]
     private float fireAngleThreshold;
 
+    private NetworkIdentity target;
     private bool inRange;
     private float muzzleVelocity;
 
@@ -34,18 +38,18 @@ public class CannonWeaponController : WeaponController
     [Server]
     private void FixedUpdate()
     {
-        if (!WeaponOwner.Owner || targetRepository.PriorityTarget == null)
+        UpdateTargets();
+
+        if (!WeaponOwner.Owner || target == null)
         {
             if (LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
             {
                 LineOfSightIgnoredRepository.Instance.Remove(netIdentity);
             }
-
             return;
         }
 
         Aim();
-        turretRotation.LookAt(AimDirection);
 
         if (weaponData.ReloadDelay - reloadTime <= 1f && !LineOfSightIgnoredRepository.Instance.Contains(netIdentity))
         {
@@ -64,6 +68,45 @@ public class CannonWeaponController : WeaponController
 
         Fire();
         LineOfSightIgnoredRepository.Instance.Remove(netIdentity);
+    }
+
+
+    [Server]
+    private void UpdateTargets()
+    {
+        if (targetRepository.PriorityTarget != null)
+        {
+            target = targetRepository.PriorityTarget;
+            return;
+        }
+        
+        //var friendlyMechs =
+        //    MechRepository.Instance.Mechs.GetFriendly(WeaponOwner.Owner.PlayerIndex).Select(mech => mech.GetComponent<MechVisibilityHandler>()).ToList();
+        //friendlyMechs.Any(mech => mech.Visible.Contains(test))
+
+        List<NetworkIdentity> newTargets = new List<NetworkIdentity>();
+        foreach (NetworkIdentity test in TargetsRepository.Instance.Targets)
+        {
+            if (WeaponOwner.Owner.GetComponent<MechVisibilityHandler>().Visible.Contains(test))
+            {
+                newTargets.Add(test);
+            }
+        }
+        
+        var newTarget = newTargets.OrderBy(t => (t.transform.position - transform.position).sqrMagnitude)
+            .FirstOrDefault();
+        
+        if (newTarget != target && targetRepository.Contains(target))
+        {
+            targetRepository.Remove(target);
+        }
+
+        if (!targetRepository.Contains(newTarget))
+        {
+            targetRepository.Add(newTarget);
+        }
+
+        target = newTarget;
     }
 
     [Server]
@@ -86,13 +129,13 @@ public class CannonWeaponController : WeaponController
     [Server]
     protected override void Aim()
     {
-        if (targetRepository.PriorityTarget == null)
+        if (target == null)
         {
             inRange = false;
             return;
         }
 
-        Vector3 targetPositionWorld = targetRepository.PriorityTarget.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
+        Vector3 targetPositionWorld = target.GetComponent<MechComponentRepository>().GetWorldPosition(MechComponentLocation.Torso);
 
         CalculateAngleToHitTarget(targetPositionWorld, out float? highAngle, out float? lowAngle);
         inRange = lowAngle != null || highAngle != null;
@@ -109,6 +152,7 @@ public class CannonWeaponController : WeaponController
         muzzleEnd.eulerAngles = new Vector3(360f - angle, muzzleEnd.eulerAngles.y, muzzleEnd.eulerAngles.z);
 
         AimDirection = muzzleEnd.forward;
+        turretRotation.LookAt(AimDirection);
     }
 
     [ClientRpc]
