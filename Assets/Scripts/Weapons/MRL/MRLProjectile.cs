@@ -76,12 +76,12 @@ public class MRLProjectile : Projectile
                 damageables.Add(newDamageable);
                 OnHitEvent?.Invoke(newDamageable, transform.position);
             }
-
             Destroy(gameObject);
         }
 
         transform.rotation = newRotation;
         transform.position = newPosition;
+        currentPosition = newPosition;
     }
 
     private void OnHit(IDamageable damageable, Vector3 point)
