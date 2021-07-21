@@ -791,6 +791,11 @@ PrefabInstance:
       propertyPath: seekerTag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6314096214063474196, guid: 0c0e2986cccbb98478065c45f634cc19,
+        type: 3}
+      propertyPath: sceneId
+      value: 3602890161
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3074487058395830899, guid: 0c0e2986cccbb98478065c45f634cc19, type: 3}
     - {fileID: 3895312814371902526, guid: 0c0e2986cccbb98478065c45f634cc19, type: 3}
