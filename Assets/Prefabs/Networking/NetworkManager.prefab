@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5138923531799763417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7457140425419550222}
+  - component: {fileID: 6788357623518445956}
+  - component: {fileID: 6448792141022528887}
+  - component: {fileID: 937683330293731264}
+  m_Layer: 0
+  m_Name: Repositories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7457140425419550222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138923531799763417}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1643904491041058031}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6788357623518445956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138923531799763417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022a803f06ec86d4e8a35735f82fcd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6448792141022528887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138923531799763417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a800e19ba152e545a46fa5b64e7adbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &937683330293731264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138923531799763417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2a01d0f735a364080c253ee5c4490c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7146083071264858460
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +82,6 @@ GameObject:
   - component: {fileID: 609192954014754095}
   - component: {fileID: 738793919683500967}
   - component: {fileID: 1226381652}
-  - component: {fileID: 1226381653}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -31,7 +99,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7457140425419550222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -89,7 +158,6 @@ MonoBehaviour:
     type: 3}
   rightWeaponPrefab: {fileID: 4223662892337230678, guid: 10879ea4486b0c740b24e8bed63acc24,
     type: 3}
-  mechRepository: {fileID: 1226381653}
 --- !u!114 &609192954014754095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,16 +208,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rebuildInterval: 0.5
-  mechRepository: {fileID: 1226381653}
---- !u!114 &1226381653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7146083071264858460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a800e19ba152e545a46fa5b64e7adbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  mechRepository: {fileID: 0}

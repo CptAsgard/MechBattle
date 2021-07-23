@@ -7,8 +7,6 @@ public class LineOfSightInterestManagement : InterestManagement
 {        
     [SerializeField, Tooltip("Rebuild all every 'rebuildInterval' seconds.")]
     private float rebuildInterval = 1;
-    [SerializeField]
-    private MechRepository mechRepository;
 
     private double lastRebuildTime;
 
@@ -19,7 +17,7 @@ public class LineOfSightInterestManagement : InterestManagement
             return true;
         }
         
-        var mechs = mechRepository.GetByOwner(newObserver);
+        var mechs = MechRepository.Instance.GetByOwner(newObserver);
         return mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity));
     }
 
@@ -35,7 +33,7 @@ public class LineOfSightInterestManagement : InterestManagement
 
             if (conn.isAuthenticated && conn.identity != null)
             {
-                var mechs = mechRepository.GetByOwner(conn);
+                var mechs = MechRepository.Instance.GetByOwner(conn);
                 if (mechs.Any(mech => mech.GetComponent<MechVisibilityHandler>().CanSee(identity)))
                 {
                     newObservers.Add(conn);

@@ -10,8 +10,6 @@ public class MechRoomManager : NetworkRoomManager
     private GameObject leftWeaponPrefab;
     [SerializeField]
     private GameObject rightWeaponPrefab;
-    [SerializeField]
-    private MechRepository mechRepository;
 
     private int index = 0;
 
@@ -27,7 +25,7 @@ public class MechRoomManager : NetworkRoomManager
 
             MechState newMechState = mech.GetComponent<MechState>();
             newMechState.Initialize(conn, index + 1); // NOTE : we start at 1, uninitialized mechs start at 0 and are considered enemies
-            mechRepository.Add(newMechState);
+            MechRepository.Instance.Add(newMechState);
 
             mech.GetComponent<AIPathBlocker>().seekerTag = spawn.spawnPoints.Count * index + i; // TODO : ugly & unreliable
             

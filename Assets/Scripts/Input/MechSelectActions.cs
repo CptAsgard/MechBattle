@@ -1,3 +1,4 @@
+using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,13 @@ public class MechSelectActions : NetworkBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
         MechSelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
+    }
+
+    public void SelectMech(int mechIndex)
+    {
+        int playerIndex = NetworkClient.localPlayer.GetComponent<Player>().identity;
+        var mechs = MechRepository.Instance.GetFriendly(playerIndex).ToList();
+        MechSelectionState.selected = mechs[mechIndex];
     }
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)

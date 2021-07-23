@@ -142,6 +142,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 952d6f33-f276-4d72-8619-7823c530c96e
     m_ActionName: Camera/Drag[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4651439412345411882}
+        m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
+        m_MethodName: SelectMech
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 999ce8d5-0a87-44bd-bd52-02da2de20609
+    m_ActionName: Mech/Select Mech 1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4651439412345411882}
+        m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
+        m_MethodName: SelectMech
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1adb64aa-cb68-46e6-9a30-f5ddc15cbef0
+    m_ActionName: Mech/Select Mech 2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4651439412345411882}
+        m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
+        m_MethodName: SelectMech
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 36186396-6853-4a3d-9696-ce72ecd5804d
+    m_ActionName: Mech/Select Mech 3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4651439412345411882}
+        m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
+        m_MethodName: SelectMech
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 83d57410-2870-46fc-a19f-7305e56341f8
+    m_ActionName: Mech/Select Mech 4[/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Mech
