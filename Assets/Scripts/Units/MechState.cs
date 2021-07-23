@@ -9,6 +9,11 @@ public class MechState : NetworkBehaviour, ITarget
     [SyncVar]
     public MechPowerState PowerState;
 
+    private void Awake()
+    {
+        MechRepository.Instance.Add(this);
+    }
+
     public override void OnStartServer()
     {
         if (isServer)
