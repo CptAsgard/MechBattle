@@ -128,7 +128,7 @@ MonoBehaviour:
     m_ActionName: Mech/Select Mech[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
-  m_DefaultActionMap: 7872fb8e-ed0a-4547-a55a-30276672529d
+  m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &4946275486694099662
@@ -177,7 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  resetPositionOnEndDrag: 0
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 3072
+  scrollSpeed: 15
