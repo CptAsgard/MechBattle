@@ -5,12 +5,21 @@ using UnityEngine.InputSystem;
 
 public class MechSelectActions : NetworkBehaviour
 {
+    public static MechSelectionState MechSelectionState = new MechSelectionState();
+
     [SerializeField]
     private InputActionReference mousePosition;
     [SerializeField]
     private LayerMask selectorMask;
+    [SerializeField]
+    private CameraMoveActions cameraMove;
 
-    public MechSelectionState MechSelectionState = new MechSelectionState();
+    private int previousSelected;
+
+    public void SetTargetMechIndex(int mechIndex)
+    {
+        MechSelectionState.TargetMechIndex = mechIndex;
+    }
 
     public void Select(InputAction.CallbackContext callbackContext)
     {
@@ -23,11 +32,24 @@ public class MechSelectActions : NetworkBehaviour
         MechSelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
     }
 
-    public void SelectMech(int mechIndex)
+    public void SelectFriendlyMech(InputAction.CallbackContext callbackContext)
     {
+        if (!callbackContext.performed)
+        {
+            return;
+        }
+
         int playerIndex = NetworkClient.localPlayer.GetComponent<Player>().identity;
         var mechs = MechRepository.Instance.GetFriendly(playerIndex).ToList();
-        MechSelectionState.selected = mechs[mechIndex];
+
+        MechSelectionState.selected = mechs[MechSelectionState.TargetMechIndex];
+
+        if (previousSelected == MechSelectionState.TargetMechIndex)
+        {
+            cameraMove.FocusFriendlyMech(MechSelectionState.TargetMechIndex);
+        }
+
+        previousSelected = MechSelectionState.TargetMechIndex;
     }
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)

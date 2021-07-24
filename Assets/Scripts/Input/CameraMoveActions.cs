@@ -1,3 +1,5 @@
+using System.Linq;
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,12 +16,7 @@ public class CameraMoveActions : MonoBehaviour
     private Vector3 cameraStartPosition;
     private bool isDragging = false;
     private Vector3 cameraPreviousPosition;
-
-    private void Start()
-    {
-        UpdateCameraHeight();
-    }
-
+    
     private void Update()
     {
         if (!isDragging)
@@ -80,6 +77,17 @@ public class CameraMoveActions : MonoBehaviour
                 Camera.main.transform.position = cameraStartPosition;
             }
         }
+    }
+    
+    public void FocusFriendlyMech(int mechIndex)
+    {
+        int playerIndex = NetworkClient.localPlayer.GetComponent<Player>().identity;
+        var mechs = MechRepository.Instance.GetFriendly(playerIndex).ToList();
+        
+        Camera.main.transform.position = mechs[mechIndex].transform.position + Vector3.up * 13f;
+        UpdateCameraHeight();
+
+        Debug.Log("double tap focus mech");
     }
 
     private void UpdateCameraHeight()

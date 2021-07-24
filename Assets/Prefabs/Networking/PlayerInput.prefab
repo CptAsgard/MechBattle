@@ -146,7 +146,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4651439412345411882}
         m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
-        m_MethodName: SelectMech
+        m_MethodName: SetTargetMechIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -156,13 +156,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 999ce8d5-0a87-44bd-bd52-02da2de20609
-    m_ActionName: Mech/Select Mech 1[/Keyboard/1]
+    m_ActionId: 3f1d3bec-af8c-4a13-9bbb-ffc958872262
+    m_ActionName: Mech/Focus Mech 1[/Keyboard/1]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4651439412345411882}
         m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
-        m_MethodName: SelectMech
+        m_MethodName: SetTargetMechIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -172,13 +172,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1adb64aa-cb68-46e6-9a30-f5ddc15cbef0
-    m_ActionName: Mech/Select Mech 2[/Keyboard/2]
+    m_ActionId: 4d4a6c64-67f5-4730-966d-462928d0c3cb
+    m_ActionName: Mech/Focus Mech 2[/Keyboard/2]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4651439412345411882}
         m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
-        m_MethodName: SelectMech
+        m_MethodName: SetTargetMechIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -188,13 +188,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 36186396-6853-4a3d-9696-ce72ecd5804d
-    m_ActionName: Mech/Select Mech 3[/Keyboard/3]
+    m_ActionId: ae54c544-a72d-45f7-a491-0323290091ca
+    m_ActionName: Mech/Focus Mech 3[/Keyboard/3]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4651439412345411882}
         m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
-        m_MethodName: SelectMech
+        m_MethodName: SetTargetMechIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -204,8 +204,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 83d57410-2870-46fc-a19f-7305e56341f8
-    m_ActionName: Mech/Select Mech 4[/Keyboard/4]
+    m_ActionId: 99471ac1-ca0a-46bc-838a-bd8cfe3bff4b
+    m_ActionName: Mech/Focus Mech 4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4651439412345411882}
+        m_TargetAssemblyTypeName: MechSelectActions, Assembly-CSharp
+        m_MethodName: SelectFriendlyMech
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 77a56335-b218-4055-9937-c24b22e9a83a
+    m_ActionName: Mech/Select Mech[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Mech
@@ -227,7 +243,6 @@ MonoBehaviour:
   syncInterval: 0.1
   mousePosition: {fileID: 2607035550237485003, guid: b5f8cbe27e4b68f438f4076c12b69e40,
     type: 3}
-  mechSelectActions: {fileID: 4651439412345411882}
 --- !u!114 &4651439412345411882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +262,7 @@ MonoBehaviour:
   selectorMask:
     serializedVersion: 2
     m_Bits: 512
+  cameraMove: {fileID: 3082385650883801927}
 --- !u!114 &3082385650883801927
 MonoBehaviour:
   m_ObjectHideFlags: 0

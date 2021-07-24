@@ -7,8 +7,6 @@ public class MechMoveActions : NetworkBehaviour
 {
     [SerializeField]
     private InputActionReference mousePosition;
-    [SerializeField]
-    private MechSelectActions mechSelectActions; // TODO : this is not great
 
     private Player player;
 
@@ -24,7 +22,7 @@ public class MechMoveActions : NetworkBehaviour
             return;
         }
 
-        if (mechSelectActions.MechSelectionState.selected == null || mechSelectActions.MechSelectionState.selected.PowerState != MechPowerState.PowerOn || mechSelectActions.MechSelectionState.selected.PlayerIndex != player.identity)
+        if (MechSelectActions.MechSelectionState.selected == null || MechSelectActions.MechSelectionState.selected.PowerState != MechPowerState.PowerOn || MechSelectActions.MechSelectionState.selected.PlayerIndex != player.identity)
         {
             return;
         }
@@ -41,7 +39,7 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            WalkTowards(mechSelectActions.MechSelectionState.selected.gameObject, downHit.point);
+            WalkTowards(MechSelectActions.MechSelectionState.selected.gameObject, downHit.point);
         }
 
         if (callbackContext.canceled)
@@ -51,7 +49,7 @@ public class MechMoveActions : NetworkBehaviour
                 return;
             }
 
-            LookTowards(mechSelectActions.MechSelectionState.selected.gameObject, upHit.point);
+            LookTowards(MechSelectActions.MechSelectionState.selected.gameObject, upHit.point);
         }
     }
 

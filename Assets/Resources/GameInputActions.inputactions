@@ -22,33 +22,41 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Select Mech 1",
+                    "name": "Focus Mech 1",
                     "type": "Button",
-                    "id": "999ce8d5-0a87-44bd-bd52-02da2de20609",
+                    "id": "3f1d3bec-af8c-4a13-9bbb-ffc958872262",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Select Mech 2",
+                    "name": "Focus Mech 2",
                     "type": "Button",
-                    "id": "1adb64aa-cb68-46e6-9a30-f5ddc15cbef0",
+                    "id": "4d4a6c64-67f5-4730-966d-462928d0c3cb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Select Mech 3",
+                    "name": "Focus Mech 3",
                     "type": "Button",
-                    "id": "36186396-6853-4a3d-9696-ce72ecd5804d",
+                    "id": "ae54c544-a72d-45f7-a491-0323290091ca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Select Mech 4",
+                    "name": "Focus Mech 4",
                     "type": "Button",
-                    "id": "83d57410-2870-46fc-a19f-7305e56341f8",
+                    "id": "99471ac1-ca0a-46bc-838a-bd8cfe3bff4b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select Mech",
+                    "type": "Button",
+                    "id": "77a56335-b218-4055-9937-c24b22e9a83a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -79,45 +87,89 @@
                 },
                 {
                     "name": "",
-                    "id": "83f4b126-7da3-426b-a6b7-b9b63aa71717",
+                    "id": "9555887d-5052-4d11-820b-3b5227d787cf",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Select Mech 1",
+                    "action": "Focus Mech 1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1d10bcc4-d443-4b05-a785-4268fb8e71de",
+                    "id": "1564ac54-b7c1-4c75-ab64-565b3ee93af5",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Select Mech 2",
+                    "action": "Focus Mech 2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a9ff0898-b598-43ca-9410-f983c9773c93",
+                    "id": "dcff5227-847f-46aa-82c9-d25fe31c735a",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Select Mech 3",
+                    "action": "Focus Mech 3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b1df4795-6ae4-466e-a736-68256cdf30ba",
+                    "id": "ee6633d8-6fdb-4a04-b1e1-578d2315dba2",
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Select Mech 4",
+                    "action": "Focus Mech 4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b398de7b-89b1-4fae-b088-b1546af8297b",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Select Mech",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32f6b163-bcec-4edb-a1b6-73e1219ef41f",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Select Mech",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d2a1d37-64f3-404a-b022-174ab84f5795",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Select Mech",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ccb6e75-790d-461f-bdde-faf0e1c6baed",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Select Mech",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

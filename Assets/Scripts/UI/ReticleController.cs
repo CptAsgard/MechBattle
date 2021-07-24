@@ -26,7 +26,7 @@ public class ReticleController : MonoBehaviour
             return;
         }
 
-        GameObject selected = selectActions.MechSelectionState.selected?.gameObject;
+        GameObject selected = MechSelectActions.MechSelectionState.selected?.gameObject;
         selectedReticle.SetTarget(selected);
         
         GameObject targetEnemy = selected?.GetComponent<WeaponTargetRepository>().Targets.FirstOrDefault()?.gameObject;
