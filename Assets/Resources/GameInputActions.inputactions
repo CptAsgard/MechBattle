@@ -210,7 +210,7 @@
                 },
                 {
                     "name": "2D Vector",
-                    "id": "8efc47f7-7989-4b00-9ed1-91d8eec5b31d",
+                    "id": "4de77918-c7eb-4194-b913-6f357fb5791d",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -220,30 +220,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "c39b4923-9c04-4adb-90c2-ba49d0975848",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurnCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "832f09a8-5539-44fc-8c82-8e895f452e9e",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurnCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "5a896183-1302-4cb8-a103-733d7db3afc7",
+                    "name": "Up",
+                    "id": "f4f23dda-f4a1-4331-86bd-5c0bb8dd2913",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -253,12 +231,34 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "add5de88-9026-4b47-a5d2-6b0add0e3ce7",
+                    "name": "Down",
+                    "id": "aa0d2f70-635c-40eb-8aa0-49a3798f6633",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
+                    "action": "TurnCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "67a98045-5703-45b5-a940-797584e85296",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "d2697ba8-2791-4cd3-a623-1c5d6eec7946",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "TurnCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
