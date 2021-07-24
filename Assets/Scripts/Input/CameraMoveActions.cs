@@ -3,10 +3,8 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraMoveActions : MonoBehaviour
+public class CameraMoveActions : NetworkBehaviour
 {
-    [SerializeField]
-    private InputActionReference mousePosition;
     [SerializeField]
     private bool resetPositionOnEndDrag = true;
     [SerializeField]
@@ -16,22 +14,33 @@ public class CameraMoveActions : MonoBehaviour
     private Vector3 cameraStartPosition;
     private bool isDragging = false;
     private Vector3 cameraPreviousPosition;
-    
+    private Vector2 mousePosition;
+
+    public override void OnStartClient()
+    {
+        InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
+        actionMap.FindAction("MousePosition").performed += context => mousePosition = context.ReadValue<Vector2>();
+        actionMap.FindAction("Drag").started += OnDragAction;
+        actionMap.FindAction("Drag").performed += OnDragAction;
+        actionMap.FindAction("Drag").canceled += OnDragAction;
+
+        FocusFriendlyMech(0);
+    }
+
     private void Update()
     {
         if (!isDragging)
         {
             return;
         }
-
-        Vector3 screenPosition = mousePosition.action.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Camera.main.farClipPlane, groundLayerMask))
         {
             //current raycast not hitting anything then don't move camera
-            bool offscreen = screenPosition.x < 0 || screenPosition.y < 0 ||
-                screenPosition.x > Camera.main.pixelWidth || screenPosition.y > Camera.main.pixelHeight;
+            bool offscreen = mousePosition.x < 0 || mousePosition.y < 0 ||
+                mousePosition.x > Camera.main.pixelWidth || mousePosition.y > Camera.main.pixelHeight;
 
             if (!offscreen)
             {
@@ -50,10 +59,9 @@ public class CameraMoveActions : MonoBehaviour
 
     public void OnDragAction(InputAction.CallbackContext callbackContext)
     {
-        Vector3 screenPosition = mousePosition.action.ReadValue<Vector2>();
         if (callbackContext.started)
         {
-            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             isDragging = Physics.Raycast(ray, out RaycastHit hit, Camera.main.farClipPlane, groundLayerMask);
 
             if (!isDragging)
@@ -86,8 +94,6 @@ public class CameraMoveActions : MonoBehaviour
         
         Camera.main.transform.position = mechs[mechIndex].transform.position + Vector3.up * 13f;
         UpdateCameraHeight();
-
-        Debug.Log("double tap focus mech");
     }
 
     private void UpdateCameraHeight()

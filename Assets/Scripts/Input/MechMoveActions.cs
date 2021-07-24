@@ -5,13 +5,17 @@ using UnityEngine.InputSystem;
 
 public class MechMoveActions : NetworkBehaviour
 {
-    [SerializeField]
-    private InputActionReference mousePosition;
-
     private Player player;
+    private Vector2 mousePosition;
 
     private void Start()
     {
+        InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
+        actionMap.FindAction("MousePosition").performed += context => mousePosition = context.ReadValue<Vector2>();
+        actionMap.FindAction("Command").started += Move;
+        actionMap.FindAction("Command").performed += Move;
+        actionMap.FindAction("Command").canceled += Move;
+
         player = isServer ? GetComponentInParent<Player>() : NetworkClient.localPlayer.GetComponent<Player>();
     }
 
@@ -29,7 +33,7 @@ public class MechMoveActions : NetworkBehaviour
 
         if (callbackContext.started)
         {
-            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>()), out RaycastHit downHit, 100))
+            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition), out RaycastHit downHit, 100))
             {
                 return;
             }
@@ -44,7 +48,7 @@ public class MechMoveActions : NetworkBehaviour
 
         if (callbackContext.canceled)
         {
-            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>()), out RaycastHit upHit, 100))
+            if (!Physics.Raycast(Camera.main.ScreenPointToRay(mousePosition), out RaycastHit upHit, 100))
             {
                 return;
             }

@@ -6,15 +6,27 @@ using UnityEngine.InputSystem;
 public class MechSelectActions : NetworkBehaviour
 {
     public static MechSelectionState MechSelectionState = new MechSelectionState();
-
-    [SerializeField]
-    private InputActionReference mousePosition;
-    [SerializeField]
-    private LayerMask selectorMask;
+    
     [SerializeField]
     private CameraMoveActions cameraMove;
+    [SerializeField]
+    private LayerMask selectorMask;
 
-    private int previousSelected;
+    private int previousSelected = -1;
+    private Vector2 mousePosition;
+
+    private void Start()
+    {
+        InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
+        actionMap.FindAction("MousePosition").performed += context => mousePosition = context.ReadValue<Vector2>();
+        actionMap.FindAction("Select").performed += Select;
+        actionMap.FindAction("Select Mech").performed += SelectFriendlyMech;
+        actionMap.FindAction("Command").performed += TargetEnemy;
+        actionMap.FindAction("Focus Mech 1").performed += ctx => SetTargetMechIndex(0);
+        actionMap.FindAction("Focus Mech 2").performed += ctx => SetTargetMechIndex(1);
+        actionMap.FindAction("Focus Mech 3").performed += ctx => SetTargetMechIndex(2);
+        actionMap.FindAction("Focus Mech 4").performed += ctx => SetTargetMechIndex(3);
+    }
 
     public void SetTargetMechIndex(int mechIndex)
     {
@@ -23,12 +35,12 @@ public class MechSelectActions : NetworkBehaviour
 
     public void Select(InputAction.CallbackContext callbackContext)
     {
-        if (!callbackContext.started)
+        if (!callbackContext.performed)
         {
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         MechSelectionState.selected = Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask) ? hit.collider.GetComponentInParent<MechState>() : null;
     }
 
@@ -59,7 +71,7 @@ public class MechSelectActions : NetworkBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition.action.ReadValue<Vector2>());
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100, selectorMask))
         {
             int selectedTeam = MechSelectionState.selected.PlayerIndex; // TODO check if owners on same team

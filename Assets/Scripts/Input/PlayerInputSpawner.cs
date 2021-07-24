@@ -1,17 +1,13 @@
 using Mirror;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerInputSpawner : NetworkBehaviour
 {
-    [SerializeField]
-    private InputActionAsset inputActions;
     [SerializeField]
     private GameObject inputObject;
 
     public override void OnStartAuthority()
     {
-        inputActions.Enable();
         CreateAuthoritativeInputObject();
     }
 
