@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Select Mech",
+                    "name": "Focus Mech",
                     "type": "Button",
                     "id": "77a56335-b218-4055-9937-c24b22e9a83a",
                     "expectedControlType": "Button",
@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Focus Mech 1",
+                    "name": "Select Mech 1",
                     "type": "Button",
                     "id": "3f1d3bec-af8c-4a13-9bbb-ffc958872262",
                     "expectedControlType": "Button",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Focus Mech 2",
+                    "name": "Select Mech 2",
                     "type": "Button",
                     "id": "4d4a6c64-67f5-4730-966d-462928d0c3cb",
                     "expectedControlType": "Button",
@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Focus Mech 3",
+                    "name": "Select Mech 3",
                     "type": "Button",
                     "id": "ae54c544-a72d-45f7-a491-0323290091ca",
                     "expectedControlType": "Button",
@@ -62,7 +62,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Focus Mech 4",
+                    "name": "Select Mech 4",
                     "type": "Button",
                     "id": "99471ac1-ca0a-46bc-838a-bd8cfe3bff4b",
                     "expectedControlType": "Button",
@@ -116,7 +116,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Focus Mech 1",
+                    "action": "Select Mech 1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -127,7 +127,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Focus Mech 2",
+                    "action": "Select Mech 2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -138,7 +138,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Focus Mech 3",
+                    "action": "Select Mech 3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -149,7 +149,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Focus Mech 4",
+                    "action": "Select Mech 4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -165,50 +165,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "b398de7b-89b1-4fae-b088-b1546af8297b",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Select Mech",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "32f6b163-bcec-4edb-a1b6-73e1219ef41f",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Select Mech",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1d2a1d37-64f3-404a-b022-174ab84f5795",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Select Mech",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9ccb6e75-790d-461f-bdde-faf0e1c6baed",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Select Mech",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "4de77918-c7eb-4194-b913-6f357fb5791d",
                     "path": "2DVector",
@@ -218,28 +174,6 @@
                     "action": "TurnCamera",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Up",
-                    "id": "f4f23dda-f4a1-4331-86bd-5c0bb8dd2913",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "TurnCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Down",
-                    "id": "aa0d2f70-635c-40eb-8aa0-49a3798f6633",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "TurnCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "Left",
@@ -262,6 +196,17 @@
                     "action": "TurnCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "571a53cc-ffa6-470a-a14e-485d801bb76f",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "TurnCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "2D Vector",
@@ -317,6 +262,17 @@
                     "action": "MoveCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d52790d2-6d8e-4c47-ad0d-1c961387bc07",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Focus Mech",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

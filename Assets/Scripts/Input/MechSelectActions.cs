@@ -20,17 +20,19 @@ public class MechSelectActions : NetworkBehaviour
         InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
         actionMap.FindAction("MousePosition").performed += context => mousePosition = context.ReadValue<Vector2>();
         actionMap.FindAction("Select").performed += Select;
-        actionMap.FindAction("Select Mech").performed += SelectFriendlyMech;
+        actionMap.FindAction("Focus Mech").performed += FocusFriendlyMech;
         actionMap.FindAction("Command").performed += TargetEnemy;
-        actionMap.FindAction("Focus Mech 1").performed += ctx => SetTargetMechIndex(0);
-        actionMap.FindAction("Focus Mech 2").performed += ctx => SetTargetMechIndex(1);
-        actionMap.FindAction("Focus Mech 3").performed += ctx => SetTargetMechIndex(2);
-        actionMap.FindAction("Focus Mech 4").performed += ctx => SetTargetMechIndex(3);
+        actionMap.FindAction("Select Mech 1").performed += ctx => SetTargetMechIndex(ctx, 0);
+        actionMap.FindAction("Select Mech 2").performed += ctx => SetTargetMechIndex(ctx, 1);
+        actionMap.FindAction("Select Mech 3").performed += ctx => SetTargetMechIndex(ctx, 2);
+        actionMap.FindAction("Select Mech 4").performed += ctx => SetTargetMechIndex(ctx, 3);
     }
 
-    public void SetTargetMechIndex(int mechIndex)
+    public void SetTargetMechIndex(InputAction.CallbackContext callbackContext, int mechIndex)
     {
         MechSelectionState.TargetMechIndex = mechIndex;
+
+        SelectFriendlyMech(callbackContext);
     }
 
     public void Select(InputAction.CallbackContext callbackContext)
@@ -55,13 +57,21 @@ public class MechSelectActions : NetworkBehaviour
         var mechs = MechRepository.Instance.GetFriendly(playerIndex).ToList();
 
         MechSelectionState.selected = mechs[MechSelectionState.TargetMechIndex];
+    }
 
-        if (previousSelected == MechSelectionState.TargetMechIndex)
+    public void FocusFriendlyMech(InputAction.CallbackContext callbackContext)
+    {
+        if (!callbackContext.performed)
         {
-            cameraMove.FocusFriendlyMech(MechSelectionState.TargetMechIndex);
+            return;
         }
 
-        previousSelected = MechSelectionState.TargetMechIndex;
+        if (MechSelectionState.selected == null)
+        {
+            return;
+        }
+
+        cameraMove.FocusFriendlyMech(MechSelectionState.TargetMechIndex);
     }
 
     public void TargetEnemy(InputAction.CallbackContext callbackContext)
